@@ -33,5 +33,6 @@ public class Cooperativa
     public static void main(String[] args){
         Producto producto = new Producto(TipoProducto.ZANAHORIA,1300.0f,2.5f,true);
         System.out.println(producto.getPrecio());
+        System.out.println(producto.getPrecio());
     }
 }
