@@ -82,9 +82,11 @@ public class Cooperativa
         c.pedidos.add(new Pedido(testFecha,testFecha,c.clientes.get(1),c.productos.get(1),c.repartidores.get(1)));
 
         //Mostramos el pedido
+        System.out.println(c.pedidos.get(0).toString());
         System.out.println(c.pedidos.get(1).toString());
 
         //Mostramos los tramos del pedido
+        c.pedidos.get(0).mostrarTramos();
         c.pedidos.get(1).mostrarTramos();
 
 
