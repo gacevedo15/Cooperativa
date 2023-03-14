@@ -6,6 +6,7 @@ public class Cooperativa
     //Constantes
     public static float MAX_HA=5.0f;
     public static final int MAX_PRODUCTOS=5;
+
     
     public static final float MARGEN_DISTRIBUIDOR=0.05f;
     public static final float MAX_KG_DISTRIBUIDOR=1000.0f;
@@ -62,7 +63,7 @@ public class Cooperativa
         c.productores.add(new Productor("Pedro",TipoProductor.GRAN_PRODUCTOR));
 
         //Creamos los clientes y los añadimos a la cooperativa
-        c.clientes.add(new Cliente("Ana",TipoCliente.CONSUMIDOR_FINAL,675.37f));
+        c.clientes.add(new Cliente("Ana",TipoCliente.CONSUMIDOR_FINAL,160.0f));
         c.clientes.add(new Cliente("Luis",TipoCliente.DISTRIBUIDOR,1258.0f));
 
         //Creamos los repartidores y los añadimos a la cooperativa
@@ -78,8 +79,8 @@ public class Cooperativa
         Date testFecha=new Date();
 
         //Creamos pedidos y lo añadimos a la cooperativa
-        c.pedidos.add(new Pedido(testFecha,testFecha,c.clientes.get(0),c.productos.get(0),c.repartidores.get(0)));
-        c.pedidos.add(new Pedido(testFecha,testFecha,c.clientes.get(1),c.productos.get(1),c.repartidores.get(1)));
+        c.pedidos.add(new Pedido(testFecha,testFecha,c.clientes.get(0),c.productos.get(0),c.repartidores.get(0),20.0f));
+        c.pedidos.add(new Pedido(testFecha,testFecha,c.clientes.get(1),c.productos.get(1),c.repartidores.get(1),50.0f));
 
         //Mostramos el pedido
         System.out.println(c.pedidos.get(0).toString());
@@ -88,6 +89,10 @@ public class Cooperativa
         //Mostramos los tramos del pedido
         c.pedidos.get(0).mostrarTramos();
         c.pedidos.get(1).mostrarTramos();
+
+        //Mostrar coste total de la logistica
+        System.out.println("Coste total logistica: "+c.pedidos.get(0).calcularCosteTotalLogistica());
+        System.out.println("Coste total logistica: "+c.pedidos.get(1).calcularCosteTotalLogistica());
 
 
 

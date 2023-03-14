@@ -15,6 +15,14 @@ public class Tramo{
         this.tipoLogistica = tipoLogistica;
     }
 
+    //Getters
+    public float getDistancia() {
+        return distancia;
+    }
+    public TipoLogistica getTipoLogistica() {
+        return tipoLogistica;
+    }
+
     //toString
     public String toString(){
         return "Tramo: " + distancia + "km - " + tipoLogistica;

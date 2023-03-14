@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 public class Pedido{
 
     private static int idPedidoActual=0;
+    private static float COSTE_KM=1.5f;
+
     
     private int idPedido;
     
@@ -14,23 +16,24 @@ public class Pedido{
     private float costeProducto;
     private float costeLogistica;
     private float precioFinal;
-    
-    private float pesoKg;
+
+    private float cantCompradaKg;
     
     private Cliente c;
     private Producto p;
     private Repartidor r;
-    private ArrayList<Tramo> tramo;
+    private ArrayList<Tramo> tramos;
 
     //Constructor
-    public Pedido(Date fechaPedido, Date fechaEntrega, Cliente c, Producto p, Repartidor r) {
+    public Pedido(Date fechaPedido, Date fechaEntrega, Cliente c, Producto p, Repartidor r, float cantCompradaKg) {
         this.idPedido = ++idPedidoActual;
         this.fechaPedido = fechaPedido;
         this.fechaEntrega = fechaEntrega;
         this.c = c;
         this.p = p;
         this.r = r;
-        this.tramo = crearTramos();
+        this.cantCompradaKg = cantCompradaKg;
+        this.tramos = crearTramos();
     }
 
     /***------------------------------------------------------------***/
@@ -44,6 +47,9 @@ public class Pedido{
     }
     public Date getFechaEntrega() {
         return fechaEntrega;
+    }
+    public float getCantCompradaKg() {
+        return cantCompradaKg;
     }
 
     //Setters
@@ -67,6 +73,7 @@ public class Pedido{
     //Método para crear los tramos
     public ArrayList<Tramo> crearTramos() {
         ArrayList<Tramo> tramos = new ArrayList<Tramo>();
+        float costePorTramo = calcularCosteTramo();
         float distancia = c.getDistancia();
 
         if (p.esPerecedero()) {
@@ -93,9 +100,48 @@ public class Pedido{
 
     //Método para mostrar los tramos y su tipo de logística
     public void mostrarTramos(){
-        for(Tramo t:tramo){
+        for(Tramo t: tramos){
             System.out.println(t.toString());
         }
     }
+
+    //Calcular el coste de cada tramo
+    public float calcularCosteTramo(){
+        return 0.5f*p.getValorReferenciaPorKg()*cantCompradaKg;
+    }
+
+    //Calcular coste por Km
+    public float calcularCosteDistancia(){
+        return COSTE_KM*c.getDistancia();
+    }
+
+    //Devuelve la cantidad de tramos de gran logística
+    public int numTramosGranLogistica(){
+        int numTramos = 0;
+        for(Tramo t: tramos){
+            if(t.getTipoLogistica() == TipoLogistica.GRAN_LOGISTICA){
+                numTramos++;
+            }
+        }
+        return numTramos;
+    }
+
+    //Calcular el coste de la gran logística
+    public float calcularCosteGranLogistica(){
+        return numTramosGranLogistica()*calcularCosteTramo()*calcularCosteDistancia();
+    }
+
+    //Calcular el coste de la pequeña logística
+    public float calcularCostePequenaLogistica(){
+        return calcularCosteDistancia();
+    }
+
+    //Calcular el coste total de la logística
+    public float calcularCosteTotalLogistica(){
+        return calcularCostePequenaLogistica()+calcularCosteGranLogistica();
+    }
+
+
+
 
 }
