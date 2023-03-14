@@ -1,4 +1,7 @@
 #BlueJ class context
 comment0.target=Repartidor
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Repartidor\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-numComments=1
+comment1.params=nombre
+comment1.target=Repartidor(java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getNombre()
+numComments=3

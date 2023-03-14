@@ -1,15 +1,18 @@
 public class Producto {
     private TipoProducto tipo;
     private float rendimientoPorHectarea;
-    private float precio;
+    private float valorReferenciaPorKg;
     private boolean esPerecedero;
 
-    public Producto(TipoProducto tipo,float rendimientoPorHectarea,float precio,boolean esPerecedero) {
-        this.tipo=tipo;
-        this.rendimientoPorHectarea=rendimientoPorHectarea;
-        this.precio=precio;
-        this.esPerecedero=esPerecedero;
+    //Constructor
+    public Producto(TipoProducto tipo, float rendimientoPorHectarea, float valorReferenciaPorKg, boolean esPerecedero) {
+        this.tipo = tipo;
+        this.rendimientoPorHectarea = rendimientoPorHectarea;
+        this.valorReferenciaPorKg = valorReferenciaPorKg;
+        this.esPerecedero = esPerecedero;
     }
+
+    /***------------------------------------------------------------***/
 
     //Getters
     public TipoProducto getTipo() {
@@ -18,10 +21,10 @@ public class Producto {
     public float getRendimientoPorHectarea() {
         return rendimientoPorHectarea;
     }
-    public float getPrecio() {
-        return precio;
+    public float getValorReferenciaPorKg() {
+        return valorReferenciaPorKg;
     }
-    public boolean isEsPerecedero() {
+    public boolean esPerecedero() {
         return esPerecedero;
     }
 
@@ -32,19 +35,20 @@ public class Producto {
     public void setRendimientoPorHectarea(float rendimientoPorHectarea) {
         this.rendimientoPorHectarea = rendimientoPorHectarea;
     }
-    public void setPrecio(float precio) {
-        this.precio = precio;
+    public void setValorReferenciaPorKg(float valorReferenciaPorKg) {
+        this.valorReferenciaPorKg = valorReferenciaPorKg;
     }
     public void setEsPerecedero(boolean esPerecedero) {
         this.esPerecedero = esPerecedero;
     }
 
-    //ToString
-    public String toString() {
-        if (esPerecedero)
-            return "Producto{" + "tipo=" + tipo + ", rendimientoPorHectarea=" + rendimientoPorHectarea + ", precio=" + precio + ", Perecedero";
-        else
-            return "Producto{" + "tipo=" + tipo + ", rendimientoPorHectarea=" + rendimientoPorHectarea + ", precio=" + precio + ", No Perecedero";
+    /***------------------------------------------------------------***/
+
+    //Calcular valor de la producción (revisar si es necesario)
+    public float calcularValorProduccion(float extension){
+        return this.rendimientoPorHectarea * this.valorReferenciaPorKg * extension;
     }
+
+
 
 }

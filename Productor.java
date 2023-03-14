@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Productor {
 
@@ -6,25 +6,24 @@ public class Productor {
     private int idProductor;
     private String nombre;
     private TipoProductor tipoProductor;
-    private ArrayList<ProductoAsociado> listaProductos;
+    private HashMap<Producto, Float> productos;
 
-    //Constructores
-    //Constructor sin lista de productos
+    //Constructor sin productos
     public Productor(String nombre, TipoProductor tipoProductor) {
         this.idProductor = ++idProductorActual;
         this.nombre = nombre;
         this.tipoProductor = tipoProductor;
-        this.listaProductos = new ArrayList<ProductoAsociado>();
+        this.productos = new HashMap<Producto, Float>();
     }
-
-    //Constructor con lista de productos
-    public Productor(String nombre, TipoProductor tipoProductor, ArrayList<ProductoAsociado> listaProductos) {
+    //Constructor con productos
+    public Productor(String nombre, TipoProductor tipoProductor, HashMap<Producto, Float> productos) {
         this.idProductor = ++idProductorActual;
         this.nombre = nombre;
         this.tipoProductor = tipoProductor;
-        this.listaProductos = listaProductos;
+        this.productos = productos;
     }
 
+    /***------------------------------------------------------------***/
 
     //Getters
     public int getIdProductor() {
@@ -36,42 +35,57 @@ public class Productor {
     public TipoProductor getTipoProductor() {
         return tipoProductor;
     }
-    public ArrayList<ProductoAsociado> getListaProductos() {
-        return listaProductos;
+    public HashMap<Producto, Float> getProductos() {
+        return productos;
     }
 
     //Setters
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public void setTipoProductor(TipoProductor tipoProductor) {
+    public final void setTipoProductor(TipoProductor tipoProductor) {
         this.tipoProductor = tipoProductor;
     }
-    public void setListaProductos(ArrayList<ProductoAsociado> listaProductos) {
-        this.listaProductos = listaProductos;
+    public final void setProductos(HashMap<Producto, Float> productos) {
+        this.productos = productos;
     }
 
-    //ToString
-    public String toString() {
-        return "Productor{" + "idProductor=" + idProductor + ", nombre=" + nombre + ", tipoProductor=" + tipoProductor + ", listaProductos=" + listaProductos + '}';
-    }
-
-    //ToString que muestre el tipo de producto de la lista de productos y la extension de tierra que tiene
-    public String toString2() {
-        String s = "Productor{" + "idProductor=" + idProductor + ", nombre=" + nombre + ", tipoProductor=" + tipoProductor + ", listaProductos=";
-        for (ProductoAsociado p : listaProductos) {
-            s += p.getProducto().getTipo() + " " + p.getNumHa() + " ha, ";
-        }
-        return s + "}";
-    }
+    /***------------------------------------------------------------***/
 
     //Añadir producto
-    public void addProducto(ProductoAsociado p) {
-        listaProductos.add(p);
+    public final void addProducto(Producto p, float extension){
+        this.productos.put(p, extension);
     }
+
     //Eliminar producto
-    public void removeProducto(ProductoAsociado p) {
-        listaProductos.remove(p);
+    public void removeProducto(Producto p){
+        this.productos.remove(p);
     }
+
+    //Buscar producto
+    public boolean buscarProducto(Producto p){
+        return this.productos.containsKey(p);
+    }
+
+    //Modificar extensión de un producto
+    public void modificarExtensionProducto(Producto p, float extension){
+        this.productos.replace(p, extension);
+    }
+
+    /***------------------------------------------------------------***/
+
+    //Calcular extensión total
+    public float calcularExtensionTotal(){
+        float extensionTotal = 0;
+        for (Producto p : this.productos.keySet()) {
+            extensionTotal += this.productos.get(p);
+        }
+        return extensionTotal;
+    }
+
+
+
+
+
 
 }

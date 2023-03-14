@@ -1,7 +1,21 @@
 #BlueJ class context
 comment0.target=Producto
-comment1.params=tipo\ rendimientoPorHectarea\ precio\ esPerecedero
+comment1.params=tipo\ rendimientoPorHectarea\ valorReferenciaPorKg\ esPerecedero
 comment1.target=Producto(TipoProducto,\ float,\ float,\ boolean)
 comment2.params=
-comment2.target=float\ getPrecio()
-numComments=3
+comment2.target=TipoProducto\ getTipo()
+comment3.params=
+comment3.target=float\ getRendimientoPorHectarea()
+comment4.params=
+comment4.target=float\ getValorReferenciaPorKg()
+comment5.params=
+comment5.target=boolean\ isEsPerecedero()
+comment6.params=tipo
+comment6.target=void\ setTipo(TipoProducto)
+comment7.params=rendimientoPorHectarea
+comment7.target=void\ setRendimientoPorHectarea(float)
+comment8.params=valorReferenciaPorKg
+comment8.target=void\ setValorReferenciaPorKg(float)
+comment9.params=esPerecedero
+comment9.target=void\ setEsPerecedero(boolean)
+numComments=10

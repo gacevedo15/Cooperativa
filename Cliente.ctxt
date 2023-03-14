@@ -1,4 +1,20 @@
 #BlueJ class context
 comment0.target=Cliente
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Cliente\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-numComments=1
+comment1.params=nombre\ tipoCliente\ distancia
+comment1.target=Cliente(java.lang.String,\ TipoCliente,\ float)
+comment2.params=
+comment2.target=int\ getIdCliente()
+comment2.text=------------------------------------------------------------**
+comment3.params=
+comment3.target=java.lang.String\ getNombre()
+comment4.params=
+comment4.target=TipoCliente\ getTipoCliente()
+comment5.params=
+comment5.target=float\ getDistancia()
+comment6.params=nombre
+comment6.target=void\ setNombre(java.lang.String)
+comment7.params=tipoCliente
+comment7.target=void\ setTipoCliente(TipoCliente)
+comment8.params=distancia
+comment8.target=void\ setDistancia(int)
+numComments=9
