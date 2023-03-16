@@ -7,8 +7,10 @@ import java.util.ArrayList;
  * @version (a version number or a date)
  */
 public class Logistica{
+
+    //Constante
     private ArrayList<Tramo> tramos;
-    private int cantTramosGranLogistica;
+    private int cantTramos;
     private float costeFijo;
     private float costePorKmGranLogistica;
     private float costePorKmPequenaLogistica;
@@ -27,7 +29,7 @@ public class Logistica{
     //Método para crear los tramos
     public ArrayList<Tramo> crearTramos(float distancia, boolean esPerecedero) {
         ArrayList<Tramo> tramos = new ArrayList<Tramo>();
-        cantTramosGranLogistica=0;
+        cantTramos =0;
 
         if (esPerecedero) {
             if (distancia <= 100.0f) {
@@ -35,14 +37,18 @@ public class Logistica{
             } else {
                 tramos.add(new Tramo(distancia-100,TipoLogistica.GRAN_LOGISTICA));
                 tramos.add(new Tramo(100,TipoLogistica.PEQUENA_LOGISTICA));
-                cantTramosGranLogistica=1;
+                cantTramos =1;
             }
         } else {
-            cantTramosGranLogistica = (int) Math.ceil(distancia / 50);
+            cantTramos = (int) Math.ceil(distancia / 50);
+            int cantTramosGranLogistica = cantTramos-1;
             float distanciaTramo;
-            for (int i = 1; i <= cantTramosGranLogistica; i++) {
-                distanciaTramo = (i == cantTramosGranLogistica) ? distancia % 50 : 50.0f;
-                if (i == cantTramosGranLogistica){
+            for (int i = 1; i <= cantTramos; i++) {
+                distanciaTramo = (i == cantTramos) ? distancia % 50 : 50.0f;
+                if (i == cantTramos){
+                    if (distanciaTramo == 0.0f){
+                        distanciaTramo = 50.0f;
+                    }
                     tramos.add(new Tramo(distanciaTramo, TipoLogistica.PEQUENA_LOGISTICA));
                 }else{
                     tramos.add(new Tramo(distanciaTramo, TipoLogistica.GRAN_LOGISTICA));
@@ -57,6 +63,7 @@ public class Logistica{
         for (Tramo tramo : tramos) {
             System.out.println("Distancia: " + tramo.getDistancia() + " Tipo de logística: " + tramo.getTipoLogistica());
         }
+        System.out.println("\n");
     }
 
 
@@ -71,26 +78,22 @@ public class Logistica{
 
         float costeTramosGranLogistica = 0;
         float costeTramosPequenaLogistica = 0;
-
         float costeTotalGranLogisticaPorViaje = 0;
-
         float costeTotalGranLogistica = 0;
-
         costeTotalLogistica = 0;
-
         float distanciaTotalTramosGranLogistica = 0;
 
         if (c.getTipoCliente()==TipoCliente.DISTRIBUIDOR){
-            int cantViajes = (int) Math.ceil(cantidadComprada / 1000.0f);
-            float cantKgUltimoViaje = cantidadComprada % 1000.0f;
+            int cantViajes = (int) Math.ceil(cantidadComprada / Cooperativa.MIN_KG_DISTRIBUIDOR);
+            float cantKgUltimoViaje = cantidadComprada % Cooperativa.MIN_KG_DISTRIBUIDOR;
             if (cantKgUltimoViaje>0){
                 for (int i=1;i<cantViajes;i++){
                     for (Tramo tramo : tramos) {
                        if (tramo.getTipoLogistica()==TipoLogistica.GRAN_LOGISTICA){
-                           costeTramosGranLogistica += 0.5f * p.getValorReferenciaPorKg() * 1000.0f;
+                           costeTramosGranLogistica += costeFijo * p.getValorReferenciaPorKg() * Cooperativa.MIN_KG_DISTRIBUIDOR;
                            distanciaTotalTramosGranLogistica += tramo.getDistancia();
                        }else{
-                            costeTramosPequenaLogistica += 1000.0f*tramo.getDistancia()*costePorKmPequenaLogistica;
+                            costeTramosPequenaLogistica += Cooperativa.MIN_KG_DISTRIBUIDOR*tramo.getDistancia()*costePorKmPequenaLogistica;
                        }
                     }
                     costeTotalGranLogisticaPorViaje += costeTramosGranLogistica+distanciaTotalTramosGranLogistica*costePorKmGranLogistica;
@@ -100,7 +103,7 @@ public class Logistica{
                 distanciaTotalTramosGranLogistica = 0;
                 for (Tramo tramo : tramos) {
                     if (tramo.getTipoLogistica()==TipoLogistica.GRAN_LOGISTICA){
-                        costeTramosGranLogistica += 0.5f * p.getValorReferenciaPorKg() * cantKgUltimoViaje;
+                        costeTramosGranLogistica += costeFijo * p.getValorReferenciaPorKg() * cantKgUltimoViaje;
                         distanciaTotalTramosGranLogistica += tramo.getDistancia();
                     }else{
                         costeTramosPequenaLogistica += cantKgUltimoViaje*tramo.getDistancia()*costePorKmPequenaLogistica;
@@ -112,7 +115,7 @@ public class Logistica{
             }else{
                 for (Tramo tramo : tramos) {
                     if (tramo.getTipoLogistica()==TipoLogistica.GRAN_LOGISTICA){
-                        costeTramosGranLogistica += 0.5f * p.getValorReferenciaPorKg() * 1000.0f;
+                        costeTramosGranLogistica += costeFijo * p.getValorReferenciaPorKg() * Cooperativa.MIN_KG_DISTRIBUIDOR;
                         distanciaTotalTramosGranLogistica += tramo.getDistancia();
                     }else{
                         costeTramosPequenaLogistica += cantidadComprada*tramo.getDistancia()*costePorKmPequenaLogistica;
@@ -126,7 +129,7 @@ public class Logistica{
         }else{
             for (Tramo tramo : tramos) {
                 if (tramo.getTipoLogistica()==TipoLogistica.GRAN_LOGISTICA){
-                    costeTramosGranLogistica += 0.5f * p.getValorReferenciaPorKg() * cantidadComprada;
+                    costeTramosGranLogistica += costeFijo * p.getValorReferenciaPorKg() * cantidadComprada;
                     distanciaTotalTramosGranLogistica += tramo.getDistancia();
                 }else{
                     costeTramosPequenaLogistica += cantidadComprada*tramo.getDistancia()*costePorKmPequenaLogistica;

@@ -16,6 +16,7 @@ public class Pedido{
     private OfertaLogistica o;
 
     private float costeProducto;
+    private float costeProductoPorKg;
     private float cantCompradaKg;
     private float costeLogistica;
     private float costeTotal;
@@ -29,7 +30,15 @@ public class Pedido{
         this.r = r;
         this.l = new Logistica(c, p, cantCompradaKg,o);
         this.cantCompradaKg = cantCompradaKg;
-        this.costeLogistica = l.calcularCosteLogistica(p,c,cantCompradaKg);
+        if (c.getTipoCliente() == TipoCliente.DISTRIBUIDOR) {
+            this.costeProducto = this.costeLogistica = this.costeTotal = l.calcularCosteLogistica(p,c,cantCompradaKg);
+            this.costeProductoPorKg = this.costeTotal / cantCompradaKg;
+        } else {
+            this.costeProductoPorKg = p.getValorReferenciaPorKg()*o.getCosteFijo();
+            this.costeProducto = Cooperativa.aplicarIVA(this.costeProductoPorKg * cantCompradaKg);
+            this.costeLogistica = Cooperativa.aplicarIVA(l.calcularCosteLogistica(p,c,cantCompradaKg));
+            this.costeTotal = this.costeProducto + this.costeLogistica;
+        }
     }
 
     //Getters
@@ -42,11 +51,15 @@ public class Pedido{
         l.mostrarTramos();
     }
 
-
-
     //ToString
     public String toString() {
-        return "ID Pedido: " + idPedido + " Cliente: " + c.getNombre() + " Producto: " + p.getTipo() + " Repartidor: " + r.getNombre() + " Coste Producto: " + costeProducto + " Coste Logística: " + costeLogistica + " Coste Total: " + costeTotal;
+        return "ID Pedido: " + idPedido
+                + "\nCliente: " + c.getNombre() + " - " + c.getTipoCliente()
+                + "\nProducto: " + p.getTipo() + " - " + p.esPerecedero()
+                + "\nRepartidor: " + r.getNombre()
+                + "\nCoste Producto: " + Cooperativa.df.format(costeProducto)  + "€"
+                + "\nCoste Logística: " + Cooperativa.df.format(costeLogistica)  + "€"
+                + "\nCoste Total: " + Cooperativa.df.format(costeTotal)  + "€\n";
     }
 
 }

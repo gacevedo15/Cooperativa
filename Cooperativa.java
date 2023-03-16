@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Date;
+import java.text.DecimalFormat;
+
 
 public class Cooperativa
 {
@@ -15,6 +17,8 @@ public class Cooperativa
     public static final float MAX_KG_CONSUMIDOR_FINAL=100.0f;
     
     public static final float IVA=0.1f;
+
+    public static DecimalFormat df = new DecimalFormat("#.##");
     
     //Atributos
     private ArrayList<Producto> productos;
@@ -22,6 +26,7 @@ public class Cooperativa
     private ArrayList<Cliente> clientes;
     private ArrayList<Repartidor> repartidores;
     private ArrayList<Pedido> pedidos;
+
 
     //Constructor
     public Cooperativa(){
@@ -32,15 +37,9 @@ public class Cooperativa
         this.pedidos=new ArrayList<Pedido>();
     }
 
-    //Método para calcular el coste de un producto según el tipo de cliente
-    public static float calcularCosteProductoPorKg(Producto p, Cliente c){
-        float costeProducto=0.0f;
-        if(c.getTipoCliente()==TipoCliente.CONSUMIDOR_FINAL){
-            costeProducto=p.getValorReferenciaPorKg()* MARGEN_CONSUMIDOR_FINAL *IVA;
-        }else if(c.getTipoCliente()==TipoCliente.DISTRIBUIDOR){
-            costeProducto=p.getValorReferenciaPorKg()* MARGEN_DISTRIBUIDOR;
-        }
-        return costeProducto;
+    //Método para añadir IVA a un precio
+    public static float aplicarIVA(float precio){
+        return precio+(precio*IVA);
     }
 
     
@@ -52,15 +51,16 @@ public class Cooperativa
         c.productos.add(new Producto(TipoProducto.ACEITUNA,2500.0f,3.0f,false));
         c.productos.add(new Producto(TipoProducto.ZANAHORIA,500.0f,1.5f,true));
         c.productos.add(new Producto(TipoProducto.ALGODON,1000.0f,1.0f,false));
-        c.productos.add(new Producto(TipoProducto.ACEITE,100.0f,0.50f,false));
+        c.productos.add(new Producto(TipoProducto.ACEITE,100.0f,0.60f,false));
 
         //Creamos los productores y los añadimos a la cooperativa
         c.productores.add(new Productor("Juan",TipoProductor.PEQUENO_PRODUCTOR));
         c.productores.add(new Productor("Pedro",TipoProductor.GRAN_PRODUCTOR));
 
         //Creamos los clientes y los añadimos a la cooperativa
-        c.clientes.add(new Cliente("Ana",TipoCliente.DISTRIBUIDOR,180f));
-        c.clientes.add(new Cliente("Luis",TipoCliente.CONSUMIDOR_FINAL,180f));
+        c.clientes.add(new Cliente("Ana",TipoCliente.DISTRIBUIDOR,180.0f));
+        c.clientes.add(new Cliente("Luis149",TipoCliente.CONSUMIDOR_FINAL,350.01f));
+        c.clientes.add(new Cliente("Luis150",TipoCliente.CONSUMIDOR_FINAL,249.99f));
 
         //Creamos los repartidores y los añadimos a la cooperativa
         c.repartidores.add(new Repartidor("Repartidor1"));
@@ -77,22 +77,29 @@ public class Cooperativa
 
         //Creamos pedidos y lo añadimos a la cooperativa
         c.pedidos.add(new Pedido(c.clientes.get(0),c.productos.get(3),c.repartidores.get(0),2000.0f,oferta1));
-        c.pedidos.add(new Pedido(c.clientes.get(1),c.productos.get(3),c.repartidores.get(0),90.0f,oferta2));
+        c.pedidos.add(new Pedido(c.clientes.get(1),c.productos.get(3),c.repartidores.get(0),50.0f,oferta2));
+        c.pedidos.add(new Pedido(c.clientes.get(2),c.productos.get(3),c.repartidores.get(0),50.0f,oferta2));
 
 
         //Mostramos el pedido 1
         System.out.println(c.pedidos.get(0).toString());
         //Mostramos los tramos del pedido 1
         c.pedidos.get(0).mostrarTramos();
-        //Mostrar coste total logistica del pedido 1
-        System.out.println("Coste total logistica: "+c.pedidos.get(0).getCosteLogistica());
+
 
         //Mostramos el pedido 2
         System.out.println(c.pedidos.get(1).toString());
+
         //Mostramos los tramos del pedido 2
         c.pedidos.get(1).mostrarTramos();
-        //Mostrar coste total logistica del pedido 2
-        System.out.println("Coste total logistica: "+c.pedidos.get(1).getCosteLogistica());
+
+        //Mostramos el pedido 3
+        System.out.println(c.pedidos.get(2).toString());
+
+        //Mostramos los tramos del pedido 3
+        c.pedidos.get(2).mostrarTramos();
+
+
 
     }
 }

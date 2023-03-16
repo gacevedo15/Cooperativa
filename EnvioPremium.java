@@ -13,9 +13,9 @@ public class EnvioPremium extends OfertaLogistica{
     public EnvioPremium(String nombre, float costePorKmGranLogistica, float costePorKmPequenaLogistica, TipoCliente tipoCliente) {
         super(nombre, costePorKmGranLogistica, costePorKmPequenaLogistica);
         if (tipoCliente == TipoCliente.DISTRIBUIDOR) {
-           setCosteFijo(0.05f);
+           setCosteFijo(1.10f); //Si es distribuidor, el coste fijo es 10% más caro (valorReferenciaPorKg del producto * 1.10)
         }else {
-            setCosteFijo(0.15f);
+            setCosteFijo(1.20f); //Si es cliente, el coste fijo es 20% más caro (valorReferenciaPorKg del producto * 1.20)
         }
     }
 

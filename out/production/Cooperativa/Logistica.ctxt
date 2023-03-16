@@ -1,16 +1,12 @@
 #BlueJ class context
 comment0.target=Logistica
 comment0.text=\n\ Write\ a\ description\ of\ class\ Logistica\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=c\ p\ ofertaLogistica\ cantCompradaKg
-comment1.target=Logistica(Cliente,\ Producto,\ OfertaLogistica,\ float)
-comment2.params=c\ p
-comment2.target=java.util.ArrayList\ crearTramos(Cliente,\ Producto)
-comment3.params=t\ distancia\ costeProducto\ cantATransportar
-comment3.target=float\ calcularCostePorTramo(Tramo,\ float,\ float,\ float)
-comment4.params=c\ p\ cantCompradaKg
-comment4.target=float\ calcularCosteGranLogistica(Cliente,\ Producto,\ float)
-comment5.params=c
-comment5.target=float\ calcularCostePequenaLogistica(Cliente)
-comment6.params=c\ p\ cantCompradaKg
-comment6.target=float\ calcularCosteLogistica(Cliente,\ Producto,\ float)
-numComments=7
+comment1.params=c\ p\ cantCompradaKg
+comment1.target=Logistica(Cliente,\ Producto,\ float)
+comment2.params=distancia\ esPerecedero
+comment2.target=java.util.ArrayList\ crearTramos(float,\ boolean)
+comment3.params=
+comment3.target=void\ mostrarTramos()
+comment4.params=p\ c\ cantidadComprada
+comment4.target=float\ calcularCosteLogistica(Producto,\ Cliente,\ float)
+numComments=5
