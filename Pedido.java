@@ -55,7 +55,7 @@ public class Pedido{
     public String toString() {
         return "ID Pedido: " + idPedido
                 + "\nCliente: " + c.getNombre() + " - " + c.getTipoCliente()
-                + "\nProducto: " + p.getTipo() + " - " + p.esPerecedero()
+                + "\nProducto: " + p.getTipo() + " - " + (p.esPerecedero() ? "Perecedero" : "No Perecedero")
                 + "\nRepartidor: " + r.getNombre()
                 + "\nCoste Producto: " + Cooperativa.df.format(costeProducto)  + "€"
                 + "\nCoste Logística: " + Cooperativa.df.format(costeLogistica)  + "€"
