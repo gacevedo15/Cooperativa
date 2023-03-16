@@ -59,8 +59,8 @@ public class Cooperativa
 
         //Creamos los clientes y los añadimos a la cooperativa
         c.clientes.add(new Cliente("Ana",TipoCliente.DISTRIBUIDOR,180.0f));
-        c.clientes.add(new Cliente("Luis149",TipoCliente.CONSUMIDOR_FINAL,350.01f));
-        c.clientes.add(new Cliente("Luis150",TipoCliente.CONSUMIDOR_FINAL,249.99f));
+        c.clientes.add(new Cliente("Luis149",TipoCliente.CONSUMIDOR_FINAL,112.0f));
+        c.clientes.add(new Cliente("Luis150",TipoCliente.CONSUMIDOR_FINAL,114.0f));
 
         //Creamos los repartidores y los añadimos a la cooperativa
         c.repartidores.add(new Repartidor("Repartidor1"));
