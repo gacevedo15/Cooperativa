@@ -44,10 +44,7 @@ public class Producto {
 
     /***------------------------------------------------------------***/
 
-    //Calcular valor de la producción (revisar si es necesario)
-    public float calcularValorProduccion(float extension){
-        return this.rendimientoPorHectarea * this.valorReferenciaPorKg * extension;
-    }
+
 
 
 

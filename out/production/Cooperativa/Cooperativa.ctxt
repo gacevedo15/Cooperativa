@@ -2,10 +2,8 @@
 comment0.target=Cooperativa
 comment1.params=
 comment1.target=Cooperativa()
-comment2.params=
-comment2.target=void\ mostrarPedidos()
-comment3.params=tc\ p\ numKg
-comment3.target=float\ calcularCosteProducto(TipoCliente,\ Producto,\ float)
-comment4.params=args
-comment4.target=void\ main(java.lang.String[])
-numComments=5
+comment2.params=p\ c
+comment2.target=float\ calcularCosteProductoPorKg(Producto,\ Cliente)
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+numComments=4

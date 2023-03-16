@@ -1,21 +1,5 @@
 #BlueJ class context
 comment0.target=Pedido
-comment1.params=fechaPedido\ fechaEntrega\ c\ p\ r
-comment1.target=Pedido(java.util.Date,\ java.util.Date,\ Cliente,\ Producto,\ Repartidor)
-comment2.params=
-comment2.target=int\ getIdPedido()
-comment2.text=------------------------------------------------------------**
-comment3.params=
-comment3.target=java.util.Date\ getFechaPedido()
-comment4.params=
-comment4.target=java.util.Date\ getFechaEntrega()
-comment5.params=fechaEntrega
-comment5.target=void\ setFechaEntrega(java.util.Date)
-comment6.params=
-comment6.target=java.lang.String\ toString()
-comment7.params=
-comment7.target=java.util.ArrayList\ crearTramos()
-comment7.text=------------------------------------------------------------**
-comment8.params=
-comment8.target=void\ mostrarTramos()
-numComments=9
+comment1.params=c\ p\ r\ cantCompradaKg\ ofertaLogistica
+comment1.target=Pedido(Cliente,\ Producto,\ Repartidor,\ float,\ OfertaLogistica)
+numComments=2

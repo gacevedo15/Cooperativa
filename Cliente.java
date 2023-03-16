@@ -4,6 +4,7 @@ public class Cliente{
     private String nombre;
     private TipoCliente tipoCliente;
     private float distancia;
+    private boolean esClientePremium;
 
     //Constructor
     public Cliente(String nombre, TipoCliente tipoCliente, float distancia) {
@@ -11,6 +12,7 @@ public class Cliente{
         this.nombre = nombre;
         this.tipoCliente = tipoCliente;
         this.distancia = distancia;
+        this.esClientePremium = false;
     }
 
     /***------------------------------------------------------------***/
@@ -28,6 +30,9 @@ public class Cliente{
     public float getDistancia() {
         return distancia;
     }
+    public boolean getEsClientePremium() {
+        return esClientePremium;
+    }
 
     //Setters
     public void setNombre(String nombre) {
@@ -38,6 +43,9 @@ public class Cliente{
     }
     public void setDistancia(int distancia) {
         this.distancia = distancia;
+    }
+    public void setEsClientePremium(boolean esClientePremium) {
+        this.esClientePremium = esClientePremium;
     }
 
     /***------------------------------------------------------------***/
