@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=OfertaLogistica
-comment0.text=\n\ Write\ a\ description\ of\ class\ OfertaLogistica\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=nombre\ costePorKmGranLogistica\ costePorKmPequenaLogistica\ costeFijo
-comment1.target=OfertaLogistica(java.lang.String,\ float,\ float,\ float)
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ OfertaLogistica\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=nombre\ costePorKmGranLogistica\ costePorKmPequenaLogistica
+comment1.target=OfertaLogistica(java.lang.String,\ float,\ float)
 comment2.params=
 comment2.target=java.lang.String\ getNombre()
 comment3.params=
@@ -11,6 +11,8 @@ comment4.params=
 comment4.target=float\ getCostePorKmPequenaLogistica()
 comment5.params=
 comment5.target=float\ getCosteFijo()
-comment6.params=p\ cantATransportar
-comment6.target=float\ calcularCostePorTramo(Producto,\ float)
-numComments=7
+comment6.params=costeFijo
+comment6.target=void\ setCosteFijo(float)
+comment7.params=precioLogistica\ porcentaje\ c
+comment7.target=float\ aplicarDescuento(float,\ float,\ Cliente)
+numComments=8
