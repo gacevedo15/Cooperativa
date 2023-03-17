@@ -9,11 +9,8 @@ public class Cooperativa
     public static float MAX_HA=5.0f;
     public static final int MAX_PRODUCTOS=5;
 
-    
-    public static final float MARGEN_DISTRIBUIDOR =1.05f;
+
     public static final float MIN_KG_DISTRIBUIDOR=1000.0f;
-    
-    public static final float MARGEN_CONSUMIDOR_FINAL =1.15f;
     public static final float MAX_KG_CONSUMIDOR_FINAL=100.0f;
     
     public static final float IVA=0.1f;
