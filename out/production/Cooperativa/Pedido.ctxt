@@ -1,5 +1,11 @@
 #BlueJ class context
 comment0.target=Pedido
-comment1.params=c\ p\ r\ cantCompradaKg\ ofertaLogistica
+comment1.params=c\ p\ r\ cantCompradaKg\ o
 comment1.target=Pedido(Cliente,\ Producto,\ Repartidor,\ float,\ OfertaLogistica)
-numComments=2
+comment2.params=
+comment2.target=float\ getCosteLogistica()
+comment3.params=
+comment3.target=void\ mostrarTramos()
+comment4.params=
+comment4.target=java.lang.String\ toString()
+numComments=5

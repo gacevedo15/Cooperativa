@@ -6,14 +6,16 @@ public class Productor {
     private int idProductor;
     private String nombre;
     private TipoProductor tipoProductor;
-    private HashMap<Producto, Float> productos;
+    protected HashMap<Producto, Float> productos;
+    protected float extensionTotal;
 
     //Constructor sin productos
     public Productor(String nombre, TipoProductor tipoProductor) {
         this.idProductor = ++idProductorActual;
         this.nombre = nombre;
         this.tipoProductor = tipoProductor;
-        this.productos = new HashMap<Producto, Float>();
+        this.productos = new HashMap<>();
+        this.extensionTotal = 0;
     }
     //Constructor con productos
     public Productor(String nombre, TipoProductor tipoProductor, HashMap<Producto, Float> productos) {
@@ -21,22 +23,26 @@ public class Productor {
         this.nombre = nombre;
         this.tipoProductor = tipoProductor;
         this.productos = productos;
+        this.extensionTotal = calcularExtensionTotal();
     }
 
     /***------------------------------------------------------------***/
 
     //Getters
     public int getIdProductor() {
-        return idProductor;
+        return this.idProductor;
     }
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
     public TipoProductor getTipoProductor() {
-        return tipoProductor;
+        return this.tipoProductor;
     }
     public HashMap<Producto, Float> getProductos() {
-        return productos;
+        return this.productos;
+    }
+    public float getExtensionTotal() {
+        return this.extensionTotal;
     }
 
     //Setters
@@ -48,6 +54,7 @@ public class Productor {
     }
     public final void setProductos(HashMap<Producto, Float> productos) {
         this.productos = productos;
+        this.extensionTotal = calcularExtensionTotal();
     }
 
     /***------------------------------------------------------------***/
@@ -55,37 +62,66 @@ public class Productor {
     //Añadir producto
     public final void addProducto(Producto p, float extension){
         this.productos.put(p, extension);
+        this.extensionTotal += extension;
     }
 
-    //Eliminar producto
-    public void removeProducto(Producto p){
-        this.productos.remove(p);
-    }
-
-    //Buscar producto
-    public boolean buscarProducto(Producto p){
-        return this.productos.containsKey(p);
-    }
-
-    //Modificar extensión de un producto
-    public void modificarExtensionProducto(Producto p, float extension){
-        this.productos.replace(p, extension);
-    }
-
-    /***------------------------------------------------------------***/
-
-    //Calcular extensión total
-    public float calcularExtensionTotal(){
-        float extensionTotal = 0;
+    //Eliminar producto segun el tipo
+    public void removeProducto(TipoProducto tipoProducto){
         for (Producto p : this.productos.keySet()) {
-            extensionTotal += this.productos.get(p);
+            if (p.getTipo() == tipoProducto) {
+                this.extensionTotal -= this.productos.get(p);
+                this.productos.remove(p);
+                break;
+            }
+        }
+    }
+
+    //Buscar producto por tipo
+    public boolean buscarProducto(TipoProducto tipoProducto){
+        for (Producto p : this.productos.keySet()) {
+            if (p.getTipo() == tipoProducto) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Modificar extensión de un producto segun el tipo
+    public void modificarExtensionProducto(TipoProducto tipoProducto, float extension){
+        for (Producto p : this.productos.keySet()) {
+            if (p.getTipo() == tipoProducto) {
+                this.extensionTotal -= this.productos.get(p);
+                this.productos.put(p, extension);
+                this.extensionTotal += extension;
+                break;
+            }
+        }
+    }
+
+    //Calcula la extensión total de los productos
+    public float calcularExtensionTotal(){
+        extensionTotal = 0;
+        for (Producto p : this.productos.keySet()) {
+           extensionTotal += this.productos.get(p);
         }
         return extensionTotal;
     }
 
+    /***------------------------------------------------------------***/
 
 
-
-
+    //ToString que printe toda la información del productor y el tipo de producto con su extensión
+    @Override
+    public String toString() {
+        String s = "idProductor = " + idProductor
+                + "\nNombre = " + nombre
+                + "\nTipoProductor = " + tipoProductor
+                + "\nProductos:\n";
+        for (Producto p : this.productos.keySet()) {
+            s += "       " + p.getTipo() + " - " + this.productos.get(p) + " ha\n";
+        }
+        s += "Extensión Total = " + extensionTotal + " ha\n";
+        return s;
+    }
 
 }

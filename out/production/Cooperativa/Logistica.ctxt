@@ -1,12 +1,13 @@
 #BlueJ class context
 comment0.target=Logistica
 comment0.text=\n\ Write\ a\ description\ of\ class\ Logistica\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=c\ p\ cantCompradaKg
-comment1.target=Logistica(Cliente,\ Producto,\ float)
+comment1.params=c\ p\ cantCompradaKg\ ofertaLogistica
+comment1.target=Logistica(Cliente,\ Producto,\ float,\ OfertaLogistica)
 comment2.params=distancia\ esPerecedero
 comment2.target=java.util.ArrayList\ crearTramos(float,\ boolean)
 comment3.params=
 comment3.target=void\ mostrarTramos()
 comment4.params=p\ c\ cantidadComprada
 comment4.target=float\ calcularCosteLogistica(Producto,\ Cliente,\ float)
+comment4.text=\n\ \ \ \ \ Calcula\ el\ costo\ total\ de\ la\ log\u00EDstica\ para\ un\ producto\ y\ un\ cliente\ dados,\ considerando\ la\ cantidad\ comprada.\ El\ costo\ se\ divide\ en\ tramos\ de\ gran\ log\u00EDstica\ y\ peque\u00F1a\ log\u00EDstica.\n\ \ \ \ \ @param\ p\ Producto\ que\ se\ desea\ comprar.\n\ \ \ \ \ @param\ c\ Cliente\ que\ realiza\ la\ compra.\n\ \ \ \ \ @param\ cantidadComprada\ Cantidad\ de\ producto\ que\ se\ desea\ comprar.\n\ \ \ \ \ @return\ El\ costo\ total\ de\ la\ log\u00EDstica\ para\ la\ cantidad\ de\ producto\ especificada.\n
 numComments=5

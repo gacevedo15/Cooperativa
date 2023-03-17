@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.text.DecimalFormat;
 
 
@@ -54,8 +54,8 @@ public class Cooperativa
         c.productos.add(new Producto(TipoProducto.ACEITE,100.0f,0.60f,false));
 
         //Creamos los productores y los añadimos a la cooperativa
-        c.productores.add(new Productor("Juan",TipoProductor.PEQUENO_PRODUCTOR));
-        c.productores.add(new Productor("Pedro",TipoProductor.GRAN_PRODUCTOR));
+        c.productores.add(new Productor("Productor1",TipoProductor.PEQUENO_PRODUCTOR));
+        c.productores.add(new Productor("Productor2",TipoProductor.GRAN_PRODUCTOR));
 
         //Creamos los clientes y los añadimos a la cooperativa
         c.clientes.add(new Cliente("Ana",TipoCliente.DISTRIBUIDOR,180.0f));
@@ -66,10 +66,18 @@ public class Cooperativa
         c.repartidores.add(new Repartidor("Repartidor1"));
 
         //Añadimos productos a los productores
-        c.productores.get(0).addProducto(c.productos.get(3), 2.0f);
+        c.productores.get(0).addProducto(c.productos.get(0), 1.5f);
+        c.productores.get(0).addProducto(c.productos.get(1), 2.0f);
+        c.productores.get(0).addProducto(c.productos.get(2), 0.5f);
 
-        //Date de ejemplo
+        //Mostramos los datos del productor 1
+        System.out.println(c.productores.get(0).toString());
 
+        //Eliminamos un producto del productor 1
+        c.productores.get(0).removeProducto(TipoProducto.ACEITUNA);
+
+        //Mostramos los datos del productor 1
+        System.out.println(c.productores.get(0).toString());
 
         //Creamos ofertas de logistica de prueba
         OfertaLogistica oferta1=new EnvioEstandar("Oferta1",0.05f,0.01f,TipoCliente.DISTRIBUIDOR);
@@ -80,12 +88,34 @@ public class Cooperativa
         c.pedidos.add(new Pedido(c.clientes.get(1),c.productos.get(3),c.repartidores.get(0),50.0f,oferta2));
         c.pedidos.add(new Pedido(c.clientes.get(2),c.productos.get(3),c.repartidores.get(0),50.0f,oferta2));
 
+        //Actualizamos el precio del producto de los pedidos
+        c.productos.get(3).actualizarPrecio(1.5f);
+
+        //Actualizamos la fecha de entrega de los pedidos
+        c.pedidos.get(0).setFechaEntrega(LocalDate.of(2023, 03, 19));
+        c.pedidos.get(1).setFechaEntrega(LocalDate.of(2023, 03, 20));
+        c.pedidos.get(2).setFechaEntrega(LocalDate.of(2023, 05, 19));
+
+        //Guardamos el pedido en el cliente
+        c.clientes.get(0).addPedido(c.pedidos.get(0));
+        c.clientes.get(1).addPedido(c.pedidos.get(1));
+        c.clientes.get(2).addPedido(c.pedidos.get(2));
+
+        //Printamos los pedidos del cliente 1
+        ArrayList<Pedido> pedidosCliente1=c.clientes.get(0).getPedidos();
+        for (int i=0;i<pedidosCliente1.size();i++){
+            System.out.println(pedidosCliente1.get(i).toString());
+        }
+
+        //Printamos el precio del producto de los pedidos
+        for (int i=0;i<c.pedidos.size();i++){
+            System.out.println("Precio del producto del pedido "+(i+1)+": "+c.pedidos.get(i).obtenerValorProductoPorKg());
+        }
 
         //Mostramos el pedido 1
         System.out.println(c.pedidos.get(0).toString());
         //Mostramos los tramos del pedido 1
         c.pedidos.get(0).mostrarTramos();
-
 
         //Mostramos el pedido 2
         System.out.println(c.pedidos.get(1).toString());
@@ -99,7 +129,24 @@ public class Cooperativa
         //Mostramos los tramos del pedido 3
         c.pedidos.get(2).mostrarTramos();
 
+        //Creamos productores que serán federados
+        Productor miembro1=new Productor("Productor 1",TipoProductor.PEQUENO_PRODUCTOR);
+        Productor miembro2=new Productor("Productor 2",TipoProductor.PEQUENO_PRODUCTOR);
 
+        //Creamos la lista de miembros y los añadimos
+        ArrayList<Productor> miembros=new ArrayList<Productor>();
+        miembros.add(miembro1);
+        miembros.add(miembro2);
+
+        //Añadimos el producto ZANAHORIA a cada miembro
+        miembro1.addProducto(c.productos.get(1), 1.5f);
+        miembro2.addProducto(c.productos.get(1), 2.0f);
+
+        //Creamos un productor federado
+        ProductorFederado pf=new ProductorFederado("ProductorFederado1",miembros);
+
+        //Printamos los datos del productor federado
+        System.out.println(pf);
 
     }
 }

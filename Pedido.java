@@ -1,13 +1,11 @@
-import java.util.ArrayList;
-import java.util.Date;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 public class Pedido{
 
     private static int idPedidoActual=0;
     private int idPedido;
-    private Date fechaPedido;
-    private Date fechaEntrega;
+    private LocalDate fechaPedido;
+    private LocalDate fechaEntrega;
 
     private Cliente c;
     private Producto p;
@@ -24,14 +22,15 @@ public class Pedido{
     //Constructor
     public Pedido(Cliente c, Producto p, Repartidor r, float cantCompradaKg, OfertaLogistica o) {
         this.idPedido = ++idPedidoActual;
-        this.fechaPedido = new Date();
+        this.fechaPedido = LocalDate.now();
         this.c = c;
         this.p = p;
         this.r = r;
         this.l = new Logistica(c, p, cantCompradaKg,o);
         this.cantCompradaKg = cantCompradaKg;
         if (c.getTipoCliente() == TipoCliente.DISTRIBUIDOR) {
-            this.costeProducto = this.costeLogistica = this.costeTotal = l.calcularCosteLogistica(p,c,cantCompradaKg);
+            this.costeProducto = p.getValorReferenciaPorKg()*o.getCosteFijo();
+            this.costeLogistica = this.costeTotal = l.calcularCosteLogistica(p,c,cantCompradaKg);
             this.costeProductoPorKg = this.costeTotal / cantCompradaKg;
         } else {
             this.costeProductoPorKg = p.getValorReferenciaPorKg()*o.getCosteFijo();
@@ -44,6 +43,10 @@ public class Pedido{
     //Getters
     public float getCosteLogistica() {
         return costeLogistica;
+    }
+
+    public void setFechaEntrega(LocalDate fechaEntrega) {
+        this.fechaEntrega = fechaEntrega;
     }
 
     //Mostrar tramos de la logistica
@@ -61,5 +64,19 @@ public class Pedido{
                 + "\nCoste Logística: " + Cooperativa.df.format(costeLogistica)  + "€"
                 + "\nCoste Total: " + Cooperativa.df.format(costeTotal)  + "€\n";
     }
+
+    //Método para obtener el valor del producto
+    public float obtenerValorProductoPorKg() {
+        float precio;
+        LocalDate fechaPrecio = this.fechaEntrega != null && this.fechaEntrega.isAfter(this.fechaPedido.plusDays(10)) ? this.fechaEntrega.minusDays(10) : this.fechaPedido;
+        if (this.p.getFechaUltimaActualizacion().isBefore(fechaPrecio)) {
+            precio = this.p.getValorReferenciaPorKgAnterior();
+        } else {
+            precio = this.p.getValorReferenciaPorKg();
+        }
+        return precio;
+    }
+
+
 
 }

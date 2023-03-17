@@ -1,7 +1,11 @@
+import java.time.LocalDate;
+
 public class Producto {
     private TipoProducto tipo;
     private float rendimientoPorHectarea;
     private float valorReferenciaPorKg;
+    private float valorReferenciaPorKgAnterior;
+    private LocalDate fechaUltimaActualizacion;
     private boolean esPerecedero;
 
     //Constructor
@@ -9,6 +13,7 @@ public class Producto {
         this.tipo = tipo;
         this.rendimientoPorHectarea = rendimientoPorHectarea;
         this.valorReferenciaPorKg = valorReferenciaPorKg;
+        this.fechaUltimaActualizacion = LocalDate.now();
         this.esPerecedero = esPerecedero;
     }
 
@@ -16,16 +21,22 @@ public class Producto {
 
     //Getters
     public TipoProducto getTipo() {
-        return tipo;
+        return this.tipo;
     }
     public float getRendimientoPorHectarea() {
-        return rendimientoPorHectarea;
+        return this.rendimientoPorHectarea;
     }
     public float getValorReferenciaPorKg() {
-        return valorReferenciaPorKg;
+        return this.valorReferenciaPorKg;
+    }
+    public float getValorReferenciaPorKgAnterior() {
+        return this.valorReferenciaPorKgAnterior;
+    }
+    public LocalDate getFechaUltimaActualizacion() {
+        return this.fechaUltimaActualizacion;
     }
     public boolean esPerecedero() {
-        return esPerecedero;
+        return this.esPerecedero;
     }
 
     //Setters
@@ -36,10 +47,18 @@ public class Producto {
         this.rendimientoPorHectarea = rendimientoPorHectarea;
     }
     public void setValorReferenciaPorKg(float valorReferenciaPorKg) {
-        this.valorReferenciaPorKg = valorReferenciaPorKg;
+        actualizarPrecio(valorReferenciaPorKg);
     }
     public void setEsPerecedero(boolean esPerecedero) {
         this.esPerecedero = esPerecedero;
+    }
+
+    /***------------------------------------------------------------***/
+
+    public void actualizarPrecio(float nuevoPrecio) {
+        this.valorReferenciaPorKgAnterior = this.valorReferenciaPorKg;
+        this.valorReferenciaPorKg = nuevoPrecio;
+        this.fechaUltimaActualizacion = LocalDate.now();
     }
 
     /***------------------------------------------------------------***/

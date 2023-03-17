@@ -1,10 +1,8 @@
 #BlueJ class context
 comment0.target=EnvioEstandar
 comment0.text=\n\ Write\ a\ description\ of\ class\ EnvioEstandar\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=nombre\ costePorKmGranLogistica\ costePorKmPequenaLogistica\ costeFijo
-comment1.target=EnvioEstandar(java.lang.String,\ float,\ float,\ float)
-comment2.params=c\ p\ cantCompradaKg\ cantTramos
-comment2.target=float\ calcularCosteGranLogistica(Cliente,\ Producto,\ float,\ int)
-comment3.params=c
-comment3.target=float\ calcularCostePequenaLogistica(Cliente)
-numComments=4
+comment1.params=nombre\ costePorKmGranLogistica\ costePorKmPequenaLogistica\ tipoCliente
+comment1.target=EnvioEstandar(java.lang.String,\ float,\ float,\ TipoCliente)
+comment2.params=precioLogistica\ porcentaje\ c
+comment2.target=float\ aplicarDescuento(float,\ float,\ Cliente)
+numComments=3

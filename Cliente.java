@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Cliente{
     private static int contadorClientes = 0;
     private int idCliente;
@@ -6,6 +8,8 @@ public class Cliente{
     private float distancia;
     private boolean esClientePremium;
 
+    private ArrayList<Pedido> pedidos;
+
     //Constructor
     public Cliente(String nombre, TipoCliente tipoCliente, float distancia) {
         this.idCliente = ++contadorClientes;
@@ -13,26 +17,31 @@ public class Cliente{
         this.tipoCliente = tipoCliente;
         this.distancia = distancia;
         this.esClientePremium = false;
+        this.pedidos = new ArrayList<>();
     }
 
     /***------------------------------------------------------------***/
 
     //Getters
     public int getIdCliente() {
-        return idCliente;
+        return this.idCliente;
     }
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
     public TipoCliente getTipoCliente() {
-        return tipoCliente;
+        return this.tipoCliente;
     }
     public float getDistancia() {
-        return distancia;
+        return this.distancia;
     }
     public boolean getEsClientePremium() {
-        return esClientePremium;
+        return this.esClientePremium;
     }
+    public ArrayList<Pedido> getPedidos() {
+        return this.pedidos;
+    }
+
 
     //Setters
     public void setNombre(String nombre) {
@@ -47,6 +56,14 @@ public class Cliente{
     public void setEsClientePremium(boolean esClientePremium) {
         this.esClientePremium = esClientePremium;
     }
+
+    /***------------------------------------------------------------***/
+
+    //Añadir pedido
+    public void addPedido(Pedido p) {
+        this.pedidos.add(p);
+    }
+
 
     /***------------------------------------------------------------***/
 
