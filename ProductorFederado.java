@@ -6,12 +6,12 @@ public class ProductorFederado extends Productor {
     private ArrayList<Productor> miembros;
 
     //Constructor
-    public ProductorFederado(String nombre, ArrayList<Productor> miembros) {
+    public ProductorFederado(String nombre, ArrayList<Productor> miembros, Producto producto) {
         super(nombre, TipoProductor.PEQUENO_PRODUCTOR);
         this.miembros = miembros;
-        this.productos = miembros.get(0).getProductos();
-        this.extensionTotal = calcularExtensionTotal();
-
+        this.productos = new HashMap<>();
+        productos.put(producto, calcularExtensionTotal(producto.getTipo()));
+        extensionTotal=productos.get(producto);
     }
 
     /***------------------------------------------------------------***/
@@ -38,23 +38,36 @@ public class ProductorFederado extends Productor {
         this.miembros.remove(p);
     }
 
-    //Calcular la extension total de todos los miembros
+    //Suma la extensión que tiene cada miembro del producto que sea igual al tipo de producto
+    public float calcularExtensionTotal(TipoProducto tipoProducto){
+        float extensionTotal = 0;
+        for (Productor p : this.miembros) {
+            for (Producto producto : p.getProductos().keySet()) {
+                if (producto.getTipo() == tipoProducto) {
+                    extensionTotal += p.getProductos().get(producto);
+                }
+            }
+        }
+        return extensionTotal;
+    }
+
 
 
     //Devuelve un producto, el producto que coincide con el tipo de producto de todos los miembros
 
 
-    //ToString que muestre los datos del productor federado, el producto en comun y los miembros
+    //ToString que muestre los datos del productor federado, el tipo de producto, su extension total y el nombre de cada miembro
     @Override
     public String toString() {
         String s = "idProductor = " + getIdProductor()
                 + "\nNombre = " + getNombre()
-                + "\nTipoProductor = " + getIdProductor()
-                + "\nProductos = " + productos
-                + "\nExtensionTotal = " + extensionTotal
-                + "\nMiembros = " + miembros;
+                + "\nTipo = " + getTipoProductor()
+                + "\nTipo de producto = " + productos.keySet().iterator().next().getTipo()
+                + "\nExtension total = " + extensionTotal
+                + "\nMiembros = " + miembros.stream().map(Productor::getNombre).reduce("", (a, b) -> a + ", " + b).substring(2);
         return s;
     }
+
 
 
 }

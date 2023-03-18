@@ -39,6 +39,17 @@ public class Cooperativa
         return precio+(precio*IVA);
     }
 
+    //Método para saber los productores que tienen un producto del tipo pasado por parámetro
+    public ArrayList<Productor> getProductoresConProducto(TipoProducto tipoProducto){
+        ArrayList<Productor> productoresConProducto=new ArrayList<Productor>();
+        for(Productor p:productores){
+            if(p.getProductos().containsKey(tipoProducto)){
+                productoresConProducto.add(p);
+            }
+        }
+        return productoresConProducto;
+    }
+
     
     public static void main(String[] args){
         //Creamos la cooperativa
@@ -140,7 +151,7 @@ public class Cooperativa
         miembro2.addProducto(c.productos.get(1), 2.0f);
 
         //Creamos un productor federado
-        ProductorFederado pf=new ProductorFederado("ProductorFederado1",miembros);
+        ProductorFederado pf=new ProductorFederado("ProductorFederado1",miembros,c.productos.get(1));
 
         //Printamos los datos del productor federado
         System.out.println(pf);
