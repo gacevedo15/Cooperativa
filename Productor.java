@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Productor {
 
@@ -6,72 +6,122 @@ public class Productor {
     private int idProductor;
     private String nombre;
     private TipoProductor tipoProductor;
-    private ArrayList<ProductoAsociado> listaProductos;
+    protected HashMap<Producto, Float> productos;
+    protected float extensionTotal;
 
-    //Constructores
-    //Constructor sin lista de productos
+    //Constructor sin productos
     public Productor(String nombre, TipoProductor tipoProductor) {
         this.idProductor = ++idProductorActual;
         this.nombre = nombre;
         this.tipoProductor = tipoProductor;
-        this.listaProductos = new ArrayList<ProductoAsociado>();
+        this.productos = new HashMap<>();
+        this.extensionTotal = 0;
     }
-
-    //Constructor con lista de productos
-    public Productor(String nombre, TipoProductor tipoProductor, ArrayList<ProductoAsociado> listaProductos) {
+    //Constructor con productos
+    public Productor(String nombre, TipoProductor tipoProductor, HashMap<Producto, Float> productos) {
         this.idProductor = ++idProductorActual;
         this.nombre = nombre;
         this.tipoProductor = tipoProductor;
-        this.listaProductos = listaProductos;
+        this.productos = productos;
+        this.extensionTotal = calcularExtensionTotal();
     }
 
+    /***------------------------------------------------------------***/
 
     //Getters
     public int getIdProductor() {
-        return idProductor;
+        return this.idProductor;
     }
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
     public TipoProductor getTipoProductor() {
-        return tipoProductor;
+        return this.tipoProductor;
     }
-    public ArrayList<ProductoAsociado> getListaProductos() {
-        return listaProductos;
+    public HashMap<Producto, Float> getProductos() {
+        return this.productos;
+    }
+    public float getExtensionTotal() {
+        return this.extensionTotal;
     }
 
     //Setters
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public void setTipoProductor(TipoProductor tipoProductor) {
+    public final void setTipoProductor(TipoProductor tipoProductor) {
         this.tipoProductor = tipoProductor;
     }
-    public void setListaProductos(ArrayList<ProductoAsociado> listaProductos) {
-        this.listaProductos = listaProductos;
+    public final void setProductos(HashMap<Producto, Float> productos) {
+        this.productos = productos;
+        this.extensionTotal = calcularExtensionTotal();
     }
 
-    //ToString
-    public String toString() {
-        return "Productor{" + "idProductor=" + idProductor + ", nombre=" + nombre + ", tipoProductor=" + tipoProductor + ", listaProductos=" + listaProductos + '}';
-    }
-
-    //ToString que muestre el tipo de producto de la lista de productos y la extension de tierra que tiene
-    public String toString2() {
-        String s = "Productor{" + "idProductor=" + idProductor + ", nombre=" + nombre + ", tipoProductor=" + tipoProductor + ", listaProductos=";
-        for (ProductoAsociado p : listaProductos) {
-            s += p.getProducto().getTipo() + " " + p.getNumHa() + " ha, ";
-        }
-        return s + "}";
-    }
+    /***------------------------------------------------------------***/
 
     //Añadir producto
-    public void addProducto(ProductoAsociado p) {
-        listaProductos.add(p);
+    public final void addProducto(Producto p, float extension){
+        this.productos.put(p, extension);
+        this.extensionTotal += extension;
     }
-    //Eliminar producto
-    public void removeProducto(ProductoAsociado p) {
-        listaProductos.remove(p);
+
+    //Eliminar producto segun el tipo
+    public void removeProducto(TipoProducto tipoProducto){
+        for (Producto p : this.productos.keySet()) {
+            if (p.getTipo() == tipoProducto) {
+                this.extensionTotal -= this.productos.get(p);
+                this.productos.remove(p);
+                break;
+            }
+        }
+    }
+
+    //Buscar producto por tipo
+    public boolean buscarProducto(TipoProducto tipoProducto){
+        for (Producto p : this.productos.keySet()) {
+            if (p.getTipo() == tipoProducto) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Modificar extensión de un producto segun el tipo
+    public void modificarExtensionProducto(TipoProducto tipoProducto, float extension){
+        for (Producto p : this.productos.keySet()) {
+            if (p.getTipo() == tipoProducto) {
+                this.extensionTotal -= this.productos.get(p);
+                this.productos.put(p, extension);
+                this.extensionTotal += extension;
+                break;
+            }
+        }
+    }
+
+    //Calcula la extensión total de los productos
+    public float calcularExtensionTotal(){
+        extensionTotal = 0;
+        for (Producto p : this.productos.keySet()) {
+           extensionTotal += this.productos.get(p);
+        }
+        return extensionTotal;
+    }
+
+    /***------------------------------------------------------------***/
+
+
+    //ToString que printe toda la información del productor y el tipo de producto con su extensión
+    @Override
+    public String toString() {
+        String s = "idProductor = " + idProductor
+                + "\nNombre = " + nombre
+                + "\nTipoProductor = " + tipoProductor
+                + "\nProductos:\n";
+        for (Producto p : this.productos.keySet()) {
+            s += "       " + p.getTipo() + " - " + this.productos.get(p) + " ha\n";
+        }
+        s += "Extensión Total = " + extensionTotal + " ha\n";
+        return s;
     }
 
 }

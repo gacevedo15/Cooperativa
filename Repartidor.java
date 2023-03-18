@@ -1,11 +1,15 @@
+public class Repartidor{
 
-/**
- * Write a description of class Repartidor here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Repartidor
-{
-    
+    private String nombre;
+
+    //Constructor
+    public Repartidor(String nombre) {
+        this.nombre = nombre;
+    }
+
+    //Getters
+    public String getNombre() {
+        return nombre;
+    }
+
 }

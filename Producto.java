@@ -1,28 +1,42 @@
+import java.time.LocalDate;
+
 public class Producto {
     private TipoProducto tipo;
     private float rendimientoPorHectarea;
-    private float precio;
+    private float valorReferenciaPorKg;
+    private float valorReferenciaPorKgAnterior;
+    private LocalDate fechaUltimaActualizacion;
     private boolean esPerecedero;
 
-    public Producto(TipoProducto tipo,float rendimientoPorHectarea,float precio,boolean esPerecedero) {
-        this.tipo=tipo;
-        this.rendimientoPorHectarea=rendimientoPorHectarea;
-        this.precio=precio;
-        this.esPerecedero=esPerecedero;
+    //Constructor
+    public Producto(TipoProducto tipo, float rendimientoPorHectarea, float valorReferenciaPorKg, boolean esPerecedero) {
+        this.tipo = tipo;
+        this.rendimientoPorHectarea = rendimientoPorHectarea;
+        this.valorReferenciaPorKg = valorReferenciaPorKg;
+        this.fechaUltimaActualizacion = LocalDate.now();
+        this.esPerecedero = esPerecedero;
     }
+
+    /***------------------------------------------------------------***/
 
     //Getters
     public TipoProducto getTipo() {
-        return tipo;
+        return this.tipo;
     }
     public float getRendimientoPorHectarea() {
-        return rendimientoPorHectarea;
+        return this.rendimientoPorHectarea;
     }
-    public float getPrecio() {
-        return precio;
+    public float getValorReferenciaPorKg() {
+        return this.valorReferenciaPorKg;
     }
-    public boolean isEsPerecedero() {
-        return esPerecedero;
+    public float getValorReferenciaPorKgAnterior() {
+        return this.valorReferenciaPorKgAnterior;
+    }
+    public LocalDate getFechaUltimaActualizacion() {
+        return this.fechaUltimaActualizacion;
+    }
+    public boolean esPerecedero() {
+        return this.esPerecedero;
     }
 
     //Setters
@@ -32,19 +46,25 @@ public class Producto {
     public void setRendimientoPorHectarea(float rendimientoPorHectarea) {
         this.rendimientoPorHectarea = rendimientoPorHectarea;
     }
-    public void setPrecio(float precio) {
-        this.precio = precio;
+    public void setValorReferenciaPorKg(float valorReferenciaPorKg) {
+        actualizarPrecio(valorReferenciaPorKg);
     }
     public void setEsPerecedero(boolean esPerecedero) {
         this.esPerecedero = esPerecedero;
     }
 
-    //ToString
-    public String toString() {
-        if (esPerecedero)
-            return "Producto{" + "tipo=" + tipo + ", rendimientoPorHectarea=" + rendimientoPorHectarea + ", precio=" + precio + ", Perecedero";
-        else
-            return "Producto{" + "tipo=" + tipo + ", rendimientoPorHectarea=" + rendimientoPorHectarea + ", precio=" + precio + ", No Perecedero";
+    /***------------------------------------------------------------***/
+
+    public void actualizarPrecio(float nuevoPrecio) {
+        this.valorReferenciaPorKgAnterior = this.valorReferenciaPorKg;
+        this.valorReferenciaPorKg = nuevoPrecio;
+        this.fechaUltimaActualizacion = LocalDate.now();
     }
+
+    /***------------------------------------------------------------***/
+
+
+
+
 
 }

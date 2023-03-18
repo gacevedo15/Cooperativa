@@ -1,7 +1,9 @@
 #BlueJ class context
 comment0.target=Cooperativa
-comment1.params=tc\ p\ numKg
-comment1.target=float\ calcularCosteProducto(TipoCliente,\ Producto,\ float)
-comment2.params=args
-comment2.target=void\ main(java.lang.String[])
-numComments=3
+comment1.params=
+comment1.target=Cooperativa()
+comment2.params=precio
+comment2.target=float\ aplicarIVA(float)
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+numComments=4

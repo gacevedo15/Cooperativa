@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=OfertaLogistica
+comment0.text=\n\ Write\ a\ description\ of\ class\ OfertaLogistica\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=nombre\ costePorKmGranLogistica\ costePorKmPequenaLogistica
+comment1.target=OfertaLogistica(java.lang.String,\ float,\ float)
+comment2.params=
+comment2.target=java.lang.String\ getNombre()
+comment3.params=
+comment3.target=float\ getCostePorKmGranLogistica()
+comment4.params=
+comment4.target=float\ getCostePorKmPequenaLogistica()
+comment5.params=
+comment5.target=float\ getCosteFijo()
+comment6.params=costeFijo
+comment6.target=void\ setCosteFijo(float)
+comment7.params=precioLogistica\ porcentaje\ c
+comment7.target=float\ aplicarDescuento(float,\ float,\ Cliente)
+numComments=8
