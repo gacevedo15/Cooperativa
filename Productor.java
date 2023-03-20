@@ -8,6 +8,7 @@ public class Productor {
     private TipoProductor tipoProductor;
     protected HashMap<Producto, Float> productos;
     protected float extensionTotal;
+    protected float beneficioTotal; //costeTotal del pedido - (IVA + costeFijo)
 
     //Constructor sin productos
     public Productor(String nombre, TipoProductor tipoProductor) {
@@ -16,6 +17,7 @@ public class Productor {
         this.tipoProductor = tipoProductor;
         this.productos = new HashMap<>();
         this.extensionTotal = 0;
+        this.beneficioTotal = 0;
     }
     //Constructor con productos
     public Productor(String nombre, TipoProductor tipoProductor, HashMap<Producto, Float> productos) {
@@ -98,6 +100,16 @@ public class Productor {
         }
     }
 
+    //Devuelve la extensión de un producto segun el tipo
+    public float getExtensionProducto(TipoProducto tipoProducto){
+        for (Producto p : this.productos.keySet()) {
+            if (p.getTipo() == tipoProducto) {
+                return this.productos.get(p);
+            }
+        }
+        return 0;
+    }
+
     //Calcula la extensión total de los productos
     public float calcularExtensionTotal(){
         extensionTotal = 0;
@@ -105,6 +117,24 @@ public class Productor {
            extensionTotal += this.productos.get(p);
         }
         return extensionTotal;
+    }
+
+    //Método para calcular la cantidad en Kg de un producto, teniendo en cuenta su rendimiento por Ha y cantidad de Ha
+    public float calcularCantidadProductoEnKg(TipoProducto tipoProducto){
+        for (Producto p : this.productos.keySet()) {
+            if (p.getTipo() == tipoProducto) {
+                return p.getRendimientoPorHectarea() * this.productos.get(p);
+            }
+        }
+        return 0;
+    }
+
+    /** 
+     * Método para añadir el beneficioProductor obtenido en un pedido
+     * @param beneficioProductor
+     */
+    public void addBeneficioProductor(float beneficioProductor){
+        this.beneficioTotal += beneficioProductor;
     }
 
     /***------------------------------------------------------------***/
@@ -115,6 +145,7 @@ public class Productor {
     public String toString() {
         String s = "idProductor = " + idProductor
                 + "\nNombre = " + nombre
+                + "\nBeneficiosObtenidos = " + beneficioTotal
                 + "\nTipoProductor = " + tipoProductor
                 + "\nProductos:\n";
         for (Producto p : this.productos.keySet()) {

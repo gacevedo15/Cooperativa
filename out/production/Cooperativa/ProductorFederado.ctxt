@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=ProductorFederado
+comment0.text=A\u00FAn\ falta\ corregir\ esta\ clase,\ necesitamos\ sacar\ el\ producto\ en\ comun\ y\ sumar\ las\ extensiones\ que\ tiene\ cada\ miembro
+comment1.params=nombre\ miembros
+comment1.target=ProductorFederado(java.lang.String,\ java.util.ArrayList)
+comment2.params=
+comment2.target=java.util.ArrayList\ getMiembros()
+comment2.text=------------------------------------------------------------**
+comment3.params=miembros
+comment3.target=void\ setMiembros(java.util.ArrayList)
+comment4.params=p
+comment4.target=void\ addMiembro(Productor)
+comment4.text=------------------------------------------------------------**
+comment5.params=p
+comment5.target=void\ removeMiembro(Productor)
+comment6.params=
+comment6.target=java.lang.String\ toString()
+numComments=7

@@ -11,9 +11,9 @@ public class EnvioEstandar extends OfertaLogistica{
     public EnvioEstandar(String nombre, float costePorKmGranLogistica, float costePorKmPequenaLogistica,TipoCliente tipoCliente) {
         super(nombre, costePorKmGranLogistica, costePorKmPequenaLogistica);
         if (tipoCliente == TipoCliente.DISTRIBUIDOR) {
-            setCosteFijo(1.05f);    //Si es distribuidor, el coste fijo es 5% más caro (valorReferenciaPorKg del producto * 1.05)
+            setCosteFijo(0.5f);    //Si es distribuidor, el coste fijo es 5% más caro (valorReferenciaPorKg del producto * 1.05)
         }else {
-            setCosteFijo(1.15f);    //Si es cliente, el coste fijo es 15% más caro (valorReferenciaPorKg del producto * 1.15)
+            setCosteFijo(0.5f);    //Si es consumidor final, el coste fijo es 15% más caro (valorReferenciaPorKg del producto * 1.15)
         }
     }
 

@@ -1,160 +1,82 @@
-import java.util.ArrayList;
-import java.time.LocalDate;
-import java.text.DecimalFormat;
-
-
-public class Cooperativa
-{
-    //Constantes
-    public static float MAX_HA=5.0f;
-    public static final int MAX_PRODUCTOS=5;
-
-
-    public static final float MIN_KG_DISTRIBUIDOR=1000.0f;
-    public static final float MAX_KG_CONSUMIDOR_FINAL=100.0f;
-    
-    public static final float IVA=0.1f;
-
-    public static DecimalFormat df = new DecimalFormat("#.##");
-    
-    //Atributos
-    private ArrayList<Producto> productos;
-    private ArrayList<Productor> productores;
-    private ArrayList<Cliente> clientes;
-    private ArrayList<Repartidor> repartidores;
-    private ArrayList<Pedido> pedidos;
-
-
-    //Constructor
-    public Cooperativa(){
-        this.productos=new ArrayList<Producto>();
-        this.productores=new ArrayList<Productor>();
-        this.clientes=new ArrayList<Cliente>();
-        this.repartidores=new ArrayList<Repartidor>();
-        this.pedidos=new ArrayList<Pedido>();
-    }
-
-    //Método para añadir IVA a un precio
-    public static float aplicarIVA(float precio){
-        return precio+(precio*IVA);
-    }
-
-    //Método para saber los productores que tienen un producto del tipo pasado por parámetro
-    public ArrayList<Productor> getProductoresConProducto(TipoProducto tipoProducto){
-        ArrayList<Productor> productoresConProducto=new ArrayList<Productor>();
-        for(Productor p:productores){
-            if(p.getProductos().containsKey(tipoProducto)){
-                productoresConProducto.add(p);
-            }
-        }
-        return productoresConProducto;
-    }
-
-    
-    public static void main(String[] args){
+/**
+ * cooperativa --- Clase principal que contiene el main
+ * 
+ * @author (Gustavo)
+ * @version (1.0)
+ * @since (1.0)
+ *
+ * Queda pendiente:
+ * - Si actualizo el precio de un producto de la cooperativa, se actualiza en cada productor que tenga ese producto?
+ *
+ * - Ver el tema de las fechas de los pedidos y el precio del producto pasado 10 días:
+ * Las compras a la cooperativa se realizan en una determinada fecha y se sirven dentro de un plazo máximo de diez días.
+ * Si al realizar la petición, se solicita que se entregue en un plazo superior a diez días, entonces habrá que revisar
+ * el valor del producto en el momento de proporcionarlo (siempre diez días antes de la fecha de entrega solicitada).
+ *
+ * - (Punto 3). Se quiere generar, a final de año, un resumen anual de totales de gestión de la cooperativa
+ */
+public class cooperativa{
+    public static void main(String[] args) {
         //Creamos la cooperativa
-        Cooperativa c=new Cooperativa();
+        TipoCooperativa c = new TipoCooperativa();
 
-        //Creamos los productos y los añadimos a la cooperativa
-        c.productos.add(new Producto(TipoProducto.ACEITUNA,2500.0f,3.0f,false));
-        c.productos.add(new Producto(TipoProducto.ZANAHORIA,500.0f,1.5f,true));
-        c.productos.add(new Producto(TipoProducto.ALGODON,1000.0f,1.0f,false));
-        c.productos.add(new Producto(TipoProducto.ACEITE,100.0f,0.60f,false));
+        //Creamos los productos disponibles para los productores
+        c.productos.add(new Producto(TipoProducto.ALGODON,1200.0f,0.60f,true));
+        c.productos.add(new Producto(TipoProducto.ZANAHORIA,1000.0f,0.50f,false));
+        c.productos.add(new Producto(TipoProducto.ACEITUNA,1500.0f,0.70f,true));
+        c.productos.add(new Producto(TipoProducto.ACEITE,2000.0f,0.80f,false));
 
-        //Creamos los productores y los añadimos a la cooperativa
-        c.productores.add(new Productor("Productor1",TipoProductor.PEQUENO_PRODUCTOR));
-        c.productores.add(new Productor("Productor2",TipoProductor.GRAN_PRODUCTOR));
+        //Creamos los productores
+        c.productores.add(new Productor("ProductorPequeño1",TipoProductor.PEQUENO_PRODUCTOR));
+        c.productores.add(new Productor("ProductorPequeño2",TipoProductor.PEQUENO_PRODUCTOR));
+        c.productores.add(new Productor("ProductorGrande1",TipoProductor.GRAN_PRODUCTOR));
+        c.productores.add(new Productor("ProductorGrande2",TipoProductor.GRAN_PRODUCTOR));
 
-        //Creamos los clientes y los añadimos a la cooperativa
-        c.clientes.add(new Cliente("Ana",TipoCliente.DISTRIBUIDOR,180.0f));
-        c.clientes.add(new Cliente("Luis149",TipoCliente.CONSUMIDOR_FINAL,112.0f));
-        c.clientes.add(new Cliente("Luis150",TipoCliente.CONSUMIDOR_FINAL,114.0f));
+        //Añadimos los productos que tendrá cada productor con su extension
+        c.productores.get(0).productos.put(c.productos.get(0), 1.0f);
+        c.productores.get(0).productos.put(c.productos.get(1), 2.0f);
+        c.productores.get(0).productos.put(c.productos.get(2), 1.5f);
 
-        //Creamos los repartidores y los añadimos a la cooperativa
-        c.repartidores.add(new Repartidor("Repartidor1"));
+        c.productores.get(1).productos.put(c.productos.get(1), 1.0f);
+        c.productores.get(1).productos.put(c.productos.get(2), 2.0f);
+        c.productores.get(1).productos.put(c.productos.get(3), 1.5f);
 
-        //Añadimos productos a los productores
-        c.productores.get(0).addProducto(c.productos.get(0), 1.5f);
-        c.productores.get(0).addProducto(c.productos.get(1), 2.0f);
-        c.productores.get(0).addProducto(c.productos.get(2), 0.5f);
+        c.productores.get(2).productos.put(c.productos.get(0), 1.0f);
+        c.productores.get(2).productos.put(c.productos.get(1), 2.0f);
+        c.productores.get(2).productos.put(c.productos.get(2), 1.5f);
 
-        //Mostramos los datos del productor 1
-        System.out.println(c.productores.get(0).toString());
+        c.productores.get(3).productos.put(c.productos.get(1), 1.0f);
+        c.productores.get(3).productos.put(c.productos.get(2), 2.0f);
+        c.productores.get(3).productos.put(c.productos.get(3), 1.5f);
 
-        //Eliminamos un producto del productor 1
-        c.productores.get(0).removeProducto(TipoProducto.ACEITUNA);
+        //Creamos los clientes
+        c.clientes.add(new Cliente("ConsumidorFinal1",TipoCliente.CONSUMIDOR_FINAL,180.0f));
+        c.clientes.add(new Cliente("ConsumidorFinal2",TipoCliente.CONSUMIDOR_FINAL,242.0f));
 
-        //Mostramos los datos del productor 1
-        System.out.println(c.productores.get(0).toString());
+        c.clientes.add(new Cliente("Distribuidor1",TipoCliente.DISTRIBUIDOR,195.0f));
+        c.clientes.add(new Cliente("Distribuidor2",TipoCliente.DISTRIBUIDOR,320.0f));
 
         //Creamos ofertas de logistica de prueba
         OfertaLogistica oferta1=new EnvioEstandar("Oferta1",0.05f,0.01f,TipoCliente.DISTRIBUIDOR);
         OfertaLogistica oferta2=new EnvioEstandar("Oferta2",0.05f,0.01f,TipoCliente.CONSUMIDOR_FINAL);
 
-        //Creamos pedidos y lo añadimos a la cooperativa
-        c.pedidos.add(new Pedido(c.clientes.get(0),c.productos.get(3),c.repartidores.get(0),2000.0f,oferta1));
-        c.pedidos.add(new Pedido(c.clientes.get(1),c.productos.get(3),c.repartidores.get(0),50.0f,oferta2));
-        c.pedidos.add(new Pedido(c.clientes.get(2),c.productos.get(3),c.repartidores.get(0),50.0f,oferta2));
+        //Cliente 1 solicita comprar un tipo de producto y una cantidad con su carrito de la compra
+        TipoProducto productoCarrito = TipoProducto.MELOCOTON;
+        float cantidadCarrito = 180.0f;
 
-        //Actualizamos el precio del producto de los pedidos
-        c.productos.get(3).actualizarPrecio(1.5f);
-
-        //Actualizamos la fecha de entrega de los pedidos
-        c.pedidos.get(0).setFechaEntrega(LocalDate.of(2023, 03, 19));
-        c.pedidos.get(1).setFechaEntrega(LocalDate.of(2023, 03, 20));
-        c.pedidos.get(2).setFechaEntrega(LocalDate.of(2023, 05, 19));
-
-        //Guardamos el pedido en el cliente
-        c.clientes.get(0).addPedido(c.pedidos.get(0));
-        c.clientes.get(1).addPedido(c.pedidos.get(1));
-        c.clientes.get(2).addPedido(c.pedidos.get(2));
-
-        //Printamos los pedidos del cliente 1
-        ArrayList<Pedido> pedidosCliente1=c.clientes.get(0).getPedidos();
-        for (int i=0;i<pedidosCliente1.size();i++){
-            System.out.println(pedidosCliente1.get(i).toString());
+        //Se añade el pedido a la lista de pedidos solo si existe el producto y hay la cantidad suficiente
+        if (!c.productoDisponible(productoCarrito)){
+            System.out.println("No existe el producto en la cooperativa");
+        }else if(c.calcularCantidadTotalEnKg(productoCarrito)<cantidadCarrito){
+            System.out.println("No hay suficiente cantidad del producto en la cooperativa");
+        }else {
+            //Se realiza el pedido
+            c.realizarPedido(c.clientes.get(0), c.getProducto(productoCarrito), cantidadCarrito, oferta2);
+            //Se añade el pedido a la lista de pedidos del cliente
+            c.clientes.get(0).addPedido(c.pedidos.get(0));
+            //Se printa por pantalla los detalles del pedido
+            System.out.println("Pedido realizado");
+            System.out.println(c.pedidos.get(0).toString());
         }
-
-        //Printamos el precio del producto de los pedidos
-        for (int i=0;i<c.pedidos.size();i++){
-            System.out.println("Precio del producto del pedido "+(i+1)+": "+c.pedidos.get(i).obtenerValorProductoPorKg());
-        }
-
-        //Mostramos el pedido 1
-        System.out.println(c.pedidos.get(0).toString());
-        //Mostramos los tramos del pedido 1
-        c.pedidos.get(0).mostrarTramos();
-
-        //Mostramos el pedido 2
-        System.out.println(c.pedidos.get(1).toString());
-
-        //Mostramos los tramos del pedido 2
-        c.pedidos.get(1).mostrarTramos();
-
-        //Mostramos el pedido 3
-        System.out.println(c.pedidos.get(2).toString());
-
-        //Mostramos los tramos del pedido 3
-        c.pedidos.get(2).mostrarTramos();
-
-        //Creamos productores que serán federados
-        Productor miembro1=new Productor("Productor 1",TipoProductor.PEQUENO_PRODUCTOR);
-        Productor miembro2=new Productor("Productor 2",TipoProductor.PEQUENO_PRODUCTOR);
-
-        //Creamos la lista de miembros y los añadimos
-        ArrayList<Productor> miembros=new ArrayList<Productor>();
-        miembros.add(miembro1);
-        miembros.add(miembro2);
-
-        //Añadimos el producto ZANAHORIA a cada miembro
-        miembro1.addProducto(c.productos.get(1), 1.5f);
-        miembro2.addProducto(c.productos.get(1), 2.0f);
-
-        //Creamos un productor federado
-        ProductorFederado pf=new ProductorFederado("ProductorFederado1",miembros,c.productos.get(1));
-
-        //Printamos los datos del productor federado
-        System.out.println(pf);
-
     }
 }

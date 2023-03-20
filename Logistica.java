@@ -84,16 +84,16 @@ public class Logistica{
         float distanciaTotalTramosGranLogistica = 0;
 
         if (c.getTipoCliente()==TipoCliente.DISTRIBUIDOR){
-            int cantViajes = (int) Math.ceil(cantidadComprada / Cooperativa.MIN_KG_DISTRIBUIDOR);
-            float cantKgUltimoViaje = cantidadComprada % Cooperativa.MIN_KG_DISTRIBUIDOR;
+            int cantViajes = (int) Math.ceil(cantidadComprada / TipoCooperativa.MIN_KG_DISTRIBUIDOR);
+            float cantKgUltimoViaje = cantidadComprada % TipoCooperativa.MIN_KG_DISTRIBUIDOR;
             if (cantKgUltimoViaje>0){
                 for (int i=1;i<cantViajes;i++){
                     for (Tramo tramo : tramos) {
                        if (tramo.getTipoLogistica()==TipoLogistica.GRAN_LOGISTICA){
-                           costeTramosGranLogistica += costeFijo * p.getValorReferenciaPorKg() * Cooperativa.MIN_KG_DISTRIBUIDOR;
+                           costeTramosGranLogistica += costeFijo * p.getValorReferenciaPorKg() * TipoCooperativa.MIN_KG_DISTRIBUIDOR;
                            distanciaTotalTramosGranLogistica += tramo.getDistancia();
                        }else{
-                            costeTramosPequenaLogistica += Cooperativa.MIN_KG_DISTRIBUIDOR*tramo.getDistancia()*costePorKmPequenaLogistica;
+                            costeTramosPequenaLogistica += TipoCooperativa.MIN_KG_DISTRIBUIDOR*tramo.getDistancia()*costePorKmPequenaLogistica;
                        }
                     }
                     costeTotalGranLogisticaPorViaje += costeTramosGranLogistica+distanciaTotalTramosGranLogistica*costePorKmGranLogistica;
@@ -115,7 +115,7 @@ public class Logistica{
             }else{
                 for (Tramo tramo : tramos) {
                     if (tramo.getTipoLogistica()==TipoLogistica.GRAN_LOGISTICA){
-                        costeTramosGranLogistica += costeFijo * p.getValorReferenciaPorKg() * Cooperativa.MIN_KG_DISTRIBUIDOR;
+                        costeTramosGranLogistica += costeFijo * p.getValorReferenciaPorKg() * TipoCooperativa.MIN_KG_DISTRIBUIDOR;
                         distanciaTotalTramosGranLogistica += tramo.getDistancia();
                     }else{
                         costeTramosPequenaLogistica += cantidadComprada*tramo.getDistancia()*costePorKmPequenaLogistica;
@@ -135,7 +135,7 @@ public class Logistica{
                     costeTramosPequenaLogistica += cantidadComprada*tramo.getDistancia()*costePorKmPequenaLogistica;
                 }
             }
-            costeTotalGranLogistica = costeTramosGranLogistica + distanciaTotalTramosGranLogistica*costePorKmGranLogistica;
+            costeTotalGranLogistica = costeTramosGranLogistica + distanciaTotalTramosGranLogistica * costePorKmGranLogistica;
             costeTotalLogistica = costeTotalGranLogistica + costeTramosPequenaLogistica;
             return costeTotalLogistica;
         }

@@ -1,9 +1,6 @@
 #BlueJ class context
-comment0.target=Cooperativa
-comment1.params=
-comment1.target=Cooperativa()
-comment2.params=precio
-comment2.target=float\ aplicarIVA(float)
-comment3.params=args
-comment3.target=void\ main(java.lang.String[])
-numComments=4
+comment0.target=cooperativa
+comment0.text=\n\ Write\ a\ description\ of\ class\ cooperativa\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+numComments=2

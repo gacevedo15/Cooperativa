@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Cliente{
     private static int contadorClientes = 0;
@@ -63,6 +64,8 @@ public class Cliente{
     public void addPedido(Pedido p) {
         this.pedidos.add(p);
     }
+
+
 
 
     /***------------------------------------------------------------***/

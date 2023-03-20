@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.target=TipoCooperativa
+comment1.params=
+comment1.target=TipoCooperativa()
+comment2.params=precio
+comment2.target=float\ aplicarIVA(float)
+comment2.text=\n\ Aplica\ el\ IVA\ a\ un\ precio\n\ @param\ precio\ sin\ IVA\n\ @return\ precio\ con\ IVA\ aplicado\n
+comment3.params=tipo
+comment3.target=boolean\ productoDisponible(TipoProducto)
+comment3.text=\n\ Comprueba\ si\ un\ producto\ est\u00E1\ disponible\ en\ la\ cooperativa\n\ @param\ tipo\ el\ tipo\ de\ producto\ que\ se\ desea\ comprobar\ si\ est\u00E1\ disponible\n\ @return\ true\ si\ el\ producto\ est\u00E1\ disponible,\ false\ en\ caso\ contrario\n
+comment4.params=tipoProducto
+comment4.target=float\ calcularCantidadTotalEnKg(TipoProducto)
+comment4.text=\n\ Calcula\ la\ cantidad\ total\ de\ un\ tipo\ de\ producto\ en\ kilogramos\ (Kg)\ que\ posee\ la\ cooperativa,\ producida\ por\ todos\ los\ productores\n\ @param\ tipoProducto\ el\ tipo\ de\ producto\ del\ cual\ se\ desea\ conocer\ la\ cantidad\ total\ producida\ en\ Kg\n\ @return\ cantidadProducto\ la\ cantidad\ total\ del\ tipo\ de\ producto\ en\ Kg\ que\ posee\ la\ cooperativa\n
+comment5.params=beneficioCooperativa
+comment5.target=void\ addBeneficioCooperativa(float)
+comment5.text=\n\ M\u00E9todo\ para\ a\u00F1adir\ el\ beneficioCooperativa\ obtenido\ por\ la\ Cooperativa\ en\ un\ pedido\n\ @param\ beneficioCooperativa\ el\ beneficioCooperativa\ obtenido\ en\ el\ pedido\n
+comment6.params=tipoProducto
+comment6.target=float\ calcularHaTotalProducto(TipoProducto)
+comment6.text=\n\ Calcular\ el\ total\ de\ Ha\ que\ posee\ la\ cooperativa\ de\ un\ tipo\ de\ producto\n\ @param\ tipoProducto\ el\ tipo\ de\ producto\ del\ cual\ se\ desea\ conocer\ la\ cantidad\ total\ de\ Ha\n\ @return\ haTotal\ la\ cantidad\ total\ de\ Ha\ que\ posee\ la\ cooperativa\ del\ tipo\ de\ producto\n
+comment7.params=pedido
+comment7.target=void\ asignarBeneficioPorProductor(Pedido)
+comment7.text=\n\ M\u00E9todo\ que\ calcula\ el\ beneficio\ obtenido\ por\ cada\ productor\ tras\ realizarse\ un\ pedido\ y\ lo\ a\u00F1ade\ a\ su\ beneficioTotal\n\ @param\ pedido\ el\ pedido\ del\ cual\ se\ desea\ calcular\ el\ beneficio\ de\ los\ productores\n
+comment8.params=pedido
+comment8.target=void\ asignarBeneficioCooperativa(Pedido)
+comment8.text=\n\ M\u00E9todo\ que\ calcula\ el\ beneficio\ obtenido\ por\ la\ Cooperativa\ en\ un\ pedido\n\ @param\ pedido\ el\ pedido\ del\ cual\ se\ desea\ calcular\ el\ beneficio\ de\ la\ Cooperativa\n
+numComments=9

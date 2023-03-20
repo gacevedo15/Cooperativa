@@ -1,9 +1,10 @@
 
 /**
- * Enumeration class TipoProducto - write a description of the enum class here
+ * Enum de los tipos de productos
+ * Contiene los tipos de productos que se pueden producir en la cooperativa
  * 
- * @author (your name here)
- * @version (version number or date here)
+ * @author (Gustavo)
+ * @version (1.0)
  */
 public enum TipoProducto
 {
