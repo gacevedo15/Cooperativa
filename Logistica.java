@@ -14,6 +14,8 @@ public class Logistica{
     private float costeFijo;
     private float costePorKmGranLogistica;
     private float costePorKmPequenaLogistica;
+    private float costeTotalPequenaLogistica;
+    private float costeTotalGranLogistica;
     private float costeTotalLogistica;
 
     //Constructor
@@ -24,6 +26,14 @@ public class Logistica{
         this.costePorKmPequenaLogistica = ofertaLogistica.getCostePorKmPequenaLogistica();
         this.costeFijo = ofertaLogistica.getCosteFijo();
 
+    }
+
+    //Getters
+    public float getCosteTotalPequenaLogistica() {
+        return this.costeTotalPequenaLogistica;
+    }
+    public float getCosteTotalGranLogistica() {
+        return this.costeTotalGranLogistica;
     }
 
     //Método para crear los tramos
@@ -77,9 +87,9 @@ public class Logistica{
     public float calcularCosteLogistica(Producto p, Cliente c, float cantidadComprada) {
 
         float costeTramosGranLogistica = 0;
-        float costeTramosPequenaLogistica = 0;
+        costeTotalPequenaLogistica = 0;
         float costeTotalGranLogisticaPorViaje = 0;
-        float costeTotalGranLogistica = 0;
+        costeTotalGranLogistica = 0;
         costeTotalLogistica = 0;
         float distanciaTotalTramosGranLogistica = 0;
 
@@ -93,7 +103,7 @@ public class Logistica{
                            costeTramosGranLogistica += costeFijo * p.getValorReferenciaPorKg() * TipoCooperativa.MIN_KG_DISTRIBUIDOR;
                            distanciaTotalTramosGranLogistica += tramo.getDistancia();
                        }else{
-                            costeTramosPequenaLogistica += TipoCooperativa.MIN_KG_DISTRIBUIDOR*tramo.getDistancia()*costePorKmPequenaLogistica;
+                            costeTotalPequenaLogistica += TipoCooperativa.MIN_KG_DISTRIBUIDOR*tramo.getDistancia()*costePorKmPequenaLogistica;
                        }
                     }
                     costeTotalGranLogisticaPorViaje += costeTramosGranLogistica+distanciaTotalTramosGranLogistica*costePorKmGranLogistica;
@@ -106,11 +116,11 @@ public class Logistica{
                         costeTramosGranLogistica += costeFijo * p.getValorReferenciaPorKg() * cantKgUltimoViaje;
                         distanciaTotalTramosGranLogistica += tramo.getDistancia();
                     }else{
-                        costeTramosPequenaLogistica += cantKgUltimoViaje*tramo.getDistancia()*costePorKmPequenaLogistica;
+                        costeTotalPequenaLogistica += cantKgUltimoViaje*tramo.getDistancia()*costePorKmPequenaLogistica;
                     }
                 }
                 costeTotalGranLogisticaPorViaje += costeTramosGranLogistica+distanciaTotalTramosGranLogistica*costePorKmGranLogistica;
-                costeTotalLogistica = costeTotalGranLogisticaPorViaje + costeTramosPequenaLogistica;
+                costeTotalLogistica = costeTotalGranLogisticaPorViaje + costeTotalPequenaLogistica;
                 return costeTotalLogistica;
             }else{
                 for (Tramo tramo : tramos) {
@@ -118,13 +128,13 @@ public class Logistica{
                         costeTramosGranLogistica += costeFijo * p.getValorReferenciaPorKg() * TipoCooperativa.MIN_KG_DISTRIBUIDOR;
                         distanciaTotalTramosGranLogistica += tramo.getDistancia();
                     }else{
-                        costeTramosPequenaLogistica += cantidadComprada*tramo.getDistancia()*costePorKmPequenaLogistica;
+                        costeTotalPequenaLogistica += cantidadComprada*tramo.getDistancia()*costePorKmPequenaLogistica;
                     }
                 }
             }
             costeTotalGranLogisticaPorViaje = costeTramosGranLogistica + distanciaTotalTramosGranLogistica*costePorKmGranLogistica;
             costeTotalGranLogistica = costeTotalGranLogisticaPorViaje*cantViajes;
-            costeTotalLogistica = costeTotalGranLogistica + costeTramosPequenaLogistica;
+            costeTotalLogistica = costeTotalGranLogistica + costeTotalPequenaLogistica;
             return costeTotalLogistica;
         }else{
             for (Tramo tramo : tramos) {
@@ -132,11 +142,11 @@ public class Logistica{
                     costeTramosGranLogistica += costeFijo * p.getValorReferenciaPorKg() * cantidadComprada;
                     distanciaTotalTramosGranLogistica += tramo.getDistancia();
                 }else{
-                    costeTramosPequenaLogistica += cantidadComprada*tramo.getDistancia()*costePorKmPequenaLogistica;
+                    costeTotalPequenaLogistica += cantidadComprada*tramo.getDistancia()*costePorKmPequenaLogistica;
                 }
             }
             costeTotalGranLogistica = costeTramosGranLogistica + distanciaTotalTramosGranLogistica * costePorKmGranLogistica;
-            costeTotalLogistica = costeTotalGranLogistica + costeTramosPequenaLogistica;
+            costeTotalLogistica = costeTotalGranLogistica + costeTotalPequenaLogistica;
             return costeTotalLogistica;
         }
 

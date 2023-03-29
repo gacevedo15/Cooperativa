@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.HashMap;
 
 public class Producto {
     private TipoProducto tipo;
@@ -6,6 +7,7 @@ public class Producto {
     private float valorReferenciaPorKg;
     private float valorReferenciaPorKgAnterior;
     private LocalDate fechaUltimaActualizacion;
+    protected HashMap<LocalDate, Float> historialValorReferenciaPorKg;
     private boolean esPerecedero;
 
     //Constructor
@@ -14,6 +16,8 @@ public class Producto {
         this.rendimientoPorHectarea = rendimientoPorHectarea;
         this.valorReferenciaPorKg = valorReferenciaPorKg;
         this.fechaUltimaActualizacion = LocalDate.now();
+        this.historialValorReferenciaPorKg = new HashMap<>();
+        this.historialValorReferenciaPorKg.put(this.fechaUltimaActualizacion, this.valorReferenciaPorKg);
         this.esPerecedero = esPerecedero;
     }
 
@@ -34,6 +38,9 @@ public class Producto {
     }
     public LocalDate getFechaUltimaActualizacion() {
         return this.fechaUltimaActualizacion;
+    }
+    public HashMap<LocalDate, Float> getHistorialValorReferenciaPorKg() {
+        return this.historialValorReferenciaPorKg;
     }
     public boolean esPerecedero() {
         return this.esPerecedero;
@@ -58,7 +65,9 @@ public class Producto {
     public void actualizarPrecio(float nuevoPrecio) {
         this.valorReferenciaPorKgAnterior = this.valorReferenciaPorKg;
         this.valorReferenciaPorKg = nuevoPrecio;
-        this.fechaUltimaActualizacion = LocalDate.now();
+        //now + 1 day
+        this.fechaUltimaActualizacion = LocalDate.now().plusDays(1);
+        this.historialValorReferenciaPorKg.put(this.fechaUltimaActualizacion, this.valorReferenciaPorKg);
     }
 
     /***------------------------------------------------------------***/
