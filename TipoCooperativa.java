@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -32,7 +33,9 @@ public class TipoCooperativa {
     public ArrayList<Repartidor> repartidores;
     public ArrayList<Pedido> pedidos;
 
-    private float beneficioTotal; //costeTotal del pedido - beneficioTotal del productor
+    public ArrayList<ResumenAnual> resumenesAnuales;
+
+    private HashMap<TipoProducto,Float> beneficioTotalPorProducto;
 
     //Constructor
     public TipoCooperativa(){
@@ -41,6 +44,13 @@ public class TipoCooperativa {
         this.clientes=new ArrayList<Cliente>();
         this.repartidores=new ArrayList<Repartidor>();
         this.pedidos=new ArrayList<Pedido>();
+        this.resumenesAnuales=new ArrayList<ResumenAnual>();
+        this.beneficioTotalPorProducto=new HashMap<TipoProducto,Float>();
+    }
+
+    //Getters
+    public HashMap<TipoProducto, Float> getBeneficioTotalPorProducto() {
+        return beneficioTotalPorProducto;
     }
 
     /**
@@ -99,14 +109,6 @@ public class TipoCooperativa {
     }
 
     /**
-     * Método para añadir el beneficioCooperativa obtenido por la Cooperativa en un pedido
-     * @param beneficioCooperativa el beneficioCooperativa obtenido en el pedido
-     */
-    public void addBeneficioCooperativa(float beneficioCooperativa){
-        this.beneficioTotal+=beneficioCooperativa;
-    }
-
-    /**
      * Calcular el total de Ha que posee la cooperativa de un tipo de producto
      * @param tipoProducto el tipo de producto del cual se desea conocer la cantidad total de Ha
      * @return haTotal la cantidad total de Ha que posee la cooperativa del tipo de producto
@@ -123,45 +125,106 @@ public class TipoCooperativa {
     }
 
     /**
-     * Método que calcula el beneficio obtenido por cada productor tras realizarse un pedido y lo añade a su beneficioTotal
-     * @param pedido el pedido del cual se desea calcular el beneficio de los productores
+     * Método que calcula el beneficio por producto de un productor
+     * @param pedido el pedido del cual se desea calcular el beneficio del productor
+     * @param productor el productor del cual se desea calcular el beneficio
+     * @return beneficioProductorPorProducto el beneficio del productor por producto
      */
-    public void asignarBeneficioPorProductor(Pedido pedido){
-        float beneficioProductor;
+    public HashMap<TipoProducto, Float> calcularBeneficioProductor(Pedido pedido, Productor productor){
+        float beneficioProductor=0.0f;
+        HashMap<TipoProducto,Float> beneficioProductorPorProducto=new HashMap<TipoProducto,Float>();
         float cantTotalHa=calcularHaTotalProducto(pedido.getProducto().getTipo());
-        //Recorremos los productores
+        for(HashMap.Entry<Producto,Float> entry : productor.getProductos().entrySet()){
+            if(entry.getKey().getTipo()==pedido.getProducto().getTipo()){
+                beneficioProductor=((entry.getValue()/cantTotalHa)*pedido.getBeneficioProductores());
+            }
+        }
+        beneficioProductorPorProducto.put(pedido.getProducto().getTipo(),beneficioProductor);
+        return beneficioProductorPorProducto;
+    }
+
+    /**
+     * Método que asigna el beneficio obtenido por cada productor tras realizarse un pedido y lo añade a su beneficioTotal
+     * @param pedido el pedido del cual se desea calcular el beneficio de los productores
+     * @param productores los productores de los cuales se desea calcular el beneficio
+     */
+    public void asignarBeneficioPorProductor(Pedido pedido, ArrayList<Productor> productores){
+        //Se recorren todos los productores
         for(Productor p:productores){
-           /* Si el productor tiene un producto del mismo tipo que el pedido, calculamos el beneficio del productor, para ello:
-            * 1. Dividimos la cant de Ha del producto del productor por la cant de Ha total de todos los productores que poseen este producto
-            * al resultado le multiplicamos la cantidad de Kg del producto del pedido
-            * y al resultado el multiplicamos el pedido.obtenerValorProductoPorKg()
-            */
-            for(HashMap.Entry<Producto,Float> entry : p.getProductos().entrySet()){
-                if(entry.getKey().getTipo()==pedido.getProducto().getTipo()){
-                    beneficioProductor=((entry.getValue()/cantTotalHa)*pedido.getBeneficioProductores());
-                    p.addBeneficioProductor(beneficioProductor);
+            //Si el productor produce el producto del pedido, se calcula su beneficio y se añade a su beneficioTotal
+            if(p.buscarProducto(pedido.getProducto().getTipo())){
+                HashMap<TipoProducto,Float> beneficioProductorPorProducto=calcularBeneficioProductor(pedido,p);
+                for(HashMap.Entry<TipoProducto,Float> entry : beneficioProductorPorProducto.entrySet()){
+                    p.addBeneficioProductor(entry.getKey(),entry.getValue());
                 }
             }
+
         }
     }
 
     /**
-     * Método que calcula el beneficio obtenido por la Cooperativa en un pedido
-     * @param pedido el pedido del cual se desea calcular el beneficio de la Cooperativa
+     * Método para calcular el beneficioTotalPorProducto de la cooperativa tras realizarse un pedido
+     * @param pedido el pedido del cual se desea calcular el beneficioTotalPorProducto de la cooperativa
+     * @return beneficioCooperativa HashMap con el beneficioTotalPorProducto de la cooperativa
      */
-    public void asignarBeneficioCooperativa(Pedido pedido){
-        float beneficioCooperativa=0.0f;
-        addBeneficioCooperativa(pedido.getBeneficioCooperativa());
+    public HashMap<TipoProducto,Float> calcularBeneficioCooperativa(Pedido pedido) {
+        HashMap<TipoProducto, Float> beneficioCooperativa = new HashMap<TipoProducto, Float>();
+        float beneficioProducto = pedido.getBeneficioCooperativa();
+        beneficioCooperativa.put(pedido.getProducto().getTipo(), beneficioProducto);
+        return beneficioCooperativa;
+    }
+
+    /**
+     * Método para añadir el beneficioTotalPorProducto obtenido en cada pedido
+     * @param beneficioCooperativa HashMap con el beneficioTotalPorProducto de la cooperativa
+     * si la clave existe ya en el HashMap beneficioTotalPorProducto, se suma el valor de la clave, si no existe se añade
+     */
+    public void addBeneficioCooperativa(HashMap<TipoProducto,Float> beneficioCooperativa){
+        for(HashMap.Entry<TipoProducto,Float> entry : beneficioCooperativa.entrySet()){
+            if(beneficioTotalPorProducto.containsKey(entry.getKey())){
+                beneficioTotalPorProducto.put(entry.getKey(),beneficioTotalPorProducto.get(entry.getKey())+entry.getValue());
+            }else{
+                beneficioTotalPorProducto.put(entry.getKey(),entry.getValue());
+            }
+        }
     }
 
     /**
      * Método que realiza un pedido, lo añade a la lista de pedidos y calcula el beneficio de los productores
      * y de la Cooperativa
      */
-    public void realizarPedido(Cliente c, Producto p, float cantCompradaKg, OfertaLogistica o) {
-        Pedido pedido = new Pedido(c, p, cantCompradaKg, o);
-        pedidos.add(pedido);
-        asignarBeneficioPorProductor(pedido);
-        asignarBeneficioCooperativa(pedido);
+    public void realizarPedido(Cliente c, Producto p, float cantCompradaKg, OfertaLogistica o, LocalDate fechaPedido,LocalDate fechaEntrega){
+        Pedido pedido = new Pedido(c, p, cantCompradaKg, o, fechaPedido,fechaEntrega);  //Se crea el pedido
+        pedidos.add(pedido);                                                //Se añade el pedido a la lista de pedidos
+        asignarBeneficioPorProductor(pedido,productores);                   //Se calcula el beneficio de los productores
+        addBeneficioCooperativa(calcularBeneficioCooperativa(pedido));      //Se calcula el beneficio de la Cooperativa
+        c.addPedido(pedido);                                                //Se añade el pedido al cliente
+
+        for(ResumenAnual r:resumenesAnuales){
+            if(r.getAnno()==pedido.getFechaPedido().getYear()){
+                r.addPedido(pedido);
+                r.actualizarVentasTotalesPorProducto(pedido.getProducto().getTipo(),pedido.getCantCompradaKg());
+                asignarBeneficioPorProductor(pedido,r.getProductores());
+                r.addBeneficioCooperativaPorProducto(calcularBeneficioCooperativa(pedido));
+            }
+        }
+    }
+
+    /**
+     * Método para actualizar el precio de un producto tanto en el ArrayList de productos como en los productores que contengan el producto
+     * @param tipoProducto el tipo de producto del cual se desea actualizar el precio
+     * @param nuevoPrecio el nuevo precio del producto
+     */
+    public void actualizarPrecioProducto(LocalDate fecha,TipoProducto tipoProducto, float nuevoPrecio) {
+        //Actualizamos el precio del producto en el ArrayList de productos
+        for (Producto p : productos) {
+            if (p.getTipo() == tipoProducto) {
+                p.actualizarPrecio(fecha,nuevoPrecio);
+            }
+        }
+        //Actualizamos el precio del producto en los productores
+        for (Productor p : productores) {
+            p.actualizarPrecioProducto(fecha,tipoProducto, nuevoPrecio);
+        }
     }
 }

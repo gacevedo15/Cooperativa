@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=ResumenAnual
+comment0.text=\n\ Clase\ que\ representa\ un\ resumen\ anual\n\ Debe\ implementar\:\n\ -\ Ventas\ totales\ en\ un\ periodo\ determinado\ de\ cada\ uno\ de\ los\ productos\ de\ la\ cooperativa.\ Listo\n\ -\ Importes\ obtenidos\ por\ cada\ uno\ de\ los\ productores\ (desglosados\ por\ productos)\n\ -\ Importes\ obtenidos\ por\ cada\ una\ de\ las\ empresas\ de\ log\u00EDstica.\n\ -\ Beneficios\ de\ la\ cooperativa\ por\ cada\ uno\ de\ los\ productos.\n\ -\ Evoluci\u00F3n\ de\ los\ precios\ de\ referencias\ de\ cada\ productos.\n
+comment1.params=pedidos\ productos
+comment1.target=ResumenAnual(java.util.ArrayList,\ java.util.ArrayList)
+comment2.params=fechaInicio\ fechaFin
+comment2.target=java.util.HashMap\ calcularVentasPorProducto(java.time.LocalDate,\ java.time.LocalDate)
+comment2.text=\n\ M\u00E9todo\ que\ calcula\ las\ ventas\ totales\ en\ un\ periodo\ determinado\ de\ cada\ uno\ de\ los\ productos\ de\ la\ cooperativa\n\ @param\ fechaInicio\ la\ fecha\ de\ inicio\ del\ periodo\n\ @param\ fechaFin\ la\ fecha\ de\ fin\ del\ periodo\n\ @return\ ventasTotales\ la\ cantidad\ total\ de\ ventas\ de\ cada\ producto\ en\ el\ periodo\n
+comment3.params=
+comment3.target=void\ printVentasPorProducto()
+comment3.text=\n\ M\u00E9todo\ para\ printar\ las\ ventas\ por\ producto\n
+comment4.params=productores
+comment4.target=void\ calcularImportesPorProductor(java.util.ArrayList)
+comment4.text=\n\ M\u00E9todo\ para\ obtener\ los\ Importes\ obtenidos\ por\ cada\ uno\ de\ los\ productores\ (desglosados\ por\ productos)\n
+numComments=5

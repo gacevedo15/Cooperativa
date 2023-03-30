@@ -17,13 +17,16 @@ public class Pedido{
     private float costeProducto;
     private float beneficioCooperativa;
     private float beneficioProductores;
+    private float costePequenaLogistica;
+    private float costeGranLogistica;
     private float costeLogistica;
     private float costeTotal;
 
     //Constructor
-    public Pedido(Cliente c, Producto p, float cantCompradaKg, OfertaLogistica o) {
+    public Pedido(Cliente c, Producto p, float cantCompradaKg, OfertaLogistica o, LocalDate fechaPedido,LocalDate fechaEntrega) {
         this.idPedido = ++idPedidoActual;
-        this.fechaPedido = LocalDate.now();
+        this.fechaPedido = fechaPedido;
+        this.fechaEntrega = fechaEntrega;
         this.c = c;
         this.p = p;
         this.l = new Logistica(c, p, cantCompradaKg,o);
@@ -32,6 +35,12 @@ public class Pedido{
     }
 
     //Getters
+    public LocalDate getFechaPedido() {
+        return this.fechaPedido;
+    }
+    public LocalDate getFechaEntrega() {
+        return this.fechaEntrega;
+    }
     public Producto getProducto() {
         return this.p;
     }
@@ -47,6 +56,12 @@ public class Pedido{
 
     public float getCosteProducto() {
         return this.costeProducto;
+    }
+    public float getCostePequenaLogistica() {
+        return this.costePequenaLogistica;
+    }
+    public float getCosteGranLogistica() {
+        return this.costeGranLogistica;
     }
     public float getCosteLogistica() {
         return this.costeLogistica;
@@ -76,36 +91,24 @@ public class Pedido{
                 + "\nCoste Total: " + TipoCooperativa.df.format(costeTotal)  + "€\n";
     }
 
-    //Método para obtener el valor del producto en dependencia de la fecha de entrega
-    public float obtenerValorProductoPorKg() {
-        float precio;
-        LocalDate fechaPrecio = this.fechaEntrega != null && this.fechaEntrega.isAfter(this.fechaPedido.plusDays(10)) ? this.fechaEntrega.minusDays(10) : this.fechaPedido;
-        if (this.p.getFechaUltimaActualizacion().isBefore(fechaPrecio)) {
-            precio = this.p.getValorReferenciaPorKgAnterior();
-        } else {
-            precio = this.p.getValorReferenciaPorKg();
-        }
-        return precio;
-    }
-
     //Método para calcular los costes del pedido
     public void calcularCostes(float cantCompradaKg) {
         if (c.getTipoCliente() == TipoCliente.DISTRIBUIDOR) {
-            this.beneficioProductores= cantCompradaKg * obtenerValorProductoPorKg(); //30
+            this.beneficioProductores= cantCompradaKg * p.getValorReferenciaPorKg(); //30
             this.costeProducto = beneficioProductores * TipoCooperativa.MARGEN_DISTRIBUIDOR; // 34,5
             this.beneficioCooperativa = costeProducto - beneficioProductores; // = 4,5
             this.costeLogistica = l.calcularCosteLogistica(p,c,cantCompradaKg);
             this.costeTotal = this.costeProducto + this.costeLogistica;
         } else {
-            this.beneficioProductores= cantCompradaKg * obtenerValorProductoPorKg(); //30
+            this.beneficioProductores= cantCompradaKg * p.getValorReferenciaPorKg(); //30
             this.costeProducto = beneficioProductores * TipoCooperativa.MARGEN_CONSUMIDOR_FINAL;
             this.beneficioCooperativa = costeProducto - beneficioProductores; // = 4,5
             this.costeProducto = TipoCooperativa.aplicarIVA(costeProducto);
             this.costeLogistica = TipoCooperativa.aplicarIVA(l.calcularCosteLogistica(p,c,cantCompradaKg));
+            this.costePequenaLogistica = l.getCosteTotalPequenaLogistica();
+            this.costeGranLogistica = l.getCosteTotalGranLogistica();
             this.costeTotal = this.costeProducto + this.costeLogistica;
         }
     }
-
-
 
 }

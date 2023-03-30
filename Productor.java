@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public class Productor {
@@ -8,7 +9,7 @@ public class Productor {
     private TipoProductor tipoProductor;
     protected HashMap<Producto, Float> productos;
     protected float extensionTotal;
-    protected float beneficioTotal; //costeTotal del pedido - (IVA + costeFijo)
+    protected HashMap<TipoProducto,Float> beneficioTotalPorProducto;
 
     //Constructor sin productos
     public Productor(String nombre, TipoProductor tipoProductor) {
@@ -17,7 +18,7 @@ public class Productor {
         this.tipoProductor = tipoProductor;
         this.productos = new HashMap<>();
         this.extensionTotal = 0;
-        this.beneficioTotal = 0;
+        this.beneficioTotalPorProducto = new HashMap<>();
     }
     //Constructor con productos
     public Productor(String nombre, TipoProductor tipoProductor, HashMap<Producto, Float> productos) {
@@ -45,6 +46,9 @@ public class Productor {
     }
     public float getExtensionTotal() {
         return this.extensionTotal;
+    }
+    public HashMap<TipoProducto, Float> getBeneficioTotalPorProducto() {
+        return this.beneficioTotalPorProducto;
     }
 
     //Setters
@@ -130,11 +134,31 @@ public class Productor {
     }
 
     /** 
-     * Método para añadir el beneficioProductor obtenido en un pedido
-     * @param beneficioProductor
+     * Método para añadir el beneficioTotalPorProducto obtenido en cada pedido
+     * @param tipoProducto el tipo de producto
+     * @param beneficioProductor el beneficioProductor obtenido
      */
-    public void addBeneficioProductor(float beneficioProductor){
-        this.beneficioTotal += beneficioProductor;
+    public void addBeneficioProductor(TipoProducto tipoProducto,float beneficioProductor){
+        if (this.beneficioTotalPorProducto.containsKey(tipoProducto)) {
+            this.beneficioTotalPorProducto.put(tipoProducto, this.beneficioTotalPorProducto.get(tipoProducto) + beneficioProductor);
+        } else {
+            this.beneficioTotalPorProducto.put(tipoProducto, beneficioProductor);
+        }
+    }
+
+    /**
+     * Método para actualizar el precio de un producto
+     * @param fecha la fecha de la actualización
+     * @param tipoProducto el tipo de producto
+     * @param precio el nuevo precio
+     */
+    public void actualizarPrecioProducto(LocalDate fecha,TipoProducto tipoProducto, float precio){
+        for (Producto p : this.productos.keySet()) {
+            if (p.getTipo() == tipoProducto) {
+                p.actualizarPrecio(fecha,precio);
+                break;
+            }
+        }
     }
 
     /***------------------------------------------------------------***/
@@ -142,16 +166,11 @@ public class Productor {
 
     //ToString que printe toda la información del productor y el tipo de producto con su extensión
     @Override
-    public String toString() {
-        String s = "idProductor = " + idProductor
-                + "\nNombre = " + nombre
-                + "\nBeneficiosObtenidos = " + beneficioTotal
-                + "\nTipoProductor = " + tipoProductor
-                + "\nProductos:\n";
+    public String toString(){
+        String s = "ID: " + this.idProductor + " - Nombre: " + this.nombre + " - Tipo: " + this.tipoProductor + " - Productos: ";
         for (Producto p : this.productos.keySet()) {
-            s += "       " + p.getTipo() + " - " + this.productos.get(p) + " ha\n";
+            s += p.getTipo() + " (" + this.productos.get(p) + " Ha) ";
         }
-        s += "Extensión Total = " + extensionTotal + " ha\n";
         return s;
     }
 
