@@ -14,7 +14,7 @@ import java.time.LocalDate;
  */
 public class cooperativa {
     public static void main(String[] args) {
-        //Creamos la cooperativa
+        //Creamos la cooperativa de prueba
         TipoCooperativa c = new TipoCooperativa();
 
         //Creamos los productos disponibles para los productores
