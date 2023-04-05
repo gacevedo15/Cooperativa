@@ -7,12 +7,12 @@ import java.time.LocalDate;
  * @version (1.0)
  * @since (1.0)
  *
- * Queda pendiente:
+ * Queda pendiente (Terminar lo antes posible):
  *
  * - Importes obtenidos por cada uno de los productores (desglosados por productos)
  * No se si sacar esta información directamente de los productores o si en mi resumen Anual guardo la información
  */
-public class Cooperativa {
+public class cooperativa {
     public static void main(String[] args) {
         //Creamos la cooperativa
         TipoCooperativa c = new TipoCooperativa();
