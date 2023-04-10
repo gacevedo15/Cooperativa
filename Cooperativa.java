@@ -61,29 +61,6 @@ public class cooperativa{
         OfertaLogistica oferta1=new EnvioEstandar("Oferta1",0.05f,0.01f,TipoCliente.DISTRIBUIDOR);
         OfertaLogistica oferta2=new EnvioEstandar("Oferta2",0.05f,0.01f,TipoCliente.CONSUMIDOR_FINAL);
 
-        //Creamos un resumen anual de 2023
-        c.resumenesAnuales.add(new ResumenAnual(2023,c));
-        //Creamos un resumen anual de 2024
-        c.resumenesAnuales.add(new ResumenAnual(2024,c));
-
-        //Cliente 1 solicita comprar un tipo de producto y una cantidad con su carrito de la compra
-        TipoProducto productoCarrito = TipoProducto.MELOCOTON;
-        float cantidadCarrito = 180.0f;
-
-        //Se añade el pedido a la lista de pedidos solo si existe el producto y hay la cantidad suficiente
-        if (!c.productoDisponible(productoCarrito)){
-            System.out.println("No existe el producto en la cooperativa");
-        }else if(c.calcularCantidadTotalEnKg(productoCarrito)<cantidadCarrito){
-            System.out.println("No hay suficiente cantidad del producto en la cooperativa");
-        }else {
-            LocalDate fechaEntrega = LocalDate.of(2023, 3, 27);
-            //Se realiza el pedido
-            c.realizarPedido(c.clientes.get(0), c.getProducto(productoCarrito), cantidadCarrito, oferta2, fechaEntrega,fechaEntrega);
-            //Se printa por pantalla los detalles del pedido
-            System.out.println("Pedido realizado");
-            System.out.println(c.pedidos.get(0).toString());
-        }
-
         //Pedidos de prueba para testear la clase ResumenAnual de 2023
         LocalDate fechaPedido = LocalDate.of(2023, 3, 20);
         LocalDate fechaEntrega = LocalDate.of(2023, 3, 29);
@@ -92,35 +69,64 @@ public class cooperativa{
         c.realizarPedido(c.clientes.get(0), c.productos.get(2), 60.0f, oferta2, fechaPedido,fechaEntrega);
         c.realizarPedido(c.clientes.get(0), c.productos.get(3), 80.0f, oferta2, fechaPedido,fechaEntrega);
 
-        c.productos.get(0).actualizarPrecio(10.5f);
-        c.productos.get(1).actualizarPrecio(20.5f);
-        c.productos.get(2).actualizarPrecio(30.5f);
-        c.productos.get(3).actualizarPrecio(40.5f);
+        //Actualizar el precio de productos
+        c.actualizarPrecioProducto(c.productos.get(0).getTipo(), 1.20f,fechaPedido);
+        c.actualizarPrecioProducto(c.productos.get(1).getTipo(), 2.30f,fechaPedido);
+        c.actualizarPrecioProducto(c.productos.get(2).getTipo(), 1.35f,fechaPedido);
+        c.actualizarPrecioProducto(c.productos.get(3).getTipo(), 2.25f,fechaPedido);
+
+        fechaPedido = LocalDate.of(2023, 4, 20);
+        fechaEntrega = LocalDate.of(2023, 4, 29);
+        c.actualizarPrecioProducto(c.productos.get(0).getTipo(), 7.20f,fechaPedido);
+        c.actualizarPrecioProducto(c.productos.get(1).getTipo(), 8.30f,fechaPedido);
+        c.actualizarPrecioProducto(c.productos.get(2).getTipo(), 9.35f,fechaPedido);
 
         //Pedidos de prueba para testear la clase ResumenAnual de 2024
         fechaPedido = LocalDate.of(2024, 3, 20);
         fechaEntrega = LocalDate.of(2024, 3, 29);
         c.realizarPedido(c.clientes.get(0), c.productos.get(0), 10.0f, oferta2, fechaPedido, fechaEntrega);
+
+        fechaPedido = LocalDate.of(2024, 4, 20);
+        fechaEntrega = LocalDate.of(2024, 4, 29);
         c.realizarPedido(c.clientes.get(0), c.productos.get(1), 20.0f, oferta2, fechaPedido, fechaEntrega);
+
+        fechaPedido = LocalDate.of(2024, 5, 20);
+        fechaEntrega = LocalDate.of(2024, 5, 29);
         c.realizarPedido(c.clientes.get(0), c.productos.get(2), 30.0f, oferta2, fechaPedido, fechaEntrega);
+
+        fechaPedido = LocalDate.of(2024, 6, 20);
+        fechaEntrega = LocalDate.of(2024, 6, 29);
         c.realizarPedido(c.clientes.get(0), c.productos.get(3), 40.0f, oferta2, fechaPedido, fechaEntrega);
 
-        c.productos.get(0).actualizarPrecio(55.5f);
-        c.productos.get(1).actualizarPrecio(45.5f);
-        c.productos.get(2).actualizarPrecio(35.5f);
-        c.productos.get(3).actualizarPrecio(25.5f);
+        /*
+        //actualizamos el precio de los productos
+        c.actualizarPrecioProducto(c.productos.get(0).getTipo(), 2.20f,fechaPedido);
+        c.actualizarPrecioProducto(c.productos.get(1).getTipo(), 3.30f,fechaPedido);
+        c.actualizarPrecioProducto(c.productos.get(2).getTipo(), 4.35f,fechaPedido);
+        c.actualizarPrecioProducto(c.productos.get(3).getTipo(), 5.25f,fechaPedido);
+        */
 
+        fechaPedido = LocalDate.of(2024, 7, 20);
+        fechaEntrega = LocalDate.of(2024, 7, 29);
 
+        /*
+        //Actualizamos el precio de los productos
+        c.actualizarPrecioProducto(c.productos.get(0).getTipo(), 3.20f,fechaPedido);
+        c.actualizarPrecioProducto(c.productos.get(1).getTipo(), 4.30f,fechaPedido);
+        c.actualizarPrecioProducto(c.productos.get(2).getTipo(), 5.35f,fechaPedido);
+        c.actualizarPrecioProducto(c.productos.get(3).getTipo(), 6.25f,fechaPedido);
+        */
 
         //Recorremos los resumenes anuales y los printamos por pantalla indicando el año
         for (ResumenAnual resumenAnual : c.resumenesAnuales) {
-            LocalDate fechaInicio = LocalDate.of(resumenAnual.getAnno(), 1, 1);
-            LocalDate fechaFin = LocalDate.of(resumenAnual.getAnno(), 12, 31);
+            LocalDate fechaInicio = LocalDate.of(resumenAnual.getAnno(), 3, 1);
+            LocalDate fechaFin = LocalDate.of(resumenAnual.getAnno(), 4, 30);
             System.out.println("-------------------------Resumen anual de " + resumenAnual.getAnno()+"-------------------------");
             //resumenAnual.printarVentasPorProducto(fechaInicio, fechaFin);
             //resumenAnual.printarImportesPorProductor();
-            resumenAnual.printarImportesPorProductor();
             //resumenAnual.printarImportesPorLogistica();
+            //resumenAnual.mostrarBeneficiosCooperativaPorProducto();
+            resumenAnual.printEvolucionPreciosReferencia();
         }
 
 

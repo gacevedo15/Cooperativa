@@ -1,11 +1,9 @@
 
 /**
- * Enumeration class TipoProductor - write a description of the enum class here
- * 
- * @author (your name here)
- * @version (version number or date here)
+ * Enumeracion que representa los tipos de productores que existen.
+ * @author Gustavo Acevedo Alfonso
+ * @version 1.0
  */
-public enum TipoProductor
-{
+public enum TipoProductor{
     PEQUENO_PRODUCTOR, GRAN_PRODUCTOR
 }

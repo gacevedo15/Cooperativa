@@ -1,4 +1,4 @@
 #BlueJ class context
 comment0.target=TipoProductor
-comment0.text=\n\ Enumeration\ class\ TipoProductor\ -\ write\ a\ description\ of\ the\ enum\ class\ here\n\ \n\ @author\ (your\ name\ here)\n\ @version\ (version\ number\ or\ date\ here)\n
+comment0.text=\n\ Enumeracion\ que\ representa\ los\ tipos\ de\ productores\ que\ existen.\n\ @author\ Gustavo\ Acevedo\ Alfonso\n\ @version\ 1.0\n
 numComments=1

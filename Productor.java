@@ -1,5 +1,14 @@
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
+/**
+ * La clase Productor representa un productor de la cooperativa.
+ * Contiene información acerca de un productor, sus productos, su extensión total y su beneficio total por producto.
+ * @author Gustavo Acevedo Alfonso
+ * @version 1.0
+ */
 public class Productor {
 
     private static int idProductorActual = 0;
@@ -10,7 +19,11 @@ public class Productor {
     protected float extensionTotal;
     protected HashMap<TipoProducto,Float> beneficioTotalPorProducto;
 
-    //Constructor sin productos
+    /**
+     * Constructor de la clase Productor sin productos.
+     * @param nombre Nombre del productor.
+     * @param tipoProductor Tipo de productor.
+     */
     public Productor(String nombre, TipoProductor tipoProductor) {
         this.idProductor = ++idProductorActual;
         this.nombre = nombre;
@@ -19,7 +32,13 @@ public class Productor {
         this.extensionTotal = 0;
         this.beneficioTotalPorProducto = new HashMap<>();
     }
-    //Constructor con productos
+
+    /**
+     * Constructor de la clase Productor con productos.
+     * @param nombre Nombre del productor.
+     * @param tipoProductor Tipo de productor.
+     * @param productos Productos que cultiva el productor.
+     */
     public Productor(String nombre, TipoProductor tipoProductor, HashMap<Producto, Float> productos) {
         this.idProductor = ++idProductorActual;
         this.nombre = nombre;
@@ -28,60 +47,112 @@ public class Productor {
         this.extensionTotal = calcularExtensionTotal();
     }
 
-    /***------------------------------------------------------------***/
-
-    //Getters
+    /**
+     * Devuelve el identificador del productor.
+     * @return el identificador del productor
+     */
     public int getIdProductor() {
         return this.idProductor;
     }
+
+    /**
+     * Devuelve el nombre del productor.
+     * @return el nombre del productor.
+     */
     public String getNombre() {
         return this.nombre;
     }
+
+    /**
+     * Devuelve el tipo de productor.
+     * @return el tipo de productor.
+     */
     public TipoProductor getTipoProductor() {
         return this.tipoProductor;
     }
+
+    /**
+     * Devuelve los productos que cultiva el productor.
+     * @return los productos que cultiva el productor.
+     */
     public HashMap<Producto, Float> getProductos() {
         return this.productos;
     }
+
+    /**
+     * Devuelve la extensión total de los productos que cultiva el productor.
+     * @return la extensión total de los productos que cultiva el productor.
+     */
     public float getExtensionTotal() {
         return this.extensionTotal;
     }
+
+    /**
+     * Devuelve el beneficio total por producto de los productos que cultiva el productor.
+     * @return el beneficio total por producto de los productos que cultiva el productor.
+     */
     public HashMap<TipoProducto, Float> getBeneficioTotalPorProducto() {
         return this.beneficioTotalPorProducto;
     }
 
-    //Setters
+    /**
+     * Actualiza el nombre del productor.
+     * @param nombre El nuevo nombre del productor.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    /**
+     * Actualiza el tipo de productor.
+     * @param tipoProductor El nuevo tipo de productor.
+     */
     public final void setTipoProductor(TipoProductor tipoProductor) {
         this.tipoProductor = tipoProductor;
     }
+
+    /**
+     * Actualiza los productos que cultiva el productor y la extensión total.
+     * @param productos Los nuevos productos que cultiva el productor.
+     */
     public final void setProductos(HashMap<Producto, Float> productos) {
         this.productos = productos;
         this.extensionTotal = calcularExtensionTotal();
     }
 
-    /***------------------------------------------------------------***/
 
-    //Añadir producto
+    /**
+     * Añade un nuevo producto a la lista de productos del productor y su correspondiente extensión.
+     * @param p el producto a añadir.
+     * @param extension la extensión correspondiente al producto a añadir.
+     */
     public final void addProducto(Producto p, float extension){
         this.productos.put(p, extension);
         this.extensionTotal += extension;
     }
 
-    //Eliminar producto segun el tipo
-    public void removeProducto(TipoProducto tipoProducto){
-        for (Producto p : this.productos.keySet()) {
+    /**
+     * Elimina un producto de la lista de productos del productor y su correspondiente extensión.
+     * @param tipoProducto el tipo de producto a eliminar.
+     */
+    public void removeProducto(TipoProducto tipoProducto) {
+        Iterator<Map.Entry<Producto, Float>> it = this.productos.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<Producto, Float> entry = it.next();
+            Producto p = entry.getKey();
             if (p.getTipo() == tipoProducto) {
-                this.extensionTotal -= this.productos.get(p);
-                this.productos.remove(p);
+                this.extensionTotal -= entry.getValue();
+                it.remove();
                 break;
             }
         }
     }
 
-    //Buscar producto por tipo
+    /**
+     * Comprueba si el productor tiene un producto.
+     * @param tipoProducto el tipo de producto a comprobar.
+     * @return true si el productor tiene el producto, false en caso contrario.
+     */
     public boolean buscarProducto(TipoProducto tipoProducto){
         for (Producto p : this.productos.keySet()) {
             if (p.getTipo() == tipoProducto) {
@@ -91,7 +162,11 @@ public class Productor {
         return false;
     }
 
-    //Modificar extensión de un producto segun el tipo
+    /**
+     * Modifica la extensión de un producto.
+     * @param tipoProducto el tipo de producto a modificar.
+     * @param extension la nueva extensión del producto.
+     */
     public void modificarExtensionProducto(TipoProducto tipoProducto, float extension){
         for (Producto p : this.productos.keySet()) {
             if (p.getTipo() == tipoProducto) {
@@ -103,7 +178,11 @@ public class Productor {
         }
     }
 
-    //Devuelve la extensión de un producto segun el tipo
+    /**
+     * Devuelve la extensión de un producto.
+     * @param tipoProducto el tipo de producto.
+     * @return la extensión del producto.
+     */
     public float getExtensionProducto(TipoProducto tipoProducto){
         for (Producto p : this.productos.keySet()) {
             if (p.getTipo() == tipoProducto) {
@@ -113,7 +192,10 @@ public class Productor {
         return 0;
     }
 
-    //Calcula la extensión total de los productos
+    /**
+     * Método para calcular la extensión total de los productos que cultiva el productor.
+     * @return la extensión total de los productos que cultiva el productor.
+     */
     public float calcularExtensionTotal(){
         extensionTotal = 0;
         for (Producto p : this.productos.keySet()) {
@@ -122,7 +204,12 @@ public class Productor {
         return extensionTotal;
     }
 
-    //Método para calcular la cantidad en Kg de un producto, teniendo en cuenta su rendimiento por Ha y cantidad de Ha
+    /**
+     * Método para calcular la cantidad de producto en Kg.
+     * Multiplica el rendimiento por hectarea del producto por su extensión.
+     * @param tipoProducto el tipo de producto.
+     * @return la cantidad de producto en Kg.
+     */
     public float calcularCantidadProductoEnKg(TipoProducto tipoProducto){
         for (Producto p : this.productos.keySet()) {
             if (p.getTipo() == tipoProducto) {
@@ -146,23 +233,23 @@ public class Productor {
     }
 
     /**
-     * Método para actualizar el precio de un producto
-     * @param tipoProducto
-     * @param precio
+     * Método para actualizar el precio de un producto.
+     * @param tipoProducto el tipo de producto.
+     * @param precio el nuevo precio del producto.
      */
-    public void actualizarPrecioProducto(TipoProducto tipoProducto, float precio){
+    public void actualizarPrecioProducto(TipoProducto tipoProducto, float precio, LocalDate fecha){
         for (Producto p : this.productos.keySet()) {
             if (p.getTipo() == tipoProducto) {
-                p.actualizarPrecio(precio);
+                p.actualizarPrecio(precio, fecha);
                 break;
             }
         }
     }
 
-    /***------------------------------------------------------------***/
-
-
-    //ToString que printe toda la información del productor y el tipo de producto con su extensión
+    /**
+     * Devuelve un String con la información del productor y sus productos.
+     * @return una cadena de texto que representa al productor.
+     */
     @Override
     public String toString(){
         String s = "ID: " + this.idProductor + " - Nombre: " + this.nombre + " - Tipo: " + this.tipoProductor + " - Productos: ";

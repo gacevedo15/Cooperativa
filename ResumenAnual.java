@@ -1,41 +1,78 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Clase que representa un resumen anual
- * Debe implementar:
- * - Ventas totales en un periodo determinado de cada uno de los productos de la cooperativa. Listo
+ * Funcionalidades:
+ * - Ventas totales en un periodo determinado de cada uno de los productos de la cooperativa.
  * - Importes obtenidos por cada uno de los productores (desglosados por productos)
  * - Importes obtenidos por cada una de las empresas de logística.
  * - Beneficios de la cooperativa por cada uno de los productos.
  * - Evolución de los precios de referencias de cada productos.
  */
 public class ResumenAnual{
+
+    /**
+     * Año del resumen anual
+     */
     private int anno;
+
+    /**
+     * Lista de pedidos del año
+     */
     public ArrayList<Pedido> pedidos;
+
+    /**
+     * Lista de productores de la cooperativa en ese año
+     */
     private ArrayList<Productor> productores;
+
+    /**
+     * Lista de productos de la cooperativa en ese año
+     */
     public ArrayList<Producto> productos;
 
+    /**
+     * HashMap que almacena las ventas totales por producto
+     */
     public HashMap<TipoProducto,Float> ventasTotalesPorProducto;
+
+    /**
+     * HashMap que almacena el beneficio de la cooperativa por producto
+     */
     public HashMap<TipoProducto,Float> beneficioCooperativaPorProducto;
 
-
+    /**
+     * Clase que representa el resumen anual de una cooperativa para un año específico.
+     * @param anno el año del resumen anual.
+     * @param cooperativa la cooperativa a la que pertenece el resumen anual.
+     */
     public ResumenAnual(int anno, TipoCooperativa cooperativa){
-        this.anno = anno;
-        this.pedidos = new ArrayList<>();
-        this.productores = cooperativa.productores;
-        resetBeneficioTotalProductor();
-        this.productos = cooperativa.productos;
-        limpiarHistoricoPrecios();
-        this.ventasTotalesPorProducto = new HashMap<>();
-        this.beneficioCooperativaPorProducto = new HashMap<>();
+        this.anno = anno; //Año del resumen anual
+        this.pedidos = new ArrayList<>(); //Se crea un ArrayList de pedidos vacío
+        this.productores = cooperativa.productores; //Se obtienen los productores de la cooperativa
+        resetBeneficioTotalProductor(); //Se resetea el beneficio total de cada productor para tenerlo a 0
+        this.productos = cooperativa.productos; //Se obtienen los productos de la cooperativa
+        //limpiarHistoricoPrecios(); //Se limpia el histórico de precios de cada producto para que no haya precios de años anteriores
+        this.ventasTotalesPorProducto = new HashMap<>(); //Se crea un HashMap vacío para almacenar las ventas totales por producto
+        this.beneficioCooperativaPorProducto = new HashMap<>(); //Se crea un HashMap vacío para almacenar el beneficio de la cooperativa por producto
     }
 
-    //Getters
+    /**
+     * Devuelve el año del resumen anual
+     * @return el año del resumen anual
+     */
     public int getAnno() {
         return anno;
     }
+
+    /**
+     * Devuelve la lista de productores de la cooperativa en ese año
+     * @return la lista de productores de la cooperativa en ese año
+     */
     public ArrayList<Productor> getProductores() {
         return productores;
     }
@@ -52,10 +89,6 @@ public class ResumenAnual{
             ventasTotalesPorProducto.put(tipoProducto, cantidad);
         }
     }
-
-    /**
-     * Método para actualizar el
-     */
 
     /**
      * Método para añadir un pedido al resumen anual
@@ -76,20 +109,28 @@ public class ResumenAnual{
     }
 
     /**
-     * Método para printar las ventas por producto
+     * Método para printar las ventas por producto en un período determinado.
      * @param fechaInicio la fecha de inicio del periodo
      * @param fechaFin la fecha de fin del periodo
-     * Se recorren los productos que tiene el ArrayList productos y si el tipo de producto coincide con alguna clave
-     * del HashMap ventasTotalesPorProducto, se printa el tipo de producto y su cantidad almacenada en el valor,
-     * en caso contrario, se printa el tipo de producto y 0.0f
      */
     public void printarVentasPorProducto(LocalDate fechaInicio, LocalDate fechaFin) {
+
+        //Se recorren los pedidos y se actualizan las ventas totales por producto si el pedido está en el período determinado
+        for (Pedido pedido : pedidos) {
+            if (pedido.getFechaPedido().isAfter(fechaInicio) && pedido.getFechaPedido().isBefore(fechaFin)) {
+                actualizarVentasTotalesPorProducto(pedido.getProducto().getTipo(), pedido.getCantCompradaKg());
+            }
+        }
+
         System.out.println("Ventas totales por producto entre " + fechaInicio + " y " + fechaFin);
+
+        /* Se recorren los productos, si el tipo de producto está en el HashMap ventasTotalesPorProducto,
+         * se printa el TipoProducto y su venta, en caso contrario, se printa el tipo de producto y 0.0f*/
         for (Producto producto : productos) {
-            if (ventasTotalesPorProducto.containsKey(producto.getTipo())){
-                System.out.println(producto.getTipo() + ": " + ventasTotalesPorProducto.get(producto.getTipo())+" Kg");
-            }else{
-                System.out.println(producto.getTipo() + ": 0,00 Kg");
+            if (ventasTotalesPorProducto.containsKey(producto.getTipo())) {
+                System.out.println(producto.getTipo() + ": " + ventasTotalesPorProducto.get(producto.getTipo()));
+            } else {
+                System.out.println(producto.getTipo() + ": " + 0.0f);
             }
         }
     }
@@ -121,11 +162,12 @@ public class ResumenAnual{
      * Método para calcular los Importes obtenidos por cada una de las empresas de logística y printarlos
      */
     public void printarImportesPorLogistica(){
-        /*Recorremos todos los pedidos y sumamos el costePequenaLogistica y costeGranLogistica, luego printamos
-         * el tipo de logística y el coste total
-         */
+
         float costePequenaLogistica = 0.0f;
         float costeGranLogistica = 0.0f;
+
+        /*Recorremos todos los pedidos y sumamos el costePequenaLogistica y costeGranLogistica, luego printamos
+         * el tipo de logística y el coste total */
         for (Pedido pedido : pedidos) {
             costePequenaLogistica += pedido.getCostePequenaLogistica();
             costeGranLogistica += pedido.getCosteGranLogistica();
@@ -151,10 +193,17 @@ public class ResumenAnual{
 
     /**
      * Método para mostrar el beneficio de la cooperativa por producto
+     * Se recorren todos los productos, si el tipo de producto está en el HashMap beneficioCooperativaPorProducto,
+     * se printa el TipoProducto y su beneficio, en caso contrario, se printa el tipo de producto y 0.0f
      */
     public void mostrarBeneficiosCooperativaPorProducto(){
-        for (TipoProducto tipoProducto : beneficioCooperativaPorProducto.keySet()) {
-            System.out.println("Producto: " + tipoProducto + " - Beneficio: " + beneficioCooperativaPorProducto.get(tipoProducto));
+        System.out.println("   Beneficio de la cooperativa por producto:   ");
+        for (Producto producto : productos) {
+            if (beneficioCooperativaPorProducto.containsKey(producto.getTipo())){
+                System.out.println("      " + producto.getTipo() + ": " + TipoCooperativa.df.format(beneficioCooperativaPorProducto.get(producto.getTipo())) + " €");
+            }else{
+                System.out.println("      " + producto.getTipo() + ": 0,00 €");
+            }
         }
     }
 
@@ -168,15 +217,47 @@ public class ResumenAnual{
     }
 
     /**
-     * Método para imprimir el histórico de precios de todos los productos
+     *
      */
-    public void printEvolucionPreciosReferencia(){
+
+    /**
+     * Método para imprimir el histórico de precios de todos los productos durante el año del Resumen,
+     * Recorre los productos y si el tipo de producto está en el HashMap historialValorReferenciaPorKg y el año de la fecha
+     * es el mismo que el año del resumen, se printa la fecha y el precio de referencia, en caso contrario, se printa el tipo de producto y "No hay datos"
+     */
+    public void printEvolucionPreciosReferencia() {
+        System.out.println("   Evolución de los precios de referencia de los productos durante el año " + anno + ":   ");
         for (Producto producto : productos) {
-            System.out.println("Producto: " + producto.getTipo());
-            for (LocalDate fecha : producto.historialValorReferenciaPorKg.keySet()) {
-                System.out.println("Fecha: " + fecha + " - Precio: " + producto.historialValorReferenciaPorKg.get(fecha));
+            if (!producto.historialValorReferenciaPorKg.isEmpty()) {
+                boolean encontrado = false;
+                LocalDate ultimaFecha = null;
+                float ultimoPrecio = 0.0f;
+
+                System.out.println("      " + producto.getTipo() + ":");
+
+                // Utilizamos TreeMap para ordenar las fechas
+                TreeMap<LocalDate, Float> historialOrdenado = new TreeMap<>(producto.historialValorReferenciaPorKg);
+
+                for (Map.Entry<LocalDate, Float> entry : historialOrdenado.entrySet()) {
+                    LocalDate fecha = entry.getKey();
+                    float precio = entry.getValue();
+                    if (fecha.getYear() == anno) {
+                        encontrado = true;
+                        System.out.println("         " + fecha + ": " + precio + " €/kg");
+                    } else if (fecha.getYear() < anno) {
+                        ultimaFecha = fecha;
+                        ultimoPrecio = precio;
+                    }
+                }
+
+                if (!encontrado) {
+                    if (ultimaFecha != null) {
+                        System.out.println("         No ha tenido modificaciones durante el año " + anno + ". Última actualización: " + ultimaFecha + ": " + ultimoPrecio + " €/kg");
+                    }
+                }
             }
         }
     }
+
 
 }

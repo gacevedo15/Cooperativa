@@ -1,11 +1,9 @@
 
 /**
- * Enumeration class TipoCliente - write a description of the enum class here
- * 
- * @author (your name here)
- * @version (version number or date here)
+ * Enumeración que define los posibles tipos de cliente.
+ * @author Gustavo Acevedo Alfonso
+ * @version 1.0
  */
-public enum TipoCliente
-{
+public enum TipoCliente{
     CONSUMIDOR_FINAL, DISTRIBUIDOR
 }
