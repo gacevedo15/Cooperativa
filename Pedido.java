@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.HashMap;
 
 /**
  * La clase Pedido representa un pedido realizado por un cliente a la cooperativa.
