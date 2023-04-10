@@ -1,8 +1,10 @@
 #BlueJ class context
 comment0.target=EnvioPremium
-comment0.text=\n\ Env\u00EDo\ Premium\ le\ aplicar\u00E1\ un\ 10%\ extra\ al\ coste\ de\ la\ Gran\ Log\u00EDstica\ y\ un\ 5%\ extra\ al\ coste\ de\ la\ Peque\u00F1a\ Log\u00EDstica.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment0.text=\n\ La\ clase\ EnvioPremium\ representa\ una\ oferta\ de\ log\u00EDstica\ premium\ para\ el\ env\u00EDo\ de\ productos.\n\ Esta\ clase\ hereda\ de\ la\ clase\ OfertaLogistica\ e\ implementa\ los\ m\u00E9todos\ para\ calcular\ el\ coste\n\ de\ env\u00EDo\ y\ aplicar\ descuentos\ (Se\ tiene\ en\ cuenta\ si\ el\ cliente\ es\ premium\ o\ no).\n\ @author\ Gustavo\ Acevedo\ Alfonso\n\ @version\ 1.0\n
 comment1.params=nombre\ costePorKmGranLogistica\ costePorKmPequenaLogistica\ tipoCliente
 comment1.target=EnvioPremium(java.lang.String,\ float,\ float,\ TipoCliente)
+comment1.text=\n\ Constructor\ de\ la\ clase\ EnvioPremium\ que\ inicializa\ los\ atributos\ heredados\ de\ la\ superclase\ OfertaLogistica\n\ y\ asigna\ el\ coste\ fijo\ seg\u00FAn\ el\ tipo\ de\ cliente.\n\ @param\ nombre\n\ @param\ costePorKmGranLogistica\n\ @param\ costePorKmPequenaLogistica\n\ @param\ tipoCliente\n
 comment2.params=precioLogistica\ porcentaje\ c
 comment2.target=float\ aplicarDescuento(float,\ float,\ Cliente)
+comment2.text=\n\ Aplica\ un\ descuento\ al\ precio\ de\ la\ log\u00EDstica,\ adem\u00E1s\ de\ un\ descuento\ extra\ del\ 10%\ si\ el\ cliente\ es\ premium.\n\ @param\ precioLogistica\ Precio\ de\ la\ log\u00EDstica.\n\ @param\ porcentaje\ Porcentaje\ de\ descuento.\n\ @param\ c\ Cliente\ al\ que\ se\ le\ aplica\ el\ descuento.\n\ @return\ Precio\ de\ la\ log\u00EDstica\ con\ el\ descuento\ aplicado.\n
 numComments=3

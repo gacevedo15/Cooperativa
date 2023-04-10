@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -7,7 +8,7 @@ import java.time.LocalDate;
  * @author Gustavo Acevedo Alfonso
  * @version 1.0
  */
-public class Pedido{
+public class Pedido implements Serializable {
 
     /**
      * El id del pedido actual. Se utiliza para autoincrementar el id del pedido.

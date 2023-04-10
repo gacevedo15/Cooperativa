@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,7 +10,7 @@ import java.util.Map;
  * @author Gustavo Acevedo Alfonso
  * @version 1.0
  */
-public class Productor {
+public class Productor implements Serializable {
 
     private static int idProductorActual = 0;
     private int idProductor;

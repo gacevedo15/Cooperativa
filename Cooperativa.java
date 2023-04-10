@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * cooperativa --- Clase principal que contiene el main
@@ -12,7 +13,7 @@ import java.time.LocalDate;
  * - Importes obtenidos por cada uno de los productores (desglosados por productos)
  * No se si sacar esta información directamente de los productores o si en mi resumen Anual guardo la información
  */
-public class cooperativa{
+public class Cooperativa{
     public static void main(String[] args) {
         //Creamos la cooperativa
         TipoCooperativa c = new TipoCooperativa();
@@ -128,6 +129,17 @@ public class cooperativa{
             //resumenAnual.mostrarBeneficiosCooperativaPorProducto();
             resumenAnual.printEvolucionPreciosReferencia();
         }
+
+        //Arraylist de ofertas de prueba
+        ArrayList<OfertaLogistica> ofertas = new ArrayList<>();
+        //Añadimos las ofertas ya creadas al arraylist
+        ofertas.add(oferta1);
+        ofertas.add(oferta2);
+
+
+        PersistenciaDatos persistencia = new PersistenciaDatos();
+        persistencia.guardarOfertas(ofertas,"ofertas.txt");
+        persistencia.guardarDatos(c,"cooperativa.txt");
 
 
     }

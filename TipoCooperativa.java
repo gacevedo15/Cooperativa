@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
@@ -10,7 +11,7 @@ import java.util.HashMap;
  * @author Gustavo Acevedo Alfonso
  * @version 1.0
  */
-public class TipoCooperativa {
+public class TipoCooperativa implements Serializable {
 
     /**
      * Constante que representa el máximo de Ha que puede poseer un pequeño productor.

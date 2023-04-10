@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -6,7 +7,7 @@ import java.util.ArrayList;
  * @author Gustavo Acevedo Alfonso
  * @version 1.0
  */
-public class Logistica{
+public class Logistica implements Serializable {
 
     /**
      * ArrayList que contiene los tramos de la ruta.

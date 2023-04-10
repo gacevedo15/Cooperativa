@@ -1,3 +1,4 @@
 #BlueJ class context
 comment0.target=TipoLogistica
+comment0.text=\n\ Enumeraci\u00F3n\ que\ representa\ un\ tipo\ de\ log\u00EDstica.\n\ Contiene\ los\ tipos\ de\ log\u00EDstica\ que\ se\ pueden\ utilizar\ en\ los\ tramos\ de\ la\ ruta.\n\ @author\ Gustavo\ Acevedo\ Alfonso\n\ @version\ 1.0\n
 numComments=1

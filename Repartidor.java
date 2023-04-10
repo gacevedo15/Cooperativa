@@ -1,4 +1,6 @@
-public class Repartidor{
+import java.io.Serializable;
+
+public class Repartidor implements Serializable {
 
     private String nombre;
 

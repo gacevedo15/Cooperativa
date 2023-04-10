@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * La clase Tramo representa un tramo de la ruta que recorre la empresa de logística.
  * Contiene la distancia del tramo y el tipo de logística que se utiliza en ese tramo.
  * @author Gustavo Acevedo Alfonso
  * @version 1.0
  */
-public class Tramo{
+public class Tramo implements Serializable {
 
     /**
      * Distancia del tramo

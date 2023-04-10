@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +14,7 @@ import java.util.TreeMap;
  * - Beneficios de la cooperativa por cada uno de los productos.
  * - Evolución de los precios de referencias de cada productos.
  */
-public class ResumenAnual{
+public class ResumenAnual implements Serializable {
 
     /**
      * Año del resumen anual

@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashMap;
 
@@ -9,7 +10,7 @@ import java.util.HashMap;
  * @author Gustavo Acevedo Alfonso
  * @version 1.0
  */
-public class Producto {
+public class Producto implements Serializable {
     private TipoProducto tipo;
     private float rendimientoPorHectarea;
     private float valorReferenciaPorKg;

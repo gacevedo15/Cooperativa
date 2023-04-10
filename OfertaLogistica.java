@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * Clase abstracta que representa una oferta logística genérica.
  * Contiene el nombre de la oferta y los costes por kilómetro para la gran y pequeña logística.
@@ -6,7 +8,7 @@
  * @author Gustavo Acevedo Alfonso
  * @version 1.0
  */
-public abstract class OfertaLogistica{
+public abstract class OfertaLogistica implements Serializable {
     private String nombre;
     private float costePorKmGranLogistica;
     private float costePorKmPequenaLogistica;

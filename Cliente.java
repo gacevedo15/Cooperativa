@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * @author Gustavo Acevedo Alfonso
  * @version 1.0
  */
-public class Cliente{
+public class Cliente implements Serializable {
     private static int contadorClientes = 0;
     private int idCliente;
     private String nombre;
