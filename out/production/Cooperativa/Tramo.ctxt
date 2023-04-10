@@ -1,16 +1,16 @@
 #BlueJ class context
 comment0.target=Tramo
-comment0.text=\n\ La\ clase\ Tramo\ representa\ un\ tramo\ de\ la\ ruta\ que\ recorre\ la\ empresa\ de\ log\u00EDstica.\n\ Contiene\ la\ distancia\ del\ tramo\ y\ el\ tipo\ de\ log\u00EDstica\ que\ se\ utiliza\ en\ ese\ tramo.\n\ @author\ Gustavo\ Acevedo\ Alfonso\n\ @version\ 1.0\n
+comment0.text=\r\n\ La\ clase\ Tramo\ representa\ un\ tramo\ de\ la\ ruta\ que\ recorre\ la\ empresa\ de\ log\u00EDstica.\r\n\ Contiene\ la\ distancia\ del\ tramo\ y\ el\ tipo\ de\ log\u00EDstica\ que\ se\ utiliza\ en\ ese\ tramo.\r\n\ @author\ Gustavo\ Acevedo\ Alfonso\r\n\ @version\ 1.0\r\n
 comment1.params=distancia\ tipoLogistica
 comment1.target=Tramo(float,\ TipoLogistica)
-comment1.text=\n\ Constructor\ de\ la\ clase\ Tramo\n\ @param\ distancia\ Distancia\ del\ tramo\n\ @param\ tipoLogistica\ Tipo\ de\ log\u00EDstica\ que\ se\ utiliza\ en\ el\ tramo\n
+comment1.text=\r\n\ Constructor\ de\ la\ clase\ Tramo\r\n\ @param\ distancia\ Distancia\ del\ tramo\r\n\ @param\ tipoLogistica\ Tipo\ de\ log\u00EDstica\ que\ se\ utiliza\ en\ el\ tramo\r\n
 comment2.params=
 comment2.target=float\ getDistancia()
-comment2.text=\n\ Devuelve\ la\ distancia\ del\ tramo\n\ @return\ Distancia\ del\ tramo\n
+comment2.text=\r\n\ Devuelve\ la\ distancia\ del\ tramo\r\n\ @return\ Distancia\ del\ tramo\r\n
 comment3.params=
 comment3.target=TipoLogistica\ getTipoLogistica()
-comment3.text=\n\ Devuelve\ el\ tipo\ de\ log\u00EDstica\ que\ se\ utiliza\ en\ el\ tramo\n\ @return\ Tipo\ de\ log\u00EDstica\ que\ se\ utiliza\ en\ el\ tramo\n
+comment3.text=\r\n\ Devuelve\ el\ tipo\ de\ log\u00EDstica\ que\ se\ utiliza\ en\ el\ tramo\r\n\ @return\ Tipo\ de\ log\u00EDstica\ que\ se\ utiliza\ en\ el\ tramo\r\n
 comment4.params=
 comment4.target=java.lang.String\ toString()
-comment4.text=\n\ Devuelve\ una\ cadena\ con\ la\ informaci\u00F3n\ del\ tramo\n\ @return\ Cadena\ con\ la\ informaci\u00F3n\ del\ tramo\n
+comment4.text=\r\n\ Devuelve\ una\ cadena\ con\ la\ informaci\u00F3n\ del\ tramo\r\n\ @return\ Cadena\ con\ la\ informaci\u00F3n\ del\ tramo\r\n
 numComments=5

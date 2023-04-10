@@ -104,6 +104,14 @@ public class TipoCooperativa implements Serializable {
     }
 
     /**
+     * Devuelve la lista de productos de la cooperativa
+     * @return lista de productos de la cooperativa
+     */
+    public ArrayList<Producto> getProductos() {
+        return productos;
+    }
+
+    /**
      * Devuelve el beneficio total por producto
      * @return beneficio total por producto
      */
