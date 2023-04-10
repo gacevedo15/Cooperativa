@@ -1,9 +1,19 @@
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Clase para la persistencia de datos en archivos.
+ * Permite guardar y cargar datos de una instancia de la clase TipoCooperativa y de una lista de OfertaLogistica.
+ * @author Gustavo Acevedo Alfonso
+ * @version 1.0
+ */
 public class PersistenciaDatos {
 
-    // Guardar datos de la cooperativa
+    /**
+     * Guarda los datos de la cooperativa en un archivo.
+     * @param cooperativa Instancia de la clase TipoCooperativa que contiene los datos a guardar.
+     * @param rutaArchivo Ruta del archivo donde se guardarán los datos.
+     */
     public static void guardarDatos(TipoCooperativa cooperativa, String rutaArchivo) {
         try {
             FileOutputStream archivoSalida = new FileOutputStream(rutaArchivo);
@@ -18,7 +28,11 @@ public class PersistenciaDatos {
         }
     }
 
-    // Cargar datos de la cooperativa
+    /**
+     * Carga los datos de la cooperativa desde un archivo.
+     * @param rutaArchivo Ruta del archivo desde el que se cargarán los datos.
+     * @return Instancia de la clase TipoCooperativa con los datos cargados.
+     */
     public static TipoCooperativa cargarDatos(String rutaArchivo) {
         TipoCooperativa cooperativa = null;
         try {
@@ -38,7 +52,11 @@ public class PersistenciaDatos {
         return cooperativa;
     }
 
-    // Guardar datos de ofertas logísticas
+    /**
+     * Guarda los datos de las ofertas logísticas en un archivo.
+     * @param ofertas Lista de ofertas logísticas que se guardarán en el archivo.
+     * @param rutaArchivo Ruta del archivo donde se guardarán los datos.
+     */
     public static void guardarOfertas(ArrayList ofertas, String rutaArchivo) {
         try {
             FileOutputStream archivoSalida = new FileOutputStream(rutaArchivo);
@@ -53,13 +71,17 @@ public class PersistenciaDatos {
         }
     }
 
-    // Cargar datos de ofertas logísticas
-    public static OfertaLogistica[] cargarOfertas(String rutaArchivo) {
-        OfertaLogistica[] ofertas = null;
+    /**
+     * Carga los datos de las ofertas logísticas desde un archivo.
+     * @param rutaArchivo Ruta del archivo desde el que se cargarán los datos.
+     * @return Lista de ofertas logísticas con los datos cargados.
+     */
+    public static ArrayList<OfertaLogistica> cargarOfertas(String rutaArchivo) {
+        ArrayList<OfertaLogistica> ofertas = null;
         try {
             FileInputStream archivoEntrada = new FileInputStream(rutaArchivo);
             ObjectInputStream objetoEntrada = new ObjectInputStream(archivoEntrada);
-            ofertas = (OfertaLogistica[]) objetoEntrada.readObject();
+            ofertas = (ArrayList<OfertaLogistica>) objetoEntrada.readObject();
             objetoEntrada.close();
             archivoEntrada.close();
             System.out.println("Las ofertas se han cargado correctamente desde el archivo: " + rutaArchivo);
