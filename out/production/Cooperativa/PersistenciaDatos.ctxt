@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=PersistenciaDatos
+comment1.params=cooperativa\ rutaArchivo
+comment1.target=void\ guardarDatos(TipoCooperativa,\ java.lang.String)
+comment2.params=rutaArchivo
+comment2.target=TipoCooperativa\ cargarDatos(java.lang.String)
+comment3.params=ofertas\ rutaArchivo
+comment3.target=void\ guardarOfertas(java.util.ArrayList,\ java.lang.String)
+comment4.params=rutaArchivo
+comment4.target=OfertaLogistica[]\ cargarOfertas(java.lang.String)
+numComments=5
