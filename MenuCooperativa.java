@@ -4,6 +4,11 @@ import java.util.Scanner;
 class MenuCooperativa implements IMenu {
     private Scanner scanner;
 
+    /**
+     * Objeto de tipo IMenu que representa el menú actual.
+     */
+    private IMenu menuActual;
+
     public MenuCooperativa() {
         scanner = new Scanner(System.in);
     }
@@ -12,10 +17,12 @@ class MenuCooperativa implements IMenu {
         int opcion;
         do {
             System.out.println("---- MENU COOPERATIVA ----");
-            System.out.println("1. Ver datos de la cooperativa");
-            System.out.println("2. Modificar datos de la cooperativa");
-            System.out.println("3. Ver ofertas logísticas");
-            System.out.println("4. Modificar ofertas logísticas");
+            System.out.println("1. PRODUCTOS");
+            System.out.println("2. PRODUCTORES");
+            System.out.println("3. CLIENTES");
+            System.out.println("4. LOGÍSTICA");
+            System.out.println("5. PEDIDOS");
+            System.out.println("6. RESUMEN ANUAL");
             System.out.println("0. Volver al menú principal");
 
             try {
@@ -27,7 +34,8 @@ class MenuCooperativa implements IMenu {
             }
             switch (opcion) {
                 case 1:
-                    System.out.println("Mostrando datos de la cooperativa...");
+                    menuActual = new MenuCooperativaProductos();
+                    menuActual.mostrarMenu();
                     break;
                 case 2:
                     //modificarCooperativa();
@@ -37,6 +45,13 @@ class MenuCooperativa implements IMenu {
                     break;
                 case 4:
                     //modificarOfertas();
+                    break;
+                case 5:
+                    //mostrarResumenAnual();
+                    break;
+                case 6:
+                    menuActual = new MenuCooperativaResumenAnual();
+                    menuActual.mostrarMenu();
                     break;
                 case 0:
                     System.out.println("Volviendo al menú principal...");

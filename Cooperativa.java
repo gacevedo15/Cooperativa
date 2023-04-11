@@ -19,7 +19,7 @@ public class Cooperativa{
         Menu menu = new Menu();
         menu.mostrarMenu();
 
-        /*
+/*
         //Creamos la cooperativa
         TipoCooperativa cooperativa = new TipoCooperativa();
 
@@ -143,7 +143,7 @@ public class Cooperativa{
         PersistenciaDatos persistencia = new PersistenciaDatos();
         persistencia.guardarOfertas(ofertas, "ofertas.txt");
         persistencia.guardarDatos(cooperativa, "cooperativa.txt");
-        */
+*/
 
     }
 }

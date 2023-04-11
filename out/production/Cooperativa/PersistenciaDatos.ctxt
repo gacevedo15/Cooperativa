@@ -1,11 +1,16 @@
 #BlueJ class context
 comment0.target=PersistenciaDatos
+comment0.text=\r\n\ Clase\ para\ la\ persistencia\ de\ datos\ en\ archivos.\r\n\ Permite\ guardar\ y\ cargar\ datos\ de\ una\ instancia\ de\ la\ clase\ TipoCooperativa\ y\ de\ una\ lista\ de\ OfertaLogistica.\r\n\ @author\ Gustavo\ Acevedo\ Alfonso\r\n\ @version\ 1.0\r\n
 comment1.params=cooperativa\ rutaArchivo
 comment1.target=void\ guardarDatos(TipoCooperativa,\ java.lang.String)
+comment1.text=\r\n\ Guarda\ los\ datos\ de\ la\ cooperativa\ en\ un\ archivo.\r\n\ @param\ cooperativa\ Instancia\ de\ la\ clase\ TipoCooperativa\ que\ contiene\ los\ datos\ a\ guardar.\r\n\ @param\ rutaArchivo\ Ruta\ del\ archivo\ donde\ se\ guardar\u00E1n\ los\ datos.\r\n
 comment2.params=rutaArchivo
 comment2.target=TipoCooperativa\ cargarDatos(java.lang.String)
+comment2.text=\r\n\ Carga\ los\ datos\ de\ la\ cooperativa\ desde\ un\ archivo.\r\n\ @param\ rutaArchivo\ Ruta\ del\ archivo\ desde\ el\ que\ se\ cargar\u00E1n\ los\ datos.\r\n\ @return\ Instancia\ de\ la\ clase\ TipoCooperativa\ con\ los\ datos\ cargados.\r\n
 comment3.params=ofertas\ rutaArchivo
 comment3.target=void\ guardarOfertas(java.util.ArrayList,\ java.lang.String)
+comment3.text=\r\n\ Guarda\ los\ datos\ de\ las\ ofertas\ log\u00EDsticas\ en\ un\ archivo.\r\n\ @param\ ofertas\ Lista\ de\ ofertas\ log\u00EDsticas\ que\ se\ guardar\u00E1n\ en\ el\ archivo.\r\n\ @param\ rutaArchivo\ Ruta\ del\ archivo\ donde\ se\ guardar\u00E1n\ los\ datos.\r\n
 comment4.params=rutaArchivo
-comment4.target=OfertaLogistica[]\ cargarOfertas(java.lang.String)
+comment4.target=java.util.ArrayList\ cargarOfertas(java.lang.String)
+comment4.text=\r\n\ Carga\ los\ datos\ de\ las\ ofertas\ log\u00EDsticas\ desde\ un\ archivo.\r\n\ @param\ rutaArchivo\ Ruta\ del\ archivo\ desde\ el\ que\ se\ cargar\u00E1n\ los\ datos.\r\n\ @return\ Lista\ de\ ofertas\ log\u00EDsticas\ con\ los\ datos\ cargados.\r\n
 numComments=5

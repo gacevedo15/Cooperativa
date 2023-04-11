@@ -23,12 +23,12 @@ public class Menu {
     /**
      * Objeto de tipo Cooperativa que representa la cooperativa.
      */
-    private TipoCooperativa cooperativa;
+    public static TipoCooperativa cooperativa;
 
     /**
      * Lista de ofertas de logística.
      */
-    private ArrayList<OfertaLogistica> ofertas;
+    public ArrayList<OfertaLogistica> ofertas;
 
     /**
      * Constructor de la clase Menu.

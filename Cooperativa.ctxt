@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Cooperativa
-comment0.text=\r\n\ cooperativa\ ---\ Clase\ principal\ que\ contiene\ el\ main\r\n\ \r\n\ @author\ (Gustavo)\r\n\ @version\ (1.0)\r\n\ @since\ (1.0)\r\n\r\n\ Queda\ pendiente\:\r\n\r\n\ -\ Importes\ obtenidos\ por\ cada\ uno\ de\ los\ productores\ (desglosados\ por\ productos)\r\n\ No\ se\ si\ sacar\ esta\ informaci\u00F3n\ directamente\ de\ los\ productores\ o\ si\ en\ mi\ resumen\ Anual\ guardo\ la\ informaci\u00F3n\r\n
+comment0.text=\n\ cooperativa\ ---\ Clase\ principal\ que\ contiene\ el\ main\n\ \n\ @author\ (Gustavo)\n\ @version\ (1.0)\n\ @since\ (1.0)\n\n\ Queda\ pendiente\:\n\n\ -\ Importes\ obtenidos\ por\ cada\ uno\ de\ los\ productores\ (desglosados\ por\ productos)\n\ No\ se\ si\ sacar\ esta\ informaci\u00F3n\ directamente\ de\ los\ productores\ o\ si\ en\ mi\ resumen\ Anual\ guardo\ la\ informaci\u00F3n\n
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
 numComments=2

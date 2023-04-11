@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 /**
  * Clase que representa un producto.
@@ -136,5 +137,31 @@ public class Producto implements Serializable {
         this.valorReferenciaPorKg = nuevoPrecio;
         this.fechaUltimaActualizacion = fechaActualizacion;
         this.historialValorReferenciaPorKg.put(this.fechaUltimaActualizacion, this.valorReferenciaPorKg);
+    }
+
+    /**
+     * ToString sencillo de la clase Producto.
+     */
+    public String toStringSencillo() {
+        return  "       Tipo: " + tipo +
+                "\n       Rendimiento Por Hectarea: " + rendimientoPorHectarea + " Kg/Ha" +
+                "\n       Valor Referencia Por Kg: " + valorReferenciaPorKg + " €/Kg" +
+                "\n       " + (esPerecedero ? "Perecedero" : "No Perecedero") +
+                "\n";
+    }
+
+    /**
+     * ToString detallado de la clase Producto.
+     */
+    public String toStringDetallado() {
+        return "       Tipo: " + tipo +
+                "\n       Rendimiento Por Hectarea: " + rendimientoPorHectarea + " Kg/Ha" +
+                "\n       Valor Referencia Por Kg: " + valorReferenciaPorKg + " €/Kg" +
+                "\n       Valor Referencia Por Kg Anterior: " + valorReferenciaPorKgAnterior + " €/Kg" +
+                "\n       Fecha Ultima Actualizacion: " + fechaUltimaActualizacion +
+                "\n       " + (esPerecedero ? "Perecedero" : "No Perecedero") +
+                "\n       Historial Valor Referencia Por Kg: " + historialValorReferenciaPorKg.entrySet().stream().map(entry -> "\n             " + entry.getKey() + ": " + entry.getValue() + " €/Kg").collect(Collectors.joining()) +
+
+                "\n";
     }
 }

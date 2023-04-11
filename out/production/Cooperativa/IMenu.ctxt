@@ -1,5 +1,6 @@
 #BlueJ class context
 comment0.target=IMenu
+comment0.text=\n\ Interfaz\ que\ define\ el\ comportamiento\ de\ un\ men\u00FA.\n\ @author\ Gustavo\ Acevedo\ Alfonso\n\ @version\ 1.0\n
 comment1.params=
 comment1.target=void\ mostrarMenu()
 numComments=2

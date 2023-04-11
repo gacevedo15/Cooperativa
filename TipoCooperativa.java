@@ -3,6 +3,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Clase que representa una cooperativa
@@ -120,6 +122,16 @@ public class TipoCooperativa implements Serializable {
     }
 
     /**
+     * Devuelve los resúmenes anuales de la cooperativa
+     * @return resúmenes anuales de la cooperativa
+     */
+    public ArrayList<ResumenAnual> getResumenesAnuales() {
+        return resumenesAnuales;
+    }
+
+
+
+    /**
      * Aplica el IVA a un precio
      * @param precio sin IVA
      * @return precio con IVA aplicado
@@ -157,7 +169,14 @@ public class TipoCooperativa implements Serializable {
         }
         return producto;
     }
-    
+
+    /**
+     * Elimina un producto de la cooperativa
+     */
+    public void eliminarProducto(Producto producto){
+        productos.remove(producto);
+    }
+
     /**
      * Calcula la cantidad total de un tipo de producto en kilogramos (Kg) que posee la cooperativa, producida por todos los productores
      * @param tipoProducto el tipo de producto del cual se desea conocer la cantidad total producida en Kg
