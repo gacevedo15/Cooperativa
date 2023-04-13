@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Write a description of class MenuCooperativaProductos here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Clase que representa el menú de la cooperativa de productos.
+ * Permite crear, eliminar, actualizar y ver los productos disponibles.
+ * @author Gustavo Acevedo Alfonso
+ * @version 1.0
  */
 public class MenuCooperativaProductos implements IMenu {
 
@@ -96,7 +96,7 @@ public class MenuCooperativaProductos implements IMenu {
         boolean esPerecedero = preguntarSiEsPerecedero();
         Producto producto = new Producto(tipoProducto, rendimientoPorHa, valorReferenciaPorKg, esPerecedero);
 
-        Menu.cooperativa.getProductos().add(producto);
+        Menu.cooperativa.addProducto(producto);
         System.out.println("   Producto creado:");
         System.out.println(producto.toStringSencillo());
     }
@@ -245,7 +245,7 @@ public class MenuCooperativaProductos implements IMenu {
      * Si no hay productos disponibles, se muestra un mensaje y se retorna null.
      * @return El producto seleccionado.
      */
-    private Producto seleccionarProducto() {
+    public Producto seleccionarProducto() {
         if (Menu.cooperativa.getProductos().isEmpty()) {
             System.out.println("No hay productos disponibles.");
             return null;

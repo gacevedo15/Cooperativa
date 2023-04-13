@@ -80,6 +80,7 @@ public class Productor implements Serializable {
         return this.productos;
     }
 
+
     /**
      * Devuelve la extensión total de los productos que cultiva el productor.
      * @return la extensión total de los productos que cultiva el productor.

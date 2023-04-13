@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 /**
  * Clase que representa el menu de Resumen Anual de la Cooperativa.
+ * Permite mostrar las estadísticas anuales de la cooperativa, ver las ventas
+ * en un período determinado, los importes obtenidos por productores, logística y Cooperativa.
  * @author Gustavo Acevedo Alfonso
  * @version 1.0
  */
@@ -47,24 +49,19 @@ public class MenuCooperativaResumenAnual implements IMenu {
                 }
                 switch (opcion) {
                     case 1:
-                        System.out.println("Ventas totales de cantidad de productos en un periodo determinado");
                         mostrarVentasTotalesCantidadProductos(anno, resumenAnual);
                         break;
                     case 2:
-                        System.out.println("Importes obtenidos por cada productor");
-
+                        mostrarImportesObtenidosPorProductor(resumenAnual);
                         break;
                     case 3:
-                        System.out.println("Importes obtenidos por cada Logística");
-
+                        mostrarImportesObtenidosPorLogistica(resumenAnual);
                         break;
                     case 4:
-                        System.out.println("Beneficios de la cooperativa por cada producto");
-
+                        mostrarBeneficiosCooperativaPorProducto(resumenAnual);
                         break;
                     case 5:
-                        System.out.println("Evolución de los precios de referencias de cada producto");
-
+                        mostrarEvolucionPreciosReferencia(resumenAnual);
                         break;
                     case 0:
                         System.out.println("Volviendo al menú principal...");
@@ -251,7 +248,37 @@ public class MenuCooperativaResumenAnual implements IMenu {
         }
     }
 
+    /***********************************************************************************
+     *          Métodos para mostrar los Importes obtenidos por cada productor
+     **********************************************************************************/
+    private void mostrarImportesObtenidosPorProductor(ResumenAnual resumenAnual) {
+        System.out.println("Importes obtenidos por cada productor");
+        resumenAnual.printarImportesPorProductor();
+    }
 
+    /***********************************************************************************
+     *          Métodos para mostrar los Importes obtenidos por cada Logística
+     **********************************************************************************/
+    private void mostrarImportesObtenidosPorLogistica(ResumenAnual resumenAnual) {
+        System.out.println("Importes obtenidos por cada Logística");
+        resumenAnual.printarImportesPorLogistica();
+    }
+
+    /***************************************************************************************
+     *          Métodos para mostrar los Beneficios de la cooperativa por cada producto
+     **************************************************************************************/
+    private void mostrarBeneficiosCooperativaPorProducto(ResumenAnual resumenAnual) {
+        System.out.println("Beneficios de la cooperativa por cada producto");
+        resumenAnual.mostrarBeneficiosCooperativaPorProducto();
+    }
+
+    /**************************************************************************************************
+     *          Métodos para mostrar la evolución de los precios de referencias de cada producto
+     **************************************************************************************************/
+    private void mostrarEvolucionPreciosReferencia(ResumenAnual resumenAnual) {
+        System.out.println("Evolución de los precios de referencia de cada producto");
+        resumenAnual.printEvolucionPreciosReferencia();
+    }
 
 
 

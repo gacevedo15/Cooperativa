@@ -38,7 +38,8 @@ class MenuCooperativa implements IMenu {
                     menuActual.mostrarMenu();
                     break;
                 case 2:
-                    //modificarCooperativa();
+                    menuActual = new MenuCooperativaProductores();
+                    menuActual.mostrarMenu();
                     break;
                 case 3:
                     //mostrarOfertas();

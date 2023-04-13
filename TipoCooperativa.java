@@ -114,6 +114,14 @@ public class TipoCooperativa implements Serializable {
     }
 
     /**
+     * Devuelve la lista de productores de la cooperativa
+     * @return lista de productores de la cooperativa
+     */
+    public ArrayList<Productor> getProductores() {
+        return productores;
+    }
+
+    /**
      * Devuelve el beneficio total por producto
      * @return beneficio total por producto
      */
@@ -128,8 +136,6 @@ public class TipoCooperativa implements Serializable {
     public ArrayList<ResumenAnual> getResumenesAnuales() {
         return resumenesAnuales;
     }
-
-
 
     /**
      * Aplica el IVA a un precio
@@ -171,10 +177,34 @@ public class TipoCooperativa implements Serializable {
     }
 
     /**
+     * Añade un producto a la cooperativa
+     * @param producto el producto que se desea añadir
+     */
+    public void addProducto(Producto producto){
+        productos.add(producto);
+    }
+
+    /**
      * Elimina un producto de la cooperativa
      */
     public void eliminarProducto(Producto producto){
         productos.remove(producto);
+    }
+
+    /**
+     * Añade un productor a la cooperativa
+     * @param productor el productor que se desea añadir
+     */
+    public void addProductor(Productor productor){
+        productores.add(productor);
+    }
+
+    /**
+     * Elimina un productor de la cooperativa
+     * @param productor el productor que se desea eliminar
+     */
+    public void eliminarProductor(Productor productor){
+        productores.remove(productor);
     }
 
     /**
