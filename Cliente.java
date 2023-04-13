@@ -9,8 +9,6 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class Cliente implements Serializable {
-    private static int contadorClientes = 0;
-    private int idCliente;
     private String nombre;
     private TipoCliente tipoCliente;
     private float distancia;
@@ -25,20 +23,11 @@ public class Cliente implements Serializable {
      * @param distancia la distancia a la que se encuentra el cliente.
      */
     public Cliente(String nombre, TipoCliente tipoCliente, float distancia) {
-        this.idCliente = ++contadorClientes;
         this.nombre = nombre;
         this.tipoCliente = tipoCliente;
         this.distancia = distancia;
         this.esClientePremium = false;
         this.pedidos = new ArrayList<>();
-    }
-
-    /**
-     * Devuelve el identificador del cliente.
-     * @return el identificador del cliente.
-     */
-    public int getIdCliente() {
-        return this.idCliente;
     }
 
     /**
@@ -119,5 +108,35 @@ public class Cliente implements Serializable {
      */
     public void addPedido(Pedido p) {
         this.pedidos.add(p);
+    }
+
+    /**
+     * Método para buscar un pedido en el historial de pedidos del cliente.
+     */
+    public Pedido buscarPedido(int idPedido) {
+        for (Pedido p : this.pedidos) {
+            if (p.getIdPedido() == idPedido) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Elimina un pedido del historial de pedidos del cliente.
+     */
+    public void removePedido(Pedido p) {
+        this.pedidos.remove(p);
+    }
+
+    /**
+     * ToString detallado de la clase Cliente.
+     */
+    @Override
+    public String toString() {
+        return "Nombre: '" + nombre + '\'' +
+                "\nTipo de Cliente: " + tipoCliente +
+                "\nDistancia: " + distancia + " km" +
+                "\n" + (esClientePremium ? "Es cliente premium" : "No es cliente premium");
     }
 }

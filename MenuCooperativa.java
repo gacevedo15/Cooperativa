@@ -20,7 +20,7 @@ class MenuCooperativa implements IMenu {
             System.out.println("1. PRODUCTOS");
             System.out.println("2. PRODUCTORES");
             System.out.println("3. CLIENTES");
-            System.out.println("4. LOGÍSTICA");
+            System.out.println("4. OFERTA LOGÍSTICA");
             System.out.println("5. PEDIDOS");
             System.out.println("6. RESUMEN ANUAL");
             System.out.println("0. Volver al menú principal");
@@ -42,13 +42,16 @@ class MenuCooperativa implements IMenu {
                     menuActual.mostrarMenu();
                     break;
                 case 3:
-                    //mostrarOfertas();
+                    menuActual = new MenuCooperativaClientes();
+                    menuActual.mostrarMenu();
                     break;
                 case 4:
-                    //modificarOfertas();
+                    menuActual = new MenuCooperativaOfertaLogistica();
+                    menuActual.mostrarMenu();
                     break;
                 case 5:
-                    //mostrarResumenAnual();
+                    menuActual = new MenuCooperativaPedidos();
+                    menuActual.mostrarMenu();
                     break;
                 case 6:
                     menuActual = new MenuCooperativaResumenAnual();

@@ -1,9 +1,0 @@
-#BlueJ class context
-comment0.target=MenuCliente
-comment1.params=
-comment1.target=MenuCliente()
-comment2.params=
-comment2.target=void\ mostrarMenu()
-comment3.params=
-comment3.target=void\ mostrarProductos()
-numComments=4

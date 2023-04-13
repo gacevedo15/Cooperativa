@@ -109,7 +109,7 @@ public class MenuCooperativaProductores implements IMenu {
         } else {
             TipoProductor tipoProductor = solicitarTipoProductor();
             Productor productor = new Productor(nombre, tipoProductor);
-            Menu.cooperativa.getProductores().add(productor);
+            Menu.cooperativa.addProductor(productor);
             System.out.println("Productor creado correctamente");
         }
     }

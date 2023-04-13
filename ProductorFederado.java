@@ -98,8 +98,7 @@ public class ProductorFederado extends Productor {
      */
     @Override
     public String toString() {
-        String s = "idProductor = " + getIdProductor()
-                + "\nNombre = " + getNombre()
+        String s ="\nNombre = " + getNombre()
                 + "\nTipo = " + getTipoProductor()
                 + "\nTipo de producto = " + productos.keySet().iterator().next().getTipo()
                 + "\nExtension total = " + extensionTotal

@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=MenuCooperativaOfertaLogistica
+comment0.text=\n\ Clase\ que\ representa\ el\ men\u00FA\ de\ la\ cooperativa\ de\ la\ gesti\u00F3n\ de\ las\ Ofertas\ Log\u00EDstica.\n\ @author\ Gustavo\ Acevedo\ Alfonso\n\ @version\ 1.0\n
+comment1.params=
+comment1.target=MenuCooperativaOfertaLogistica()
+comment1.text=\n\ Constructor\ de\ la\ clase\ MenuCooperativaProductos.\ Inicializa\ el\ Scanner.\n
+comment2.params=
+comment2.target=void\ mostrarMenu()
+numComments=3

@@ -12,8 +12,6 @@ import java.util.Map;
  */
 public class Productor implements Serializable {
 
-    private static int idProductorActual = 0;
-    private int idProductor;
     private String nombre;
     private TipoProductor tipoProductor;
     protected HashMap<Producto, Float> productos;
@@ -26,7 +24,6 @@ public class Productor implements Serializable {
      * @param tipoProductor Tipo de productor.
      */
     public Productor(String nombre, TipoProductor tipoProductor) {
-        this.idProductor = ++idProductorActual;
         this.nombre = nombre;
         this.tipoProductor = tipoProductor;
         this.productos = new HashMap<>();
@@ -41,19 +38,10 @@ public class Productor implements Serializable {
      * @param productos Productos que cultiva el productor.
      */
     public Productor(String nombre, TipoProductor tipoProductor, HashMap<Producto, Float> productos) {
-        this.idProductor = ++idProductorActual;
         this.nombre = nombre;
         this.tipoProductor = tipoProductor;
         this.productos = productos;
         this.extensionTotal = calcularExtensionTotal();
-    }
-
-    /**
-     * Devuelve el identificador del productor.
-     * @return el identificador del productor
-     */
-    public int getIdProductor() {
-        return this.idProductor;
     }
 
     /**
@@ -254,7 +242,7 @@ public class Productor implements Serializable {
      */
     @Override
     public String toString(){
-        String s = "ID: " + this.idProductor + " - Nombre: " + this.nombre + " - Tipo: " + this.tipoProductor + " - Productos: ";
+        String s = "Nombre: " + this.nombre + " - Tipo: " + this.tipoProductor + " - Productos: ";
         for (Producto p : this.productos.keySet()) {
             s += p.getTipo() + " (" + this.productos.get(p) + " Ha) ";
         }

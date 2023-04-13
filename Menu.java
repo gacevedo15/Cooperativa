@@ -47,8 +47,7 @@ public class Menu {
         int opcion;
         do {
             System.out.println("---- MENU ----");
-            System.out.println("1. Menu Cliente");
-            System.out.println("2. Menu Cooperativa");
+            System.out.println("1. Menu Cooperativa");
             System.out.println("0. Salir");
 
             try {
@@ -61,10 +60,6 @@ public class Menu {
 
             switch (opcion) {
                 case 1:
-                    menuActual = new MenuCliente();
-                    menuActual.mostrarMenu();
-                    break;
-                case 2:
                     menuActual = new MenuCooperativa();
                     menuActual.mostrarMenu();
                     break;

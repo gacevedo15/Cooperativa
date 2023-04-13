@@ -3,8 +3,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 /**
  * Clase que representa una cooperativa
@@ -81,6 +79,11 @@ public class TipoCooperativa implements Serializable {
     public ArrayList<Pedido> pedidos;
 
     /**
+     * Lista de ofertas de logística que posee la cooperativa.
+     */
+    public ArrayList<OfertaLogistica> ofertasLogistica;
+
+    /**
      * Lista de resúmenes anuales que posee la cooperativa.
      */
     public ArrayList<ResumenAnual> resumenesAnuales;
@@ -101,6 +104,7 @@ public class TipoCooperativa implements Serializable {
         this.clientes=new ArrayList<Cliente>();
         this.repartidores=new ArrayList<Repartidor>();
         this.pedidos=new ArrayList<Pedido>();
+        this.ofertasLogistica=new ArrayList<OfertaLogistica>();
         this.resumenesAnuales=new ArrayList<ResumenAnual>();
         this.beneficioTotalPorProducto=new HashMap<TipoProducto,Float>();
     }
@@ -119,6 +123,21 @@ public class TipoCooperativa implements Serializable {
      */
     public ArrayList<Productor> getProductores() {
         return productores;
+    }
+
+    /**
+     * Devuelve la lista de clientes de la cooperativa
+     * @return lista de clientes de la cooperativa
+     */
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
+    }
+
+    /**
+     * Devuelve la lista de ofertas de logística de la cooperativa
+     */
+    public ArrayList<OfertaLogistica> getOfertasLogisticas() {
+        return ofertasLogistica;
     }
 
     /**
@@ -205,6 +224,34 @@ public class TipoCooperativa implements Serializable {
      */
     public void eliminarProductor(Productor productor){
         productores.remove(productor);
+    }
+
+    /**
+     * Añade un cliente a la cooperativa
+     */
+    public void addCliente(Cliente cliente){
+        clientes.add(cliente);
+    }
+
+    /**
+     * Elimina un cliente de la cooperativa
+     */
+    public void eliminarCliente(Cliente cliente){
+        clientes.remove(cliente);
+    }
+
+    /**
+     * Añade una oferta de logística a la cooperativa
+     */
+    public void addOfertaLogistica(OfertaLogistica ofertaLogistica){
+        ofertasLogistica.add(ofertaLogistica);
+    }
+
+    /**
+     * Elimina una oferta de logística de la cooperativa
+     */
+    public void eliminarOfertaLogistica(OfertaLogistica ofertaLogistica){
+        ofertasLogistica.remove(ofertaLogistica);
     }
 
     /**
@@ -331,6 +378,42 @@ public class TipoCooperativa implements Serializable {
             asignarBeneficioPorProductor(pedido, nuevoResumen.getProductores());
             nuevoResumen.addBeneficioCooperativaPorProducto(calcularBeneficioCooperativa(pedido));
             resumenesAnuales.add(nuevoResumen);
+        }
+    }
+
+    /**
+     * Método para buscar un pedido por su id
+     */
+    public Pedido buscarPedido(int idPedido){
+        for(Pedido p : pedidos){
+            if(p.getIdPedido() == idPedido){
+                return p;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Método para eliminar un pedido
+     */
+    public void eliminarPedido(Pedido pedido){
+        //Se elimina el pedido de la lista de pedidos
+        pedidos.remove(pedido);
+
+        //Se elimina el pedido del cliente
+        for(Cliente c : clientes){
+            if(c == pedido.getCliente()){
+                c.removePedido(pedido);
+                break;
+            }
+        }
+
+        //Se elimina el pedido del resumen anual
+        for(ResumenAnual r : resumenesAnuales){
+            if(r.getAnno() == pedido.getFechaPedido().getYear()){
+                r.eliminarPedido(pedido);
+                break;
+            }
         }
     }
 

@@ -100,6 +100,13 @@ public class ResumenAnual implements Serializable {
     }
 
     /**
+     * Método para eliminar un pedido del resumen anual
+     */
+    public void eliminarPedido(Pedido pedido){
+        pedidos.remove(pedido);
+    }
+
+    /**
      * Método auxiliar para poner a 0 el beneficio total de cada productor
      * A cada productor le sobrescribe el HashMap beneficioTotalPorProducto con un nuevo HashMap vacío
      */

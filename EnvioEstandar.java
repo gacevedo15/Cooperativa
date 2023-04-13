@@ -17,6 +17,7 @@ public class EnvioEstandar extends OfertaLogistica{
      */
     public EnvioEstandar(String nombre, float costePorKmGranLogistica, float costePorKmPequenaLogistica,TipoCliente tipoCliente) {
         super(nombre, costePorKmGranLogistica, costePorKmPequenaLogistica);
+        this.tipoCliente = tipoCliente;
         if (tipoCliente == TipoCliente.DISTRIBUIDOR) {
             setCosteFijo(1.05f);    //Si es distribuidor, el coste fijo es 5% más caro (valorReferenciaPorKg del producto * 1.05)
         }else {
@@ -35,5 +36,18 @@ public class EnvioEstandar extends OfertaLogistica{
     public float aplicarDescuento(float precioLogistica, float porcentaje,Cliente c) {
         porcentaje = porcentaje/100.0f;
         return precioLogistica - (precioLogistica * porcentaje);
+    }
+
+    /**
+     * ToString de la clase EnvioEstandar.
+     */
+    @Override
+    public String toString() {
+        return "Nombre: " + getNombre() +
+                "\nTipo de logística: Envío Estándar" +
+                "\nCoste por kilómetro para la gran logística: " + getCostePorKmGranLogistica() +
+                "\nCoste por kilómetro para la pequeña logística: " + getCostePorKmPequenaLogistica() +
+                "\nCoste fijo: " + getCosteFijo() +
+                "\nTipo de cliente: " + getTipoCliente();
     }
 }

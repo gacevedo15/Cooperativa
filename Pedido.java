@@ -117,6 +117,13 @@ public class Pedido implements Serializable {
     }
 
     /**
+     * Devuelve el id del pedido.
+     */
+    public int getIdPedido() {
+        return this.idPedido;
+    }
+
+    /**
      * Devuelve la fecha en la que se realizó el pedido.
      * @return La fecha en la que se realizó el pedido.
      */
@@ -205,6 +212,13 @@ public class Pedido implements Serializable {
     }
 
     /**
+     * Devuelve el cliente que realizó el pedido.
+     */
+    public Cliente getCliente() {
+        return this.c;
+    }
+
+    /**
      * Establece la fecha de entrega del pedido.
      * @param fechaEntrega La nueva fecha de entrega del pedido.
      */
@@ -217,23 +231,6 @@ public class Pedido implements Serializable {
      */
     public void mostrarTramos() {
         l.mostrarTramos();
-    }
-
-    /**
-     * Muestra los datos del pedido
-     * (id, cliente, producto, coste producto, coste logística, beneficio productores, beneficio cooperativa, coste total).
-     * @return Los datos del pedido.
-     */
-    @Override
-    public String toString() {
-        return "ID Pedido: " + idPedido
-                + "\nCliente: " + c.getNombre() + " - " + c.getTipoCliente()
-                + "\nProducto: " + p.getTipo() + " - " + (p.esPerecedero() ? "Perecedero" : "No Perecedero")
-                + "\nCoste Producto: " + TipoCooperativa.df.format(costeProducto)  + "€"
-                + "\nCoste Logística: " + TipoCooperativa.df.format(costeLogistica)  + "€"
-                + "\nBeneficio Productores: " + TipoCooperativa.df.format(beneficioProductores)  + "€"
-                + "\nBeneficio Cooperativa: " + TipoCooperativa.df.format(beneficioCooperativa)  + "€"
-                + "\nCoste Total: " + TipoCooperativa.df.format(costeTotal)  + "€\n";
     }
 
     /**
@@ -258,6 +255,36 @@ public class Pedido implements Serializable {
             this.costeGranLogistica = l.getCosteTotalGranLogistica();
             this.costeTotal = this.costeProducto + this.costeLogistica;
         }
+    }
+
+    /**
+     * Muestra los datos del pedido
+     * (id, cliente, producto, coste producto, coste logística, beneficio productores, beneficio cooperativa, coste total).
+     * @return Los datos del pedido.
+     */
+    @Override
+    public String toString() {
+        return "ID Pedido: " + idPedido
+                + "\nFecha Pedido: " + fechaPedido
+                + "\nFecha Entrega: " + fechaEntrega
+                + "\nCliente: " + c.getNombre() + " - " + c.getTipoCliente()
+                + "\nProducto: " + p.getTipo() + " - " + (p.esPerecedero() ? "Perecedero" : "No Perecedero")
+                + "\nCoste Producto: " + TipoCooperativa.df.format(costeProducto)  + "€"
+                + "\nCoste Logística: " + TipoCooperativa.df.format(costeLogistica)  + "€"
+                + "\nBeneficio Productores: " + TipoCooperativa.df.format(beneficioProductores)  + "€"
+                + "\nBeneficio Cooperativa: " + TipoCooperativa.df.format(beneficioCooperativa)  + "€"
+                + "\nCoste Total: " + TipoCooperativa.df.format(costeTotal)  + "€\n";
+    }
+
+    /**
+     * ToString para mostrar los datos del pedido que puede ver el cliente.
+     */
+    public String toStringCliente() {
+        return "ID Pedido: " + idPedido
+                + "\nProducto: " + p.getTipo() + " - " + (p.esPerecedero() ? "Perecedero" : "No Perecedero")
+                + "\nCoste Producto: " + TipoCooperativa.df.format(costeProducto) + "€"
+                + "\nCoste Logística: " + TipoCooperativa.df.format(costeLogistica) + "€"
+                + "\nCoste Total: " + TipoCooperativa.df.format(costeTotal) + "€\n";
     }
 
 }
