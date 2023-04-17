@@ -69,11 +69,6 @@ public class TipoCooperativa implements Serializable {
     public ArrayList<Cliente> clientes;
 
     /**
-     * Lista de repartidores que posee la cooperativa.
-     */
-    public ArrayList<Repartidor> repartidores;
-
-    /**
      * Lista de pedidos que posee la cooperativa.
      */
     public ArrayList<Pedido> pedidos;
@@ -91,7 +86,7 @@ public class TipoCooperativa implements Serializable {
     /**
      * HashMap que contiene el beneficio total por producto.
      */
-    private HashMap<TipoProducto,Float> beneficioTotalPorProducto;
+    private final HashMap<TipoProducto,Float> beneficioTotalPorProducto;
 
     /**
      * Constructor de la clase TipoCooperativa.
@@ -99,14 +94,13 @@ public class TipoCooperativa implements Serializable {
      * repartidores, pedidos, resúmenes anuales y un mapa vacío para el beneficio total por tipo de producto.
      */
     public TipoCooperativa(){
-        this.productos=new ArrayList<Producto>();
-        this.productores=new ArrayList<Productor>();
-        this.clientes=new ArrayList<Cliente>();
-        this.repartidores=new ArrayList<Repartidor>();
-        this.pedidos=new ArrayList<Pedido>();
-        this.ofertasLogistica=new ArrayList<OfertaLogistica>();
-        this.resumenesAnuales=new ArrayList<ResumenAnual>();
-        this.beneficioTotalPorProducto=new HashMap<TipoProducto,Float>();
+        this.productos=new ArrayList<>();
+        this.productores=new ArrayList<>();
+        this.clientes=new ArrayList<>();
+        this.pedidos=new ArrayList<>();
+        this.ofertasLogistica=new ArrayList<>();
+        this.resumenesAnuales=new ArrayList<>();
+        this.beneficioTotalPorProducto=new HashMap<>();
     }
 
     /**
@@ -135,6 +129,7 @@ public class TipoCooperativa implements Serializable {
 
     /**
      * Devuelve la lista de ofertas de logística de la cooperativa
+     * @return lista de ofertas de logística de la cooperativa
      */
     public ArrayList<OfertaLogistica> getOfertasLogisticas() {
         return ofertasLogistica;
@@ -205,6 +200,7 @@ public class TipoCooperativa implements Serializable {
 
     /**
      * Elimina un producto de la cooperativa
+     * @param producto el producto que se desea eliminar
      */
     public void eliminarProducto(Producto producto){
         productos.remove(producto);
@@ -228,6 +224,7 @@ public class TipoCooperativa implements Serializable {
 
     /**
      * Añade un cliente a la cooperativa
+     * @param cliente el cliente que se desea añadir
      */
     public void addCliente(Cliente cliente){
         clientes.add(cliente);
@@ -235,6 +232,7 @@ public class TipoCooperativa implements Serializable {
 
     /**
      * Elimina un cliente de la cooperativa
+     * @param cliente el cliente que se desea eliminar
      */
     public void eliminarCliente(Cliente cliente){
         clientes.remove(cliente);
@@ -242,6 +240,7 @@ public class TipoCooperativa implements Serializable {
 
     /**
      * Añade una oferta de logística a la cooperativa
+     * @param ofertaLogistica la oferta de logística que se desea añadir
      */
     public void addOfertaLogistica(OfertaLogistica ofertaLogistica){
         ofertasLogistica.add(ofertaLogistica);
@@ -249,6 +248,7 @@ public class TipoCooperativa implements Serializable {
 
     /**
      * Elimina una oferta de logística de la cooperativa
+     * @param ofertaLogistica la oferta de logística que se desea eliminar
      */
     public void eliminarOfertaLogistica(OfertaLogistica ofertaLogistica){
         ofertasLogistica.remove(ofertaLogistica);
@@ -294,7 +294,7 @@ public class TipoCooperativa implements Serializable {
      */
     public HashMap<TipoProducto, Float> calcularBeneficioProductor(Pedido pedido, Productor productor){
         float beneficioProductor=0.0f;
-        HashMap<TipoProducto,Float> beneficioProductorPorProducto=new HashMap<TipoProducto,Float>();
+        HashMap<TipoProducto,Float> beneficioProductorPorProducto=new HashMap<>();
         float cantTotalHa=calcularHaTotalProducto(pedido.getProducto().getTipo());
         for(HashMap.Entry<Producto,Float> entry : productor.getProductos().entrySet()){
             if(entry.getKey().getTipo()==pedido.getProducto().getTipo()){
@@ -327,7 +327,7 @@ public class TipoCooperativa implements Serializable {
      * @return beneficioCooperativa HashMap con el beneficioTotalPorProducto de la cooperativa
      */
     public HashMap<TipoProducto,Float> calcularBeneficioCooperativa(Pedido pedido) {
-        HashMap<TipoProducto, Float> beneficioCooperativa = new HashMap<TipoProducto, Float>();
+        HashMap<TipoProducto, Float> beneficioCooperativa = new HashMap<>();
         float beneficioProducto = pedido.getBeneficioCooperativa();
         beneficioCooperativa.put(pedido.getProducto().getTipo(), beneficioProducto);
         return beneficioCooperativa;
@@ -351,6 +351,12 @@ public class TipoCooperativa implements Serializable {
     /**
      * Método que realiza un pedido, lo añade a la lista de pedidos y calcula el beneficio de los productores
      * y de la Cooperativa
+     * @param c el cliente que realiza el pedido
+     * @param p el producto que se desea comprar
+     * @param cantCompradaKg la cantidad del producto que se desea comprar en Kg
+     * @param o la oferta logística que se desea utilizar
+     * @param fechaPedido la fecha en la que se realiza el pedido
+     * @param fechaEntrega la fecha en la que se desea recibir el pedido
      */
     public void realizarPedido(Cliente c, Producto p, float cantCompradaKg, OfertaLogistica o, LocalDate fechaPedido,LocalDate fechaEntrega){
         Pedido pedido = new Pedido(c, p, cantCompradaKg, o, fechaPedido,fechaEntrega);  //Se crea el pedido
@@ -383,6 +389,8 @@ public class TipoCooperativa implements Serializable {
 
     /**
      * Método para buscar un pedido por su id
+     * @param idPedido el id del pedido que se desea buscar
+     * @return el pedido con el id indicado, si no existe devuelve null
      */
     public Pedido buscarPedido(int idPedido){
         for(Pedido p : pedidos){
@@ -395,6 +403,7 @@ public class TipoCooperativa implements Serializable {
 
     /**
      * Método para eliminar un pedido
+     * @param pedido el pedido que se desea eliminar
      */
     public void eliminarPedido(Pedido pedido){
         //Se elimina el pedido de la lista de pedidos
@@ -414,6 +423,17 @@ public class TipoCooperativa implements Serializable {
                 r.eliminarPedido(pedido);
                 break;
             }
+        }
+    }
+
+    /**
+     * Método para obtener el ultimo id de pedido
+     */
+    public int getUltimoIdPedido(){
+        if (pedidos.size() == 0)
+            return 0;
+        else{
+            return pedidos.get(pedidos.size()-1).getIdPedido();
         }
     }
 

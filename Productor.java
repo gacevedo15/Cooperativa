@@ -12,10 +12,29 @@ import java.util.Map;
  */
 public class Productor implements Serializable {
 
+    /**
+     * El nombre del productor.
+     */
     private String nombre;
+
+    /**
+     * El tipo de productor.
+     */
     private TipoProductor tipoProductor;
+
+    /**
+     * Los productos que cultiva el productor.
+     */
     protected HashMap<Producto, Float> productos;
+
+    /**
+     * La extensión total del productor.
+     */
     protected float extensionTotal;
+
+    /**
+     * El beneficio total por producto del productor.
+     */
     protected HashMap<TipoProducto,Float> beneficioTotalPorProducto;
 
     /**
@@ -242,11 +261,11 @@ public class Productor implements Serializable {
      */
     @Override
     public String toString(){
-        String s = "Nombre: " + this.nombre + " - Tipo: " + this.tipoProductor + " - Productos: ";
+        StringBuilder s = new StringBuilder("Nombre: " + this.nombre + " - Tipo: " + this.tipoProductor + " - Productos: ");
         for (Producto p : this.productos.keySet()) {
-            s += p.getTipo() + " (" + this.productos.get(p) + " Ha) ";
+            s.append(p.getTipo()).append(" (").append(this.productos.get(p)).append(" Ha) ");
         }
-        return s;
+        return s.toString();
     }
 
 }

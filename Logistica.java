@@ -94,14 +94,10 @@ public class Logistica implements Serializable {
      */
     public ArrayList<Tramo> crearTramos(float distancia, boolean esPerecedero) {
 
-        /**
-         * ArrayList que contiene los tramos de la ruta.
-         */
-        ArrayList<Tramo> tramos = new ArrayList<Tramo>();
+        // ArrayList que contiene los tramos de la ruta.
+        ArrayList<Tramo> tramos = new ArrayList<>();
 
-        /**
-         * Inicializa la cantidad de tramos a 0.
-         */
+        // Inicializamos la cantidad de tramos a 0.
         cantTramos = 0;
 
         if (esPerecedero) {
@@ -151,9 +147,7 @@ public class Logistica implements Serializable {
      */
     public float calcularCosteLogistica(Producto p, Cliente c, float cantidadComprada) {
 
-        /**
-         * Se inicializan a 0 todos los costes.
-         */
+        //Se inicializan todos los costes a 0
         float costeTramosGranLogistica = 0;
         costeTotalPequenaLogistica = 0;
         float costeTotalGranLogisticaPorViaje = 0;

@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=Repartidor
-comment1.params=nombre
-comment1.target=Repartidor(java.lang.String)
-comment2.params=
-comment2.target=java.lang.String\ getNombre()
-numComments=3

@@ -1,7 +1,14 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Clase que representa el menu principal de la cooperativa.
+ */
 class MenuCooperativa implements IMenu {
+
+    /**
+     * Scanner para leer la entrada del usuario.
+     */
     private Scanner scanner;
 
     /**
@@ -9,10 +16,16 @@ class MenuCooperativa implements IMenu {
      */
     private IMenu menuActual;
 
+    /**
+     * Constructor de la clase MenuCooperativa. Initializa el Scanner.
+     */
     public MenuCooperativa() {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Implementación del método mostrarMenu de la interfaz IMenu.
+     */
     public void mostrarMenu() {
         int opcion;
         do {
@@ -33,36 +46,32 @@ class MenuCooperativa implements IMenu {
                 opcion = -1; // Asigna un valor inválido para que vuelva a mostrar el menú
             }
             switch (opcion) {
-                case 1:
+                case 1 -> {
                     menuActual = new MenuCooperativaProductos();
                     menuActual.mostrarMenu();
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     menuActual = new MenuCooperativaProductores();
                     menuActual.mostrarMenu();
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     menuActual = new MenuCooperativaClientes();
                     menuActual.mostrarMenu();
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     menuActual = new MenuCooperativaOfertaLogistica();
                     menuActual.mostrarMenu();
-                    break;
-                case 5:
+                }
+                case 5 -> {
                     menuActual = new MenuCooperativaPedidos();
                     menuActual.mostrarMenu();
-                    break;
-                case 6:
+                }
+                case 6 -> {
                     menuActual = new MenuCooperativaResumenAnual();
                     menuActual.mostrarMenu();
-                    break;
-                case 0:
-                    System.out.println("Volviendo al menú principal...");
-                    break;
-                default:
-                    System.out.println("Opción inválida. Por favor, intente de nuevo.");
-                    break;
+                }
+                case 0 -> System.out.println("Volviendo al menú principal...");
+                default -> System.out.println("Opción inválida. Por favor, intente de nuevo.");
             }
         } while (opcion != 0);
     }

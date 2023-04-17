@@ -1,13 +1,9 @@
 import java.util.InputMismatchException;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
 /**
- * Write a description of class MenuCooperativaProductores here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Clase que representa el menú de la gestión de productores de la cooperativa.
  */
 public class MenuCooperativaProductores implements IMenu {
 
@@ -23,6 +19,9 @@ public class MenuCooperativaProductores implements IMenu {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Implementación del método mostrarMenu de la interfaz IMenu.
+     */
     public void mostrarMenu() {
         int opcion;
         do {
@@ -44,37 +43,21 @@ public class MenuCooperativaProductores implements IMenu {
                 opcion = -1; // Asigna un valor inválido para que vuelva a mostrar el menú
             }
             switch (opcion) {
-                case 1:
-                    crearProductor();
-                    break;
-                case 2:
-                    anadirProductoAProductor();
-                    break;
-                case 3:
-                    verDetallesProductor();
-                    break;
-                case 4:
-                    modificarExtensionProductoProductor();
-                    break;
-                case 5:
-                    eliminarProductoProductor();
-                    break;
-                case 6:
-                    eliminarProductor();
-                    break;
-                case 0:
-                    System.out.println("Volviendo al menú principal...");
-                    break;
-                default:
-                    System.out.println("Opción inválida. Por favor, intente de nuevo.");
-                    break;
+                case 1 -> crearProductor();
+                case 2 -> anadirProductoAProductor();
+                case 3 -> verDetallesProductor();
+                case 4 -> modificarExtensionProductoProductor();
+                case 5 -> eliminarProductoProductor();
+                case 6 -> eliminarProductor();
+                case 0 -> System.out.println("Volviendo al menú principal...");
+                default -> System.out.println("Opción inválida. Por favor, intente de nuevo.");
             }
         } while (opcion != 0);
     }
 
-    /*********************************************
+    /*-----------------------------------------*
      *      Métodos para crear Productores
-     *********************************************/
+     -----------------------------------------*/
 
     /**
      * Método para crear un productor.
@@ -117,6 +100,7 @@ public class MenuCooperativaProductores implements IMenu {
 
     /**
      * Método para solicitar el tipo de productor.
+     * @return TipoProductor
      */
     private TipoProductor solicitarTipoProductor() {
         int opcion;
@@ -150,9 +134,9 @@ public class MenuCooperativaProductores implements IMenu {
         }
     }
 
-    /******************************************************
+    /*------------------------------------------------------*
      *      Métodos para añadir Productos a un Productor
-     ******************************************************/
+     ------------------------------------------------------*/
 
     /**
      * Método para añadir un producto a un productor.
@@ -179,6 +163,8 @@ public class MenuCooperativaProductores implements IMenu {
                     System.out.println("Error: La extension total no puede ser mayor a 5");
                     return;
                 }
+            }else{
+                extension = solicitarExtensionDelProducto();
             }
 
             productor.addProducto(producto,extension);
@@ -188,6 +174,7 @@ public class MenuCooperativaProductores implements IMenu {
 
     /**
      * Método para seleccionar un productor.
+     * @return Productor seleccionado
      */
     public Productor seleccionarProductor() {
         if (Menu.cooperativa.getProductores().isEmpty()) {
@@ -216,6 +203,7 @@ public class MenuCooperativaProductores implements IMenu {
 
     /**
      * Método auxiliar para añadir la extension que tendrá el productor de un producto.
+     * @return float
      */
     private float solicitarExtensionDelProducto() {
         System.out.println("Ingrese la extension que tendrá: ");
@@ -235,9 +223,9 @@ public class MenuCooperativaProductores implements IMenu {
         } while (true);
     }
 
-    /***********************************************************
+    /*------------------------------------------------------*
      *      Métodos para ver los detalles de los productores
-     ***********************************************************/
+     ------------------------------------------------------*/
 
     /**
      * Método para ver los detalles de un productor.
@@ -250,9 +238,13 @@ public class MenuCooperativaProductores implements IMenu {
         }
     }
 
-    /**************************************************************************
+    /*-------------------------------------------------------------------------*
      *      Métodos para modificar extensión de un Producto de un Productor
-     *************************************************************************/
+     -------------------------------------------------------------------------*/
+
+    /**
+     * Método para modificar la extension de un producto de un productor.
+     */
     private void modificarExtensionProductoProductor() {
         System.out.println("---- MODIFICAR EXTENSION DE UN PRODUCTO DE UN PRODUCTOR ----");
         Productor productor = seleccionarProductor();
@@ -275,6 +267,8 @@ public class MenuCooperativaProductores implements IMenu {
 
     /**
      * Método para seleccionar un producto de un productor.
+     * @param productor Productor
+     * @return Producto seleccionado
      */
     private Producto seleccionarProducto(Productor productor) {
         if (productor.getProductos().isEmpty()) {
@@ -283,9 +277,7 @@ public class MenuCooperativaProductores implements IMenu {
         }
         System.out.println("Seleccione el producto: ");
         int contador = 1;
-        Iterator<Map.Entry<Producto, Float>> it = productor.getProductos().entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<Producto, Float> entry = it.next();
+        for (Map.Entry<Producto, Float> entry : productor.getProductos().entrySet()) {
             System.out.println(contador + ". " + entry.getKey().getTipo());
             contador++;
         }
@@ -306,9 +298,13 @@ public class MenuCooperativaProductores implements IMenu {
         return (Producto) productor.getProductos().keySet().toArray()[opcion];
     }
 
-    /******************************************************
+    /*------------------------------------------------------*
      *      Métodos para eliminar Productos de un Productor
-     ******************************************************/
+     ------------------------------------------------------*/
+
+    /**
+     * Método para eliminar un producto de un productor.
+     */
     private void eliminarProductoProductor() {
         System.out.println("---- ELIMINAR PRODUCTO DE UN PRODUCTOR ----");
         Productor productor = seleccionarProductor();
@@ -321,9 +317,13 @@ public class MenuCooperativaProductores implements IMenu {
         }
     }
 
-    /******************************************************
+    /*------------------------------------------------------*
      *      Métodos para eliminar Productores
-     ******************************************************/
+     ------------------------------------------------------*/
+
+    /**
+     * Método para eliminar un productor.
+     */
     private void eliminarProductor() {
         System.out.println("---- ELIMINAR PRODUCTOR ----");
         Productor productor = seleccionarProductor();

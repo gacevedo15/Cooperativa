@@ -11,12 +11,12 @@ public class Tramo implements Serializable {
     /**
      * Distancia del tramo
      */
-    private float distancia;
+    private final float distancia;
 
     /**
      * Tipo de logística que se utiliza en el tramo
      */
-    private TipoLogistica tipoLogistica;
+    private final TipoLogistica tipoLogistica;
 
     /**
      * Constructor de la clase Tramo

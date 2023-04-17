@@ -7,15 +7,18 @@
  */
 public class EnvioPremium extends OfertaLogistica{
 
-    private final float descuentoPremium = 0.1f;    //Descuento extra del 10% si el cliente es premium.
+    /**
+     * Descuento extra para clientes premium.
+     */
+    private final float descuentoPremium = 0.1f;
 
     /**
      * Constructor de la clase EnvioPremium que inicializa los atributos heredados de la superclase OfertaLogistica
      * y asigna el coste fijo según el tipo de cliente.
-     * @param nombre
-     * @param costePorKmGranLogistica
-     * @param costePorKmPequenaLogistica
-     * @param tipoCliente
+     * @param nombre Nombre del envío.
+     * @param costePorKmGranLogistica Coste por kilómetro para la gran logística.
+     * @param costePorKmPequenaLogistica Coste por kilómetro para la pequeña logística.
+     * @param tipoCliente Tipo de cliente al que pertenece el envío (Distribuidor o Consumidor Final).
      */
     public EnvioPremium(String nombre, float costePorKmGranLogistica, float costePorKmPequenaLogistica, TipoCliente tipoCliente) {
         super(nombre, costePorKmGranLogistica, costePorKmPequenaLogistica);
@@ -23,7 +26,7 @@ public class EnvioPremium extends OfertaLogistica{
         if (tipoCliente == TipoCliente.DISTRIBUIDOR) {
            setCosteFijo(1.10f);     //Si es distribuidor, el coste fijo es 10% más caro (valorReferenciaPorKg del producto * 1.10)
         }else {
-            setCosteFijo(1.20f);    //Si es cliente, el coste fijo es 20% más caro (valorReferenciaPorKg del producto * 1.20)
+            setCosteFijo(1.20f);    //Si es consumidor final, el coste fijo es 20% más caro (valorReferenciaPorKg del producto * 1.20)
         }
     }
 

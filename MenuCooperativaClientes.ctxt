@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=MenuCooperativaClientes
-comment0.text=\n\ Write\ a\ description\ of\ class\ MenuCooperativaProductores\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment0.text=\n\ Clase\ que\ representa\ el\ men\u00FA\ de\ la\ cooperativa\ de\ la\ gesti\u00F3n\ de\ Clientes.\n\ @author\ Gustavo\ Acevedo\ Alfonso\n\ @version\ 1.0\n
 comment1.params=
 comment1.target=MenuCooperativaClientes()
 comment1.text=\n\ Constructor\ de\ la\ clase\ MenuCooperativaProductos.\ Inicializa\ el\ Scanner.\n
@@ -12,6 +12,7 @@ comment11.target=void\ eliminarCliente()
 comment11.text=\n\ M\u00E9todo\ para\ eliminar\ un\ cliente.\n
 comment2.params=
 comment2.target=void\ mostrarMenu()
+comment2.text=\n\ Implementaci\u00F3n\ del\ m\u00E9todo\ mostrarMenu\ de\ la\ interfaz\ IMenu.\n\ Muestra\ el\ men\u00FA\ de\ la\ cooperativa\ de\ la\ gesti\u00F3n\ de\ Clientes.\n
 comment3.params=
 comment3.target=void\ crearCliente()
 comment3.text=\n\ M\u00E9todo\ para\ crear\ un\ cliente.\n

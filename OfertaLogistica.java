@@ -9,10 +9,30 @@ import java.io.Serializable;
  * @version 1.0
  */
 public abstract class OfertaLogistica implements Serializable {
+
+    /**
+     * Nombre de la oferta.
+     */
     private String nombre;
+
+    /**
+     * Costes por kilómetro para la gran logística.
+     */
     private float costePorKmGranLogistica;
+
+    /**
+     * Costes por kilómetro para la pequeña logística.
+     */
     private float costePorKmPequenaLogistica;
+
+    /**
+     * Coste fijo de la oferta.
+     */
     private float costeFijo;
+
+    /**
+     * Tipo de cliente al que se aplica la oferta.
+     */
     protected TipoCliente tipoCliente;
 
     /**
@@ -61,6 +81,7 @@ public abstract class OfertaLogistica implements Serializable {
 
     /**
      * Devuelve el tipo de cliente al que se aplica la oferta.
+     * @return Tipo de cliente al que se aplica la oferta.
      */
     public TipoCliente getTipoCliente() {
         return tipoCliente;
@@ -68,6 +89,7 @@ public abstract class OfertaLogistica implements Serializable {
 
     /**
      * Actualiza el nombre de la oferta.
+     * @param nombre Nombre de la oferta.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -75,6 +97,7 @@ public abstract class OfertaLogistica implements Serializable {
 
     /**
      * Actualiza el coste por kilómetro para la gran logística.
+     * @param costePorKmGranLogistica Coste por kilómetro para la gran logística.
      */
     public void setCostePorKmGranLogistica(float costePorKmGranLogistica) {
         this.costePorKmGranLogistica = costePorKmGranLogistica;
@@ -82,6 +105,7 @@ public abstract class OfertaLogistica implements Serializable {
 
     /**
      * Actualiza el coste por kilómetro para la pequeña logística.
+     * @param costePorKmPequenaLogistica Coste por kilómetro para la pequeña logística.
      */
     public void setCostePorKmPequenaLogistica(float costePorKmPequenaLogistica) {
         this.costePorKmPequenaLogistica = costePorKmPequenaLogistica;

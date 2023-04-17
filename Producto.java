@@ -12,12 +12,40 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 public class Producto implements Serializable {
+
+    /**
+     * El tipo de producto.
+     */
     private TipoProducto tipo;
+
+    /**
+     * El rendimiento por hectárea del producto.
+     */
     private float rendimientoPorHectarea;
+
+    /**
+     * El valor de referencia por kilogramo del producto.
+     */
     private float valorReferenciaPorKg;
+
+    /**
+     * El valor de referencia por kilogramo anterior del producto.
+     */
     private float valorReferenciaPorKgAnterior;
+
+    /**
+     * La fecha de última actualización del valor de referencia del producto.
+     */
     private LocalDate fechaUltimaActualizacion;
+
+    /**
+     * El historial de valores de referencia por kilogramo del producto.
+     */
     protected HashMap<LocalDate, Float> historialValorReferenciaPorKg;
+
+    /**
+     * Indica si el producto es perecedero o no.
+     */
     private boolean esPerecedero;
 
     /**
@@ -141,6 +169,7 @@ public class Producto implements Serializable {
 
     /**
      * ToString sencillo de la clase Producto.
+     * @return String con la información del producto.
      */
     public String toStringSencillo() {
         return  "       Tipo: " + tipo +
@@ -152,6 +181,7 @@ public class Producto implements Serializable {
 
     /**
      * ToString detallado de la clase Producto.
+     * @return String con la información detallada del producto.
      */
     public String toStringDetallado() {
         return "       Tipo: " + tipo +
@@ -161,7 +191,6 @@ public class Producto implements Serializable {
                 "\n       Fecha Ultima Actualizacion: " + fechaUltimaActualizacion +
                 "\n       " + (esPerecedero ? "Perecedero" : "No Perecedero") +
                 "\n       Historial Valor Referencia Por Kg: " + historialValorReferenciaPorKg.entrySet().stream().map(entry -> "\n             " + entry.getKey() + ": " + entry.getValue() + " €/Kg").collect(Collectors.joining()) +
-
                 "\n";
     }
 }

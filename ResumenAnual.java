@@ -19,7 +19,7 @@ public class ResumenAnual implements Serializable {
     /**
      * Año del resumen anual
      */
-    private int anno;
+    private final int anno;
 
     /**
      * Lista de pedidos del año
@@ -29,7 +29,7 @@ public class ResumenAnual implements Serializable {
     /**
      * Lista de productores de la cooperativa en ese año
      */
-    private ArrayList<Productor> productores;
+    private final ArrayList<Productor> productores;
 
     /**
      * Lista de productos de la cooperativa en ese año
@@ -101,6 +101,7 @@ public class ResumenAnual implements Serializable {
 
     /**
      * Método para eliminar un pedido del resumen anual
+     * @param pedido el pedido a eliminar
      */
     public void eliminarPedido(Pedido pedido){
         pedidos.remove(pedido);
@@ -135,11 +136,7 @@ public class ResumenAnual implements Serializable {
         /* Se recorren los productos, si el tipo de producto está en el HashMap ventasTotalesPorProducto,
          * se printa el TipoProducto y su venta, en caso contrario, se printa el tipo de producto y 0.0f*/
         for (Producto producto : productos) {
-            if (ventasTotalesPorProducto.containsKey(producto.getTipo())) {
-                System.out.println(producto.getTipo() + ": " + ventasTotalesPorProducto.get(producto.getTipo()));
-            } else {
-                System.out.println(producto.getTipo() + ": " + 0.0f);
-            }
+            System.out.println(producto.getTipo() + ": " + ventasTotalesPorProducto.getOrDefault(producto.getTipo()+ " Kg", 0.0f));
         }
     }
 
@@ -152,15 +149,13 @@ public class ResumenAnual implements Serializable {
         for (Productor productor : productores) {
             System.out.println("Importe obtenido por " + productor.getNombre()+":");
             /* Se recorren los productos del productor, si el tipo de producto está en el HashMap beneficioTotalPorProducto
-             * se printa el tipo de producto y su beneficio, en caso contrario, se printa el tipo de producto y 0.0f
-             */
+             * se printa el tipo de producto y su beneficio, en caso contrario, se printa el tipo de producto y 0.0f */
             for (Producto producto : productor.getProductos().keySet()) {
                 if (productor.beneficioTotalPorProducto.containsKey(producto.getTipo())){
                     System.out.println("  "+producto.getTipo() + ": " + TipoCooperativa.df.format(productor.beneficioTotalPorProducto.get(producto.getTipo()))+" €");
                 }else{
                     System.out.println("  "+producto.getTipo() + ": 0,00 €");
                 }
-
             }
             System.out.println();
         }
@@ -225,10 +220,6 @@ public class ResumenAnual implements Serializable {
     }
 
     /**
-     *
-     */
-
-    /**
      * Método para imprimir el histórico de precios de todos los productos durante el año del Resumen,
      * Recorre los productos y si el tipo de producto está en el HashMap historialValorReferenciaPorKg y el año de la fecha
      * es el mismo que el año del resumen, se printa la fecha y el precio de referencia, en caso contrario, se printa el tipo de producto y "No hay datos"
@@ -243,7 +234,7 @@ public class ResumenAnual implements Serializable {
 
                 System.out.println("      " + producto.getTipo() + ":");
 
-                // Utilizamos TreeMap para ordenar las fechas
+                // Utilizamos TreeMap para ordenar las fechas, puesto que el HashMap no las ordena
                 TreeMap<LocalDate, Float> historialOrdenado = new TreeMap<>(producto.historialValorReferenciaPorKg);
 
                 for (Map.Entry<LocalDate, Float> entry : historialOrdenado.entrySet()) {
@@ -258,6 +249,7 @@ public class ResumenAnual implements Serializable {
                     }
                 }
 
+                // Si no se ha encontrado ningún precio en el año del resumen, se printa la última fecha y precio
                 if (!encontrado) {
                     if (ultimaFecha != null) {
                         System.out.println("         No ha tenido modificaciones durante el año " + anno + ". Última actualización: " + ultimaFecha + ": " + ultimoPrecio + " €/kg");

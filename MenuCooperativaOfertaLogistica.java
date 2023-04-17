@@ -21,6 +21,9 @@ public class MenuCooperativaOfertaLogistica implements IMenu {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Implementación del método mostrarMenu() de la interfaz IMenu.
+     */
     public void mostrarMenu() {
         int opcion;
         do {
@@ -39,28 +42,18 @@ public class MenuCooperativaOfertaLogistica implements IMenu {
                 opcion = -1; // Asigna un valor inválido para que vuelva a mostrar el menú
             }
             switch (opcion) {
-                case 1:
-                    crearOfertaLogistica();
-                    break;
-                case 2:
-                    verOfertasLogisticas();
-                    break;
-                case 3:
-                    eliminarOfertaLogistica();
-                    break;
-                case 0:
-                    System.out.println("Volviendo al menú principal...");
-                    break;
-                default:
-                    System.out.println("Opción inválida. Por favor, intente de nuevo.");
-                    break;
+                case 1 -> crearOfertaLogistica();
+                case 2 -> verOfertasLogisticas();
+                case 3 -> eliminarOfertaLogistica();
+                case 0 -> System.out.println("Volviendo al menú principal...");
+                default -> System.out.println("Opción inválida. Por favor, intente de nuevo.");
             }
         } while (opcion != 0);
     }
 
-    /********************************************
+    /*------------------------------------*
      * Método para Crear Oferta Logística
-     ********************************************/
+     ------------------------------------*/
 
     /**
      * Método para crear una oferta logística
@@ -81,10 +74,12 @@ public class MenuCooperativaOfertaLogistica implements IMenu {
             }
         }
 
+        // Si la oferta no existe, entra en la creación de la misma
         if (!comprobarOfertaLogistica(nombre)) {
             float costeKmGranLogistica = solicitarCostePorKm("Gran Logística");
             float costeKmPequenaLogistica = solicitarCostePorKm("Pequeña Logística");
             TipoCliente tipoCliente = new MenuCooperativaClientes().seleccionarTipoCliente();
+            OfertaLogistica ofertaLogistica;
             // Ahora se debe seleccionar el tipo de oferta
             try {
                 System.out.println("Seleccione el tipo de oferta:");
@@ -93,19 +88,17 @@ public class MenuCooperativaOfertaLogistica implements IMenu {
                 int tipoOferta = scanner.nextInt();
                 scanner.nextLine(); // limpiar el buffer de entrada
                 switch (tipoOferta) {
-                    case 1:
-                        OfertaLogistica ofertaLogistica = new EnvioEstandar(nombre, costeKmGranLogistica, costeKmPequenaLogistica, tipoCliente);
+                    case 1 -> {
+                        ofertaLogistica = new EnvioEstandar(nombre, costeKmGranLogistica, costeKmPequenaLogistica, tipoCliente);
                         Menu.cooperativa.addOfertaLogistica(ofertaLogistica);
                         System.out.println("Oferta de tipo Envio Estandar creada con éxito.");
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         ofertaLogistica = new EnvioPremium(nombre, costeKmGranLogistica, costeKmPequenaLogistica, tipoCliente);
                         Menu.cooperativa.addOfertaLogistica(ofertaLogistica);
                         System.out.println("Oferta de tipo Envio Premium creada con éxito.");
-                        break;
-                    default:
-                        System.out.println("Opción inválida. No se creó la oferta.");
-                        break;
+                    }
+                    default -> System.out.println("Opción inválida. No se creó la oferta.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Error: debe ingresar un número entero");
@@ -119,6 +112,8 @@ public class MenuCooperativaOfertaLogistica implements IMenu {
 
     /**
      * Método para comprobar si la oferta ya existe
+     * @param nombre Nombre de la oferta
+     * @return true si la oferta existe, false en caso contrario
      */
     private boolean comprobarOfertaLogistica(String nombre) {
         ArrayList<OfertaLogistica> ofertasLogisticas = Menu.cooperativa.getOfertasLogisticas();
@@ -132,6 +127,8 @@ public class MenuCooperativaOfertaLogistica implements IMenu {
 
     /**
      * Método para solicitar el coste por Km
+     * @param tipoLogistica Tipo de logística
+     * @return Coste por Km
      */
     private float solicitarCostePorKm(String tipoLogistica) {
         float costePorKm = 0;
@@ -150,9 +147,13 @@ public class MenuCooperativaOfertaLogistica implements IMenu {
         return costePorKm;
     }
 
-    /********************************************
+    /*------------------------------------*
      * Método para Ver Ofertas Logísticas
-     ********************************************/
+     ------------------------------------*/
+
+    /**
+     * Método para ver las ofertas logísticas
+     */
     private void verOfertasLogisticas(){
         System.out.println("---- VER OFERTAS LOGÍSTICAS ----");
         ArrayList<OfertaLogistica> ofertasLogisticas = Menu.cooperativa.getOfertasLogisticas();
@@ -165,9 +166,9 @@ public class MenuCooperativaOfertaLogistica implements IMenu {
         }
     }
 
-    /********************************************
+    /*------------------------------------------*
      * Método para Eliminar Oferta Logística
-     ********************************************/
+     ------------------------------------------*/
 
     /**
      * Método para eliminar una oferta logística
@@ -181,9 +182,9 @@ public class MenuCooperativaOfertaLogistica implements IMenu {
         }
     }
 
-
     /**
      * Método para seleccionar una oferta logística
+     * @return Oferta logística seleccionada
      */
     private OfertaLogistica seleccionarOfertaLogistica() {
         ArrayList<OfertaLogistica> ofertasLogisticas = Menu.cooperativa.getOfertasLogisticas();
@@ -195,12 +196,12 @@ public class MenuCooperativaOfertaLogistica implements IMenu {
 
         System.out.println("Seleccione una oferta logística:");
 
-        // Mostrar las ofertas logísticas
+        // Muestra las ofertas logísticas
         for (int i = 0; i < ofertasLogisticas.size(); i++) {
             System.out.println((i + 1) + ". " + ofertasLogisticas.get(i).getNombre());
         }
 
-        // Solicitar la selección de una oferta logística
+        // Solicita que se seleccione la oferta
         int opcion = 0;
         boolean opcionValida = false;
         while (!opcionValida) {
@@ -219,9 +220,5 @@ public class MenuCooperativaOfertaLogistica implements IMenu {
         }
         return ofertasLogisticas.get(opcion - 1);
     }
-
-
-
-
 
 }

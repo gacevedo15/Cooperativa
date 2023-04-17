@@ -24,19 +24,33 @@ public class MenuCooperativaResumenAnual implements IMenu {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Implementación del método mostrarMenu de la interfaz IMenu.
+     */
     public void mostrarMenu() {
-        int opcion,anno;
+        int opcion;
         ResumenAnual resumenAnual;
+        int annoActual = -1;
         do {
-            System.out.println("---- MENU COOPERATIVA RESUMEN ANUAL ----");
-            anno = solicitarAnno();
-            resumenAnual = getResumenAnual(anno);
+            if (annoActual == -1) {
+                System.out.println("---- MENU COOPERATIVA RESUMEN ANUAL ----");
+                annoActual = solicitarAnno();
+            } else {
+                System.out.println("---- MENU COOPERATIVA RESUMEN ANUAL " + annoActual + " ----");
+            }
+            if (annoActual < 2000 || annoActual > 3000) {
+                System.out.println("Error: el año debe estar comprendido entre 2000 y 3000");
+                opcion = -1;
+                continue;
+            }
+            resumenAnual = getResumenAnual(annoActual);
             if (resumenAnual != null){
                 System.out.println("1. Ventas totales de cantidad de productos en un periodo determinado");
                 System.out.println("2. Importes obtenidos por cada productor");
                 System.out.println("3. Importes obtenidos por cada Logística");
                 System.out.println("4. Beneficios de la cooperativa por cada producto");
                 System.out.println("5. Evolución de los precios de referencias de cada producto");
+                System.out.println("6. Comprobar otro año");
                 System.out.println("0. Volver al MENU COOPERATIVA");
 
                 try {
@@ -48,30 +62,20 @@ public class MenuCooperativaResumenAnual implements IMenu {
                     opcion = -1; // Asigna un valor inválido para que vuelva a mostrar el menú
                 }
                 switch (opcion) {
-                    case 1:
-                        mostrarVentasTotalesCantidadProductos(anno, resumenAnual);
-                        break;
-                    case 2:
-                        mostrarImportesObtenidosPorProductor(resumenAnual);
-                        break;
-                    case 3:
-                        mostrarImportesObtenidosPorLogistica(resumenAnual);
-                        break;
-                    case 4:
-                        mostrarBeneficiosCooperativaPorProducto(resumenAnual);
-                        break;
-                    case 5:
-                        mostrarEvolucionPreciosReferencia(resumenAnual);
-                        break;
-                    case 0:
-                        System.out.println("Volviendo al menú principal...");
-                        break;
-                    default:
-                        System.out.println("Opción inválida. Por favor, intente de nuevo.");
-                        break;
+                    case 1 -> mostrarVentasTotalesCantidadProductos(annoActual, resumenAnual);
+                    case 2 -> mostrarImportesObtenidosPorProductor(resumenAnual);
+                    case 3 -> mostrarImportesObtenidosPorLogistica(resumenAnual);
+                    case 4 -> mostrarBeneficiosCooperativaPorProducto(resumenAnual);
+                    case 5 -> mostrarEvolucionPreciosReferencia(resumenAnual);
+                    case 6 -> {
+                        annoActual = solicitarAnno(); // Pide un nuevo año
+                        opcion = -1; // Vuelve a mostrar el menú con el nuevo año
+                    }
+                    case 0 -> System.out.println("Volviendo al menú principal...");
+                    default -> System.out.println("Opción inválida. Por favor, intente de nuevo.");
                 }
             } else {
-                System.out.println("No hay resumen anual para el año " + anno);
+                System.out.println("No hay resumen anual para el año " + annoActual);
                 opcion = 0;
             }
 
@@ -82,29 +86,27 @@ public class MenuCooperativaResumenAnual implements IMenu {
     /**
      * Método para solicitar el año a consultar.
      * El año debe estar comprendido entre 2000 y 3000.
+     * @return año a consultar
      */
     private int solicitarAnno() {
         int anno;
-        do {
-            System.out.println("Ingrese el año a consultar (2000-3000): ");
-            try {
-                anno = scanner.nextInt();
-                scanner.nextLine(); // limpiar el buffer de entrada
-            } catch (InputMismatchException e) {
-                System.out.println("Error: debe ingresar un número entero");
-                scanner.nextLine(); // Limpia el buffer de entrada
-                anno = -1; // Asigna un valor inválido para que vuelva a mostrar el menú
-            }
-            if (anno < 2000 || anno > 3000) {
-                System.out.println("Error: el año debe estar comprendido entre 2000 y 3000");
-            }
-        } while (anno < 2000 || anno > 3000);
+
+        System.out.println("Ingrese el año a consultar (2000-3000): ");
+        try {
+            anno = scanner.nextInt();
+            scanner.nextLine(); // limpiar el buffer de entrada
+        } catch (InputMismatchException e) {
+            System.out.println("Error: debe ingresar un número entero");
+            scanner.nextLine(); // Limpia el buffer de entrada
+            anno = -1; // Asigna un valor inválido para que vuelva a mostrar el menú
+        }
         return anno;
     }
 
     /**
      * Método que devuelve el resumen anual del año ingresado.
      * @param anno año a consultar
+     * @return resumen anual del año ingresado
      */
     private ResumenAnual getResumenAnual(int anno) {
         for (ResumenAnual resumen : Menu.cooperativa.getResumenesAnuales()) {
@@ -115,9 +117,9 @@ public class MenuCooperativaResumenAnual implements IMenu {
         return null;
     }
 
-    /**********************************************************************************************************
+    /*---------------------------------------------------------------------------------------------------------------*
      *          Métodos para mostrar las ventas totales de cantidad de productos en un periodo determinado
-     **********************************************************************************************************/
+     ---------------------------------------------------------------------------------------------------------------*/
 
     /**
      * Método para mostrar las ventas totales de cantidad de productos en un periodo determinado.
@@ -145,6 +147,7 @@ public class MenuCooperativaResumenAnual implements IMenu {
     /**
      * Método auxiliar para solicitar la fecha de inicio y fin del periodo a consultar (día y mes).
      * @param anno año a consultar
+     * @return array con las fechas de inicio y fin
      */
     private int[] solicitarFechaInicioFin(int anno) {
         int diaInicio = 0, mesInicio = 0, diaFin = 0, mesFin = 0;
@@ -155,13 +158,9 @@ public class MenuCooperativaResumenAnual implements IMenu {
             System.out.println("Ingrese la fecha de inicio (día y mes): ");
             diaInicio = solicitarDia();
             mesInicio = solicitarMes();
-        /*
-        Ahora hay que comprobar si la fecha es correcta.
-        Si no lo es, se muestra mensaje de error y se vuelve a solicitar la fecha.
-        */
+
             try {
                 fechaInicio = LocalDate.of(anno, mesInicio, diaInicio);
-                esFechaCorrecta = true;
             } catch (DateTimeException e) {
                 System.out.println("Error: la fecha ingresada no es válida. Inténtelo nuevamente.");
                 continue;
@@ -175,24 +174,22 @@ public class MenuCooperativaResumenAnual implements IMenu {
                 fechaFin = LocalDate.of(anno, mesFin, diaFin);
                 if (fechaInicio.isAfter(fechaFin)) {
                     System.out.println("Error: la fecha de inicio debe ser anterior a la fecha de fin. Inténtelo nuevamente.");
-                    esFechaCorrecta = false;
                 } else {
                     esFechaCorrecta = true;
                 }
             } catch (DateTimeException e) {
                 System.out.println("Error: la fecha ingresada no es válida. Inténtelo nuevamente.");
-                esFechaCorrecta = false;
             }
         }
 
         // devolver un array con las fechas de inicio y fin
-        int[] fechas = {diaInicio, mesInicio, diaFin, mesFin};
-        return fechas;
+        return new int[]{diaInicio, mesInicio, diaFin, mesFin};
     }
 
 
     /**
      * Método auxiliar para solicitar el día.
+     * @return día ingresado
      */
     private int solicitarDia() {
         int dia;
@@ -215,6 +212,7 @@ public class MenuCooperativaResumenAnual implements IMenu {
 
     /**
      * Método auxiliar para solicitar el mes.
+     * @return mes ingresado
      */
     private int solicitarMes() {
         int mes;
@@ -235,52 +233,56 @@ public class MenuCooperativaResumenAnual implements IMenu {
         return mes;
     }
 
-    /**
-     * Método auxiliar para comprobar que la fecha ingresada es válida.
-     */
-    private boolean esFechaCorrecta(int anno, int dia, int mes) {
-        try {
-            LocalDate.of(anno, mes, dia);
-            return true;
-        } catch (DateTimeException e) {
-            System.out.println("Error: la fecha ingresada no es válida");
-            return false;
-        }
-    }
-
-    /***********************************************************************************
+    /*---------------------------------------------------------------------------------*
      *          Métodos para mostrar los Importes obtenidos por cada productor
-     **********************************************************************************/
+     ---------------------------------------------------------------------------------*/
+
+    /**
+     * Método para mostrar los importes obtenidos por cada productor.
+     * @param resumenAnual resumen anual a consultar
+     */
     private void mostrarImportesObtenidosPorProductor(ResumenAnual resumenAnual) {
         System.out.println("Importes obtenidos por cada productor");
         resumenAnual.printarImportesPorProductor();
     }
 
-    /***********************************************************************************
+    /*---------------------------------------------------------------------------------*
      *          Métodos para mostrar los Importes obtenidos por cada Logística
-     **********************************************************************************/
+     ---------------------------------------------------------------------------------*/
+
+    /**
+     * Método para mostrar los importes obtenidos por cada Logística.
+     * @param resumenAnual resumen anual a consultar
+     */
     private void mostrarImportesObtenidosPorLogistica(ResumenAnual resumenAnual) {
         System.out.println("Importes obtenidos por cada Logística");
         resumenAnual.printarImportesPorLogistica();
     }
 
-    /***************************************************************************************
+    /*-----------------------------------------------------------------------------------*
      *          Métodos para mostrar los Beneficios de la cooperativa por cada producto
-     **************************************************************************************/
+    -----------------------------------------------------------------------------------*/
+
+    /**
+     * Método para mostrar los beneficios de la cooperativa por cada producto.
+     * @param resumenAnual resumen anual a consultar
+     */
     private void mostrarBeneficiosCooperativaPorProducto(ResumenAnual resumenAnual) {
         System.out.println("Beneficios de la cooperativa por cada producto");
         resumenAnual.mostrarBeneficiosCooperativaPorProducto();
     }
 
-    /**************************************************************************************************
+    /*----------------------------------------------------------------------------------------------*
      *          Métodos para mostrar la evolución de los precios de referencias de cada producto
-     **************************************************************************************************/
+     ----------------------------------------------------------------------------------------------*/
+
+    /**
+     * Método para mostrar la evolución de los precios de referencias de cada producto.
+     * @param resumenAnual resumen anual a consultar
+     */
     private void mostrarEvolucionPreciosReferencia(ResumenAnual resumenAnual) {
         System.out.println("Evolución de los precios de referencia de cada producto");
         resumenAnual.printEvolucionPreciosReferencia();
     }
-
-
-
 
 }

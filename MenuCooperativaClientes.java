@@ -21,6 +21,10 @@ public class MenuCooperativaClientes implements IMenu {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Implementación del método mostrarMenu de la interfaz IMenu.
+     * Muestra el menú de la cooperativa de la gestión de Clientes.
+     */
     public void mostrarMenu() {
         int opcion;
         do {
@@ -42,41 +46,22 @@ public class MenuCooperativaClientes implements IMenu {
                 opcion = -1; // Asigna un valor inválido para que vuelva a mostrar el menú
             }
             switch (opcion) {
-                case 1:
-                    crearCliente();
-                    break;
-                case 2:
-                    verDetallesCliente();
-                    break;
-                case 3:
-                    cambiarTipoCliente();
-                    break;
-                case 4:
-                    hacerVIPCliente();
-                    break;
-                case 5:
-                    verPedidosCliente();
-                    break;
-                case 6:
-                    eliminarCliente();
-                    break;
-                case 0:
-                    System.out.println("Volviendo al menú principal...");
-                    break;
-                default:
-                    System.out.println("Opción inválida. Por favor, intente de nuevo.");
-                    break;
+                case 1 -> crearCliente();
+                case 2 -> verDetallesCliente();
+                case 3 -> cambiarTipoCliente();
+                case 4 -> hacerVIPCliente();
+                case 5 -> verPedidosCliente();
+                case 6 -> eliminarCliente();
+                case 0 -> System.out.println("Volviendo al menú principal...");
+                default -> System.out.println("Opción inválida. Por favor, intente de nuevo.");
             }
         } while (opcion != 0);
     }
 
-    /*********************************************
+    /*----------------------------------------------*
      *      Métodos para crear Clientes
-     *********************************************/
+     ----------------------------------------------*/
 
-    /**
-     * Método para crear un cliente.
-     */
     /**
      * Método para crear un cliente.
      */
@@ -161,9 +146,9 @@ public class MenuCooperativaClientes implements IMenu {
     }
 
 
-    /************************************************
+    /*----------------------------------------------*
      *      Métodos para ver detalles de un Cliente
-     ***********************************************/
+     ----------------------------------------------*/
 
     /**
      * Método para ver los detalles de un cliente.
@@ -211,13 +196,10 @@ public class MenuCooperativaClientes implements IMenu {
         return null;
     }
 
-    /************************************************
+    /*----------------------------------------------*
      *      Métodos para cambiar tipo de Cliente
-     ***********************************************/
+     ----------------------------------------------*/
 
-    /**
-     * Método para cambiar el tipo de un cliente.
-     */
     /**
      * Método para cambiar el tipo de un cliente.
      */
@@ -244,9 +226,9 @@ public class MenuCooperativaClientes implements IMenu {
         }
     }
 
-    /************************************************
+    /*----------------------------------------------*
      *      Métodos para Hacer VIP a un Cliente
-     ***********************************************/
+     ----------------------------------------------*/
 
     /**
      * Método para hacer VIP a un cliente.
@@ -270,9 +252,9 @@ public class MenuCooperativaClientes implements IMenu {
         }
     }
 
-    /****************************************************************
+    /*--------------------------------------------------------------*
      *      Métodos para ver los pedidos de un Cliente
-     ***************************************************************/
+     --------------------------------------------------------------*/
 
     /**
      * Método para ver los pedidos de un cliente.
@@ -294,9 +276,9 @@ public class MenuCooperativaClientes implements IMenu {
         }
     }
 
-    /****************************************************************
+    /*--------------------------------------------------------------*
      *      Métodos para eliminar un Cliente
-     ***************************************************************/
+     --------------------------------------------------------------*/
 
     /**
      * Método para eliminar un cliente.
@@ -310,11 +292,4 @@ public class MenuCooperativaClientes implements IMenu {
         Menu.cooperativa.eliminarCliente(cliente);
         System.out.println("El cliente " + cliente.getNombre() + " ha sido eliminado con éxito.");
     }
-
-
-
-
-
-
-
 }

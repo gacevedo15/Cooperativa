@@ -1,11 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/** Aún falta corregir esta clase, necesitamos sacar el producto en comun y sumar las extensiones que tiene cada miembro */
 /**
- * Clase que representa un productor federado que tiene varios miembros.
- * Hereda de la clase "Productor". Contiene información acerca de los miembros que tiene el productor federado,
- * el producto que cultiva y la extensión total del mismo.
+ * Clase que representa un productor federado.
+ * Contiene información acerca de un productor federado, sus miembros y sus productos.
  */
 public class ProductorFederado extends Productor {
     private ArrayList<Productor> miembros;
@@ -98,12 +96,11 @@ public class ProductorFederado extends Productor {
      */
     @Override
     public String toString() {
-        String s ="\nNombre = " + getNombre()
+        return "\nNombre = " + getNombre()
                 + "\nTipo = " + getTipoProductor()
                 + "\nTipo de producto = " + productos.keySet().iterator().next().getTipo()
                 + "\nExtension total = " + extensionTotal
                 + "\nMiembros = " + miembros.stream().map(Productor::getNombre).reduce("", (a, b) -> a + ", " + b).substring(2);
-        return s;
     }
 
 }

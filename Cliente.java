@@ -9,11 +9,30 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class Cliente implements Serializable {
+
+    /**
+     * Variable para almacenar el nombre del cliente.
+     */
     private String nombre;
+
+    /**
+     * Variable para almacenar el tipo de cliente de tipo ENUM.
+     */
     private TipoCliente tipoCliente;
+
+    /**
+     * Variable para almacenar la distancia a la que se encuentra el cliente.
+     */
     private float distancia;
+
+    /**
+     * Variable para almacenar si el cliente es premium o no.
+     */
     private boolean esClientePremium;
 
+    /**
+     * Variable para almacenar el historial de pedidos del cliente.
+     */
     private ArrayList<Pedido> pedidos;
 
     /**

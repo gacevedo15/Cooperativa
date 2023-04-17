@@ -1,3 +1,7 @@
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -40,6 +44,8 @@ public class Menu {
         ofertas = PersistenciaDatos.cargarOfertas("ofertas.txt");
     }
 
+
+
     /**
      * Muestra el menú principal y las opciones que llevan a los distintos menús.
      */
@@ -48,6 +54,7 @@ public class Menu {
         do {
             System.out.println("---- MENU ----");
             System.out.println("1. Menu Cooperativa");
+            System.out.println("2. Guardar datos");
             System.out.println("0. Salir");
 
             try {
@@ -59,16 +66,17 @@ public class Menu {
             }
 
             switch (opcion) {
-                case 1:
+                case 1 -> {
                     menuActual = new MenuCooperativa();
                     menuActual.mostrarMenu();
-                    break;
-                case 0:
-                    System.out.println("Saliendo del programa...");
-                    break;
-                default:
-                    System.out.println("Opción inválida. Por favor, intente de nuevo.");
-                    break;
+                }
+                case 2 -> {
+                    PersistenciaDatos.guardarDatos(cooperativa, "cooperativa.txt");
+                    PersistenciaDatos.guardarOfertas(ofertas, "ofertas.txt");
+                    System.out.println("Datos guardados correctamente.");
+                }
+                case 0 -> System.out.println("Saliendo del programa...");
+                default -> System.out.println("Opción inválida. Por favor, intente de nuevo.");
             }
         } while (opcion != 0);
     }

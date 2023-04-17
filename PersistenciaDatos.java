@@ -34,7 +34,7 @@ public class PersistenciaDatos {
      * @return Instancia de la clase TipoCooperativa con los datos cargados.
      */
     public static TipoCooperativa cargarDatos(String rutaArchivo) {
-        TipoCooperativa cooperativa = null;
+        TipoCooperativa cooperativa;
         try {
             FileInputStream archivoEntrada = new FileInputStream(rutaArchivo);
             ObjectInputStream objetoEntrada = new ObjectInputStream(archivoEntrada);
@@ -42,12 +42,9 @@ public class PersistenciaDatos {
             objetoEntrada.close();
             archivoEntrada.close();
             System.out.println("Los datos se han cargado correctamente desde el archivo: " + rutaArchivo);
-        } catch (IOException e) {
-            System.out.println("Error al cargar los datos desde el archivo: " + rutaArchivo);
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            System.out.println("Error al cargar los datos desde el archivo: " + rutaArchivo);
-            e.printStackTrace();
+        } catch (Throwable e) {
+            System.out.println("Error al cargar los datos desde el archivo: " + rutaArchivo + ". Se creará una nueva Cooperativa.");
+            cooperativa = new TipoCooperativa();
         }
         return cooperativa;
     }
@@ -77,7 +74,7 @@ public class PersistenciaDatos {
      * @return Lista de ofertas logísticas con los datos cargados.
      */
     public static ArrayList<OfertaLogistica> cargarOfertas(String rutaArchivo) {
-        ArrayList<OfertaLogistica> ofertas = null;
+        ArrayList<OfertaLogistica> ofertas;
         try {
             FileInputStream archivoEntrada = new FileInputStream(rutaArchivo);
             ObjectInputStream objetoEntrada = new ObjectInputStream(archivoEntrada);
@@ -85,12 +82,9 @@ public class PersistenciaDatos {
             objetoEntrada.close();
             archivoEntrada.close();
             System.out.println("Las ofertas se han cargado correctamente desde el archivo: " + rutaArchivo);
-        } catch (IOException e) {
-            System.out.println("Error al cargar las ofertas desde el archivo: " + rutaArchivo);
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            System.out.println("Error al cargar las ofertas desde el archivo: " + rutaArchivo);
-            e.printStackTrace();
+        } catch (Throwable e) {
+            System.out.println("Error al cargar las ofertas desde el archivo: " + rutaArchivo + ". Se creará una nueva lista vacía de ofertas.");
+            ofertas = new ArrayList<>();
         }
         return ofertas;
     }

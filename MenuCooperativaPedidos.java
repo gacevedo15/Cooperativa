@@ -1,6 +1,8 @@
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 /**
  * Clase que representa la gestión de pedidos de la cooperativa.
@@ -16,12 +18,15 @@ public class MenuCooperativaPedidos implements IMenu {
     private Scanner scanner;
 
     /**
-         * Constructor de la clase MenuCooperativaPedidos que inicializa el Scanner.
+     * Constructor de la clase MenuCooperativaPedidos que inicializa el Scanner.
      */
     public MenuCooperativaPedidos() {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Implementación del método mostrarMenu() de la interfaz IMenu.
+     */
     public void mostrarMenu() {
         int opcion;
         do {
@@ -40,28 +45,18 @@ public class MenuCooperativaPedidos implements IMenu {
                 opcion = -1; // Asigna un valor inválido para que vuelva a mostrar el menú
             }
             switch (opcion) {
-                case 1:
-                    simularPedidoComoCliente();
-                    break;
-                case 2:
-                    verDetallesPedido();
-                    break;
-                case 3:
-                    eliminarPedido();
-                    break;
-                case 0:
-                    System.out.println("Volviendo al menú principal...");
-                    break;
-                default:
-                    System.out.println("Opción inválida. Por favor, intente de nuevo.");
-                    break;
+                case 1 -> simularPedidoComoCliente();
+                case 2 -> verDetallesPedido();
+                case 3 -> eliminarPedido();
+                case 0 -> System.out.println("Volviendo al menú principal...");
+                default -> System.out.println("Opción inválida. Por favor, intente de nuevo.");
             }
         } while (opcion != 0);
     }
 
-    /*****************************************************
+    /*----------------------------------------------------*
      *      Métodos para simular pedidos como cliente
-     *****************************************************/
+     ----------------------------------------------------*/
 
     /**
      * Método para simular un pedido como cliente.
@@ -69,7 +64,7 @@ public class MenuCooperativaPedidos implements IMenu {
     private void simularPedidoComoCliente() {
             System.out.println("---- SIMULAR PEDIDO COMO CLIENTE ----");
 
-            // Seleccionar el cliente que realiza el pedido
+            // Selecciona el cliente que realiza el pedido
             Cliente cliente = null;
             do {
                 System.out.println("Seleccione el cliente que realiza el pedido:");
@@ -81,7 +76,7 @@ public class MenuCooperativaPedidos implements IMenu {
                 }
             } while (cliente == null);
 
-            // Seleccionar el producto que se desea comprar
+            // Selecciona el producto que se desea comprar
             Producto producto = null;
             do {
                 System.out.println("Seleccione el producto que desea comprar:");
@@ -94,7 +89,7 @@ public class MenuCooperativaPedidos implements IMenu {
                 }
             } while (producto == null);
 
-            // Comprobar si hay suficiente cantidad de producto en la cooperativa
+            // Comprueba si hay suficiente cantidad de producto en la cooperativa
             System.out.println("Ingrese la cantidad que desea comprar en Kg:");
             float cantCompradaKg = scanner.nextFloat();
             scanner.nextLine();
@@ -105,7 +100,7 @@ public class MenuCooperativaPedidos implements IMenu {
                 return;
             }
 
-            // Comprobar que el cliente tenga permiso para comprar la cantidad de producto solicitada
+            // Comprueba que el tipo de cliente pueda comprar la cantidad que desea
             if (cliente.getTipoCliente() == TipoCliente.CONSUMIDOR_FINAL && cantCompradaKg > 100) {
                 System.out.println("Error: Un cliente de tipo consumidor final no puede comprar más de 100Kg.");
                 return;
@@ -114,13 +109,13 @@ public class MenuCooperativaPedidos implements IMenu {
                 return;
             }
 
-            // Seleccionar la oferta logística que se puede aplicar a las condiciones que se solicitan
-            OfertaLogistica ofertaLogistica = seleccionarOfertaLogistica(cliente, producto);
+            // Selecciona la oferta logística que se puede aplicar a las condiciones que se solicitan
+            OfertaLogistica ofertaLogistica = seleccionarOfertaLogistica(cliente);
             if (ofertaLogistica == null) {
                 return;
             }
 
-            // Ingresar la fecha de pedido y la fecha de entrega
+            // Ingresa la fecha de pedido y la fecha de entrega
             LocalDate fechaPedido = null;
             do {
                 System.out.println("Ingrese la fecha de pedido: ");
@@ -147,7 +142,7 @@ public class MenuCooperativaPedidos implements IMenu {
                 return;
             }
 
-            // Realizar el pedido
+            // Realiza el pedido
             Menu.cooperativa.realizarPedido(cliente, producto, cantCompradaKg, ofertaLogistica, fechaPedido, fechaEntrega);
             System.out.println("Pedido realizado con éxito.");
     }
@@ -155,6 +150,9 @@ public class MenuCooperativaPedidos implements IMenu {
 
     /**
      * Método para comprobar que se puede comprar la cantidad de producto que se desea.
+     * @param producto Producto que se desea comprar
+     * @param cantCompradaKg Cantidad de producto que se desea comprar
+     * @return true si se puede comprar la cantidad de producto que se desea, false en caso contrario
      */
     private boolean comprobarCantidadProducto(Producto producto, float cantCompradaKg) {
         return cantCompradaKg <= Menu.cooperativa.calcularCantidadTotalEnKg(producto.getTipo());
@@ -162,11 +160,13 @@ public class MenuCooperativaPedidos implements IMenu {
 
     /**
      * Método para seleccionar la oferta logística que se va a utilizar para el pedido.
+     * @param cliente Cliente que realiza el pedido
+     * @return Oferta logística seleccionada
      */
-    private OfertaLogistica seleccionarOfertaLogistica(Cliente cliente, Producto producto) {
+    private OfertaLogistica seleccionarOfertaLogistica(Cliente cliente) {
         ArrayList<OfertaLogistica> ofertasLogisticas = Menu.cooperativa.getOfertasLogisticas();
 
-        // Si no hay ofertas disponibles, devolver null y mostrar mensaje
+        // Si no hay ofertas disponibles, devuelve null y muestra mensaje por pantalla
         if (ofertasLogisticas.isEmpty()) {
             System.out.println("No existen ofertas disponibles.");
             return null;
@@ -180,13 +180,13 @@ public class MenuCooperativaPedidos implements IMenu {
             }
         }
 
-        // Si no hay ofertas disponibles para el tipo de cliente, devolver null y mostrar mensaje
+        // Si no hay ofertas disponibles para el tipo de cliente, devuelve null y muestra mensaje por pantalla
         if (ofertasFiltradas.isEmpty()) {
             System.out.println("No existen ofertas disponibles para el tipo de cliente.");
             return null;
         }
 
-        // Mostrar las ofertas filtradas y solicitar la selección de una oferta
+        // Muestra las ofertas filtradas y solicita la selección de una de ellas
         System.out.println("Seleccione una oferta logística:");
         for (int i = 0; i < ofertasFiltradas.size(); i++) {
             System.out.println((i + 1) + ". " + ofertasFiltradas.get(i).getNombre());
@@ -208,14 +208,15 @@ public class MenuCooperativaPedidos implements IMenu {
             }
         } while (opcion < 1 || opcion > ofertasFiltradas.size());
 
-        return null; // No debería llegar aquí nunca
+        return null;
     }
 
     /**
      * Método para introducir una fecha LocalDate.
+     * @return Fecha introducida
      */
     private LocalDate introducirFecha() {
-        int dia=0, mes=0, anio=0;
+        int dia, mes, anno;
         LocalDate fecha = null;
         do {
             System.out.println("Día:");
@@ -250,31 +251,33 @@ public class MenuCooperativaPedidos implements IMenu {
                 do {
                     System.out.println("Año:");
                     try {
-                        anio = scanner.nextInt();
+                        anno = scanner.nextInt();
                         scanner.nextLine();
-                        if (anio < 2020) {
+                        if (anno < 2020) {
                             System.out.println("Error: Debe ingresar un número mayor o igual a 2020.");
                             continue;
                         }
-                        fecha = LocalDate.of(anio, mes, dia);
+                        fecha = LocalDate.of(anno, mes, dia);
                     } catch (DateTimeException e) {
                         System.out.println("Error: Fecha inválida.");
-                        continue;
                     } catch (InputMismatchException e) {
                         System.out.println("Error: Debe ingresar un número entero.");
                         scanner.nextLine();
-                        continue;
                     }
-                } while (fecha == null || anio < 2020);
-            } while (fecha == null || mes < 1 || mes > 12);
-        } while (fecha == null || dia < 1 || dia > 31);
+                } while (fecha == null);
+            } while (fecha == null);
+        } while (fecha == null);
         return fecha;
     }
 
 
-    /****************************************************
-     *    Métodos para ver los detalles de un pedido    *
-     ****************************************************/
+    /*----------------------------------------------------*
+     *    Métodos para ver los detalles de un pedido
+     ----------------------------------------------------*/
+
+    /**
+     * Método para ver los detalles de un pedido.
+     */
     private void verDetallesPedido() {
         // Solicitar el número de pedido
         int numPedido = solicitarNumPedido();
@@ -314,9 +317,9 @@ public class MenuCooperativaPedidos implements IMenu {
     }
 
 
-    /*************************************
-     *    Métodos para Eliminar pedido   *
-     *************************************/
+    /*----------------------------------------------*
+     *    Métodos para Eliminar pedido
+     ----------------------------------------------*/
 
     /**
      * Método para eliminar un pedido.
@@ -336,9 +339,5 @@ public class MenuCooperativaPedidos implements IMenu {
         Menu.cooperativa.eliminarPedido(pedido);
         System.out.println("Pedido eliminado con éxito.");
     }
-
-
-
-
 
 }

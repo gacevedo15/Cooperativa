@@ -11,11 +11,6 @@ import java.time.LocalDate;
 public class Pedido implements Serializable {
 
     /**
-     * El id del pedido actual. Se utiliza para autoincrementar el id del pedido.
-     */
-    private static int idPedidoActual = 0;
-
-    /**
      * El id del pedido.
      */
     private int idPedido;
@@ -41,19 +36,9 @@ public class Pedido implements Serializable {
     private Producto p;
 
     /**
-     * El repartidor encargado de entregar el pedido.
-     */
-    private Repartidor r;
-
-    /**
      * La logística utilizada para el pedido.
      */
     private Logistica l;
-
-    /**
-     * La oferta logística aplicada al pedido.
-     */
-    private OfertaLogistica o;
 
     /**
      * La cantidad comprada del producto en kilogramos.
@@ -106,7 +91,8 @@ public class Pedido implements Serializable {
      * @param fechaEntrega Fecha estimada para la entrega del producto.
      */
     public Pedido(Cliente c, Producto p, float cantCompradaKg, OfertaLogistica o, LocalDate fechaPedido,LocalDate fechaEntrega) {
-        this.idPedido = ++idPedidoActual; //Se autoincrementa el id del pedido
+        int idUltimoPedido = Menu.cooperativa.getUltimoIdPedido(); //Se optiene el id del último pedido y se guarda en una variable
+        this.idPedido = ++idUltimoPedido; //Se autoincrementa el id del pedido
         this.fechaPedido = fechaPedido; //Se establece la fecha en la que se realiza el pedido
         this.fechaEntrega = fechaEntrega; //Se establece la fecha en la que se entrega el pedido
         this.c = c; //Cliente que realiza el pedido
@@ -118,6 +104,7 @@ public class Pedido implements Serializable {
 
     /**
      * Devuelve el id del pedido.
+     * @return El id del pedido.
      */
     public int getIdPedido() {
         return this.idPedido;
@@ -278,6 +265,7 @@ public class Pedido implements Serializable {
 
     /**
      * ToString para mostrar los datos del pedido que puede ver el cliente.
+     * @return Los datos del pedido que puede ver el cliente.
      */
     public String toStringCliente() {
         return "ID Pedido: " + idPedido

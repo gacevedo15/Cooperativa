@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -23,6 +22,9 @@ public class MenuCooperativaProductos implements IMenu {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Implementación del método mostrarMenu de la interfaz IMenu.
+     */
     public void mostrarMenu() {
         int opcion;
         do {
@@ -43,39 +45,35 @@ public class MenuCooperativaProductos implements IMenu {
                 opcion = -1; // Asigna un valor inválido para que vuelva a mostrar el menú
             }
             switch (opcion) {
-                case 1:
+                case 1 -> {
                     System.out.println("Crear producto...");
                     crearProducto();
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     System.out.println("Ver productos disponibles...");
                     verProductosDisponibles();
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     System.out.println("Ver detalles de un producto...");
                     verDetallesProducto();
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     System.out.println("Eliminar producto...");
                     eliminarProducto();
-                    break;
-                case 5:
+                }
+                case 5 -> {
                     System.out.println("Actualizar precio de un producto...");
                     actualizarPrecioProducto();
-                    break;
-                case 0:
-                    System.out.println("Volviendo al menú principal...");
-                    break;
-                default:
-                    System.out.println("Opción inválida. Por favor, intente de nuevo.");
-                    break;
+                }
+                case 0 -> System.out.println("Volviendo al menú principal...");
+                default -> System.out.println("Opción inválida. Por favor, intente de nuevo.");
             }
         } while (opcion != 0);
     }
 
-    /******************************************************
+    /*---------------------------------------------*
      *          Métodos para crear un producto
-     ******************************************************/
+     ---------------------------------------------*/
 
     /**
      * Método para crear un producto.
@@ -206,7 +204,6 @@ public class MenuCooperativaProductos implements IMenu {
                     esPerecedero = true;
                     respuestaValida = true;
                 } else if (respuesta.equals("no")) {
-                    esPerecedero = false;
                     respuestaValida = true;
                 } else {
                     throw new Exception();
@@ -219,9 +216,13 @@ public class MenuCooperativaProductos implements IMenu {
         return esPerecedero;
     }
 
-    /******************************************************
+    /*---------------------------------------------------*
      *      Métodos para ver los productos disponibles.
-     ******************************************************/
+     ---------------------------------------------------*/
+
+    /**
+     * Método para ver los productos disponibles.
+     */
     public void verProductosDisponibles() {
         System.out.println("Productos disponibles:");
         for (Producto producto : Menu.cooperativa.getProductos()) {
@@ -229,9 +230,13 @@ public class MenuCooperativaProductos implements IMenu {
         }
     }
 
-    /******************************************************
+    /*---------------------------------------------------*
      *      Métodos para ver los detalles de un producto.
-     ******************************************************/
+     ---------------------------------------------------*/
+
+    /**
+     * Método para ver los detalles de un producto.
+     */
     public void verDetallesProducto() {
         Producto producto = seleccionarProducto();
         if (producto == null) {
@@ -270,9 +275,13 @@ public class MenuCooperativaProductos implements IMenu {
         return Menu.cooperativa.getProductos().get(opcion);
     }
 
-    /******************************************************
+    /*---------------------------------------------------*
      *          Métodos para eliminar un producto.
-     ******************************************************/
+     ---------------------------------------------------*/
+
+    /**
+     * Método para eliminar un producto.
+     */
     public void eliminarProducto() {
         Producto producto = seleccionarProducto();
         if (producto == null) {
@@ -282,9 +291,13 @@ public class MenuCooperativaProductos implements IMenu {
         System.out.println("Producto "+producto.getTipo()+" eliminado con éxito.");
     }
 
-    /******************************************************
+    /*-------------------------------------------------------------*
      *          Métodos para Actualizar precio de un producto.
-     ******************************************************/
+     -------------------------------------------------------------*/
+
+    /**
+     * Método para actualizar el precio de un producto.
+     */
     public void actualizarPrecioProducto() {
         Producto producto = seleccionarProducto();
         if (producto == null) {
@@ -319,7 +332,5 @@ public class MenuCooperativaProductos implements IMenu {
         }
         return nuevoPrecio;
     }
-
-
 
 }
