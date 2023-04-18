@@ -304,9 +304,16 @@ public class MenuCooperativaProductos implements IMenu {
             return;
         }
         float nuevoPrecio = solicitarNuevoPrecio();
-        LocalDate fechaActualizacion = LocalDate.now();
-        Menu.cooperativa.actualizarPrecioProducto(producto.getTipo(), nuevoPrecio,fechaActualizacion);
-        System.out.println("El Precio del producto "+producto.getTipo()+" ha sido actualizado con éxito a" + nuevoPrecio + " €/Kg");
+        System.out.println("Introduzca la fecha de actualización del precio:");
+        LocalDate fechaActualizacion = new MenuCooperativaPedidos().introducirFecha();
+
+        //Si la fecha de actualizacion es posterior a la fecha de la ultima actualizacion del precio del producto, se actualiza el precio
+        if (fechaActualizacion.isAfter(producto.getFechaUltimaActualizacion())) {
+            Menu.cooperativa.actualizarPrecioProducto(producto.getTipo(), nuevoPrecio,fechaActualizacion);
+            System.out.println("El Precio del producto "+producto.getTipo()+" ha sido actualizado con éxito a " + nuevoPrecio + " €/Kg. Fecha: " + fechaActualizacion);
+        } else {
+            System.out.println("La fecha de actualización debe ser posterior a la fecha de la última actualización del precio del producto: "+producto.getFechaUltimaActualizacion());
+        }
     }
 
     /**
@@ -327,7 +334,7 @@ public class MenuCooperativaProductos implements IMenu {
                 valorValido = true;
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
-                scanner.nextLine(); // para limpiar el buffer del scanner
+                scanner.nextLine(); // limpiar el buffer de entrada
             }
         }
         return nuevoPrecio;

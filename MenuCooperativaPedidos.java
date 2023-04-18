@@ -215,7 +215,7 @@ public class MenuCooperativaPedidos implements IMenu {
      * Método para introducir una fecha LocalDate.
      * @return Fecha introducida
      */
-    private LocalDate introducirFecha() {
+    public LocalDate introducirFecha() {
         int dia, mes, anno;
         LocalDate fecha = null;
         do {
