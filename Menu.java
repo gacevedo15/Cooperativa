@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author Gustavo Acevedo Alfonso
  * @version 1.0
  */
-public class Menu {
+public class Menu implements IMenu {
 
     /**
      * Scanner para leer la entrada del usuario.

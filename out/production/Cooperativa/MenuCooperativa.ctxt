@@ -1,10 +1,10 @@
 #BlueJ class context
 comment0.target=MenuCooperativa
-comment0.text=\n\ Clase\ que\ representa\ el\ menu\ principal\ de\ la\ cooperativa.\n
+comment0.text=\r\n\ Clase\ que\ representa\ el\ menu\ principal\ de\ la\ cooperativa.\r\n
 comment1.params=
 comment1.target=MenuCooperativa()
-comment1.text=\n\ Constructor\ de\ la\ clase\ MenuCooperativa.\ Initializa\ el\ Scanner.\n
+comment1.text=\r\n\ Constructor\ de\ la\ clase\ MenuCooperativa.\ Initializa\ el\ Scanner.\r\n
 comment2.params=
 comment2.target=void\ mostrarMenu()
-comment2.text=\n\ Implementaci\u00F3n\ del\ m\u00E9todo\ mostrarMenu\ de\ la\ interfaz\ IMenu.\n
+comment2.text=\r\n\ Implementaci\u00F3n\ del\ m\u00E9todo\ mostrarMenu\ de\ la\ interfaz\ IMenu.\r\n
 numComments=3
