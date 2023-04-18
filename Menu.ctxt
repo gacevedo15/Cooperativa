@@ -1,10 +1,10 @@
 #BlueJ class context
 comment0.target=Menu
-comment0.text=\n\ Clase\ que\ representa\ un\ men\u00FA.\n\ Contiene\ el\ menu\ principal\ y\ las\ opciones\ que\ llevan\ a\ los\ distintos\ men\u00FAs.\n\ @author\ Gustavo\ Acevedo\ Alfonso\n\ @version\ 1.0\n
+comment0.text=\r\n\ Clase\ que\ representa\ un\ men\u00FA.\r\n\ Contiene\ el\ menu\ principal\ y\ las\ opciones\ que\ llevan\ a\ los\ distintos\ men\u00FAs.\r\n\ @author\ Gustavo\ Acevedo\ Alfonso\r\n\ @version\ 1.0\r\n
 comment1.params=
 comment1.target=Menu()
-comment1.text=\n\ Constructor\ de\ la\ clase\ Menu.\n\ Inicializa\ el\ Scanner\ y\ carga\ los\ datos\ de\ la\ cooperativa\ y\ las\ ofertas\ log\u00EDsticas.\n
+comment1.text=\r\n\ Constructor\ de\ la\ clase\ Menu.\r\n\ Inicializa\ el\ Scanner\ y\ carga\ los\ datos\ de\ la\ cooperativa\ y\ las\ ofertas\ log\u00EDsticas.\r\n
 comment2.params=
 comment2.target=void\ mostrarMenu()
-comment2.text=\n\ Muestra\ el\ men\u00FA\ principal\ y\ las\ opciones\ que\ llevan\ a\ los\ distintos\ men\u00FAs.\n
+comment2.text=\r\n\ Muestra\ el\ men\u00FA\ principal\ y\ las\ opciones\ que\ llevan\ a\ los\ distintos\ men\u00FAs.\r\n
 numComments=3
