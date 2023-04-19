@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Cooperativa
-comment0.text=\r\n\ Cooperativa\ ---\ Clase\ principal\ que\ contiene\ el\ m\u00E9todo\ main\r\n\ \r\n\ @author\ Gustavo\ Acevedo\ Alfonso\r\n\ @version\ 1.0\r\n\r\n
+comment0.text=\n\ Cooperativa\ ---\ Clase\ principal\ que\ contiene\ el\ m\u00E9todo\ main\n\ \n\ @author\ Gustavo\ Acevedo\ Alfonso\n\ @version\ 1.0\n\n
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
 numComments=2

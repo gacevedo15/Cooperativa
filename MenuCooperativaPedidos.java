@@ -101,10 +101,10 @@ public class MenuCooperativaPedidos implements IMenu {
             }
 
             // Comprueba que el tipo de cliente pueda comprar la cantidad que desea
-            if (cliente.getTipoCliente() == TipoCliente.CONSUMIDOR_FINAL && cantCompradaKg > 100) {
+            if (cliente.getTipoCliente() == TipoCliente.CONSUMIDOR_FINAL && cantCompradaKg > TipoCooperativa.MAX_KG_CONSUMIDOR_FINAL) {
                 System.out.println("Error: Un cliente de tipo consumidor final no puede comprar más de 100Kg.");
                 return;
-            } else if (cliente.getTipoCliente() == TipoCliente.DISTRIBUIDOR && cantCompradaKg < 1000) {
+            } else if (cliente.getTipoCliente() == TipoCliente.DISTRIBUIDOR && cantCompradaKg < TipoCooperativa.MIN_KG_DISTRIBUIDOR) {
                 System.out.println("Error: Un cliente de tipo distribuidor final debe comprar al menos 1000Kg.");
                 return;
             }
