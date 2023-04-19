@@ -1,5 +1,6 @@
 #BlueJ class context
 comment0.target=MenuCooperativaResumenAnual
+<<<<<<< Updated upstream
 comment0.text=\r\n\ Clase\ que\ representa\ el\ menu\ de\ Resumen\ Anual\ de\ la\ Cooperativa.\r\n\ Permite\ mostrar\ las\ estad\u00EDsticas\ anuales\ de\ la\ cooperativa,\ ver\ las\ ventas\r\n\ en\ un\ per\u00EDodo\ determinado,\ los\ importes\ obtenidos\ por\ productores,\ log\u00EDstica\ y\ Cooperativa.\r\n\ @author\ Gustavo\ Acevedo\ Alfonso\r\n\ @version\ 1.0\r\n
 comment1.params=
 comment1.target=MenuCooperativaResumenAnual()
@@ -38,3 +39,33 @@ comment9.params=resumenAnual
 comment9.target=void\ mostrarImportesObtenidosPorProductor(ResumenAnual)
 comment9.text=\r\n\ M\u00E9todo\ para\ mostrar\ los\ importes\ obtenidos\ por\ cada\ productor.\r\n\ @param\ resumenAnual\ resumen\ anual\ a\ consultar\r\n
 numComments=13
+=======
+comment0.text=\n\ Clase\ que\ representa\ el\ menu\ de\ Resumen\ Anual\ de\ la\ Cooperativa.\n\ @author\ Gustavo\ Acevedo\ Alfonso\n\ @version\ 1.0\n
+comment1.params=
+comment1.target=MenuCooperativaResumenAnual()
+comment1.text=\n\ Constructor\ de\ la\ clase\ MenuCooperativaProductos.\ Inicializa\ el\ Scanner.\n
+comment2.params=
+comment2.target=void\ mostrarMenu()
+comment3.params=
+comment3.target=int\ solicitarAnno()
+comment3.text=\n\ M\u00E9todo\ para\ solicitar\ el\ a\u00F1o\ a\ consultar.\n\ El\ a\u00F1o\ debe\ estar\ comprendido\ entre\ 2000\ y\ 3000.\n
+comment4.params=anno
+comment4.target=ResumenAnual\ getResumenAnual(int)
+comment4.text=\n\ M\u00E9todo\ que\ devuelve\ el\ resumen\ anual\ del\ a\u00F1o\ ingresado.\n\ @param\ anno\ a\u00F1o\ a\ consultar\n
+comment5.params=anno\ resumenAnual
+comment5.target=void\ mostrarVentasTotalesCantidadProductos(int,\ ResumenAnual)
+comment5.text=\n\ M\u00E9todo\ para\ mostrar\ las\ ventas\ totales\ de\ cantidad\ de\ productos\ en\ un\ periodo\ determinado.\n\ Primero\ se\ solicitan\ las\ fechas\ de\ inicio\ y\ fin\ del\ periodo\ a\ consultar.\n\ luego\ si\ son\ correctas,\ se\ muestra\ el\ resultado.\n\ @param\ anno\ a\u00F1o\ a\ consultar\n
+comment6.params=anno
+comment6.target=int[]\ solicitarFechaInicioFin(int)
+comment6.text=\n\ M\u00E9todo\ auxiliar\ para\ solicitar\ la\ fecha\ de\ inicio\ y\ fin\ del\ periodo\ a\ consultar\ (d\u00EDa\ y\ mes).\n\ @param\ anno\ a\u00F1o\ a\ consultar\n
+comment7.params=
+comment7.target=int\ solicitarDia()
+comment7.text=\n\ M\u00E9todo\ auxiliar\ para\ solicitar\ el\ d\u00EDa.\n
+comment8.params=
+comment8.target=int\ solicitarMes()
+comment8.text=\n\ M\u00E9todo\ auxiliar\ para\ solicitar\ el\ mes.\n
+comment9.params=anno\ dia\ mes
+comment9.target=boolean\ esFechaCorrecta(int,\ int,\ int)
+comment9.text=\n\ M\u00E9todo\ auxiliar\ para\ comprobar\ que\ la\ fecha\ ingresada\ es\ v\u00E1lida.\n
+numComments=10
+>>>>>>> Stashed changes
