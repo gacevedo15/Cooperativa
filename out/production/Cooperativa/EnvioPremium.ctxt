@@ -1,13 +1,13 @@
 #BlueJ class context
 comment0.target=EnvioPremium
-comment0.text=\r\n\ La\ clase\ EnvioPremium\ representa\ una\ oferta\ de\ log\u00EDstica\ premium\ para\ el\ env\u00EDo\ de\ productos.\r\n\ Esta\ clase\ hereda\ de\ la\ clase\ OfertaLogistica\ e\ implementa\ los\ m\u00E9todos\ para\ calcular\ el\ coste\r\n\ de\ env\u00EDo\ y\ aplicar\ descuentos\ (Se\ tiene\ en\ cuenta\ si\ el\ cliente\ es\ premium\ o\ no).\r\n\ @author\ Gustavo\ Acevedo\ Alfonso\r\n\ @version\ 1.0\r\n
+comment0.text=\n\ La\ clase\ EnvioPremium\ representa\ una\ oferta\ de\ log\u00EDstica\ premium\ para\ el\ env\u00EDo\ de\ productos.\n\ Esta\ clase\ hereda\ de\ la\ clase\ OfertaLogistica\ e\ implementa\ los\ m\u00E9todos\ para\ calcular\ el\ coste\n\ de\ env\u00EDo\ y\ aplicar\ descuentos\ (Se\ tiene\ en\ cuenta\ si\ el\ cliente\ es\ premium\ o\ no).\n\ @author\ Gustavo\ Acevedo\ Alfonso\n\ @version\ 1.0\n
 comment1.params=nombre\ costePorKmGranLogistica\ costePorKmPequenaLogistica\ tipoCliente
 comment1.target=EnvioPremium(java.lang.String,\ float,\ float,\ TipoCliente)
-comment1.text=\r\n\ Constructor\ de\ la\ clase\ EnvioPremium\ que\ inicializa\ los\ atributos\ heredados\ de\ la\ superclase\ OfertaLogistica\r\n\ y\ asigna\ el\ coste\ fijo\ seg\u00FAn\ el\ tipo\ de\ cliente.\r\n\ @param\ nombre\ Nombre\ del\ env\u00EDo.\r\n\ @param\ costePorKmGranLogistica\ Coste\ por\ kil\u00F3metro\ para\ la\ gran\ log\u00EDstica.\r\n\ @param\ costePorKmPequenaLogistica\ Coste\ por\ kil\u00F3metro\ para\ la\ peque\u00F1a\ log\u00EDstica.\r\n\ @param\ tipoCliente\ Tipo\ de\ cliente\ al\ que\ pertenece\ el\ env\u00EDo\ (Distribuidor\ o\ Consumidor\ Final).\r\n
+comment1.text=\n\ Constructor\ de\ la\ clase\ EnvioPremium\ que\ inicializa\ los\ atributos\ heredados\ de\ la\ superclase\ OfertaLogistica\n\ y\ asigna\ el\ coste\ fijo\ seg\u00FAn\ el\ tipo\ de\ cliente.\n\ @param\ nombre\ Nombre\ del\ env\u00EDo.\n\ @param\ costePorKmGranLogistica\ Coste\ por\ kil\u00F3metro\ para\ la\ gran\ log\u00EDstica.\n\ @param\ costePorKmPequenaLogistica\ Coste\ por\ kil\u00F3metro\ para\ la\ peque\u00F1a\ log\u00EDstica.\n\ @param\ tipoCliente\ Tipo\ de\ cliente\ al\ que\ pertenece\ el\ env\u00EDo\ (Distribuidor\ o\ Consumidor\ Final).\n
 comment2.params=precioLogistica\ porcentaje\ c
 comment2.target=float\ aplicarDescuento(float,\ float,\ Cliente)
-comment2.text=\r\n\ Aplica\ un\ descuento\ al\ precio\ de\ la\ log\u00EDstica,\ adem\u00E1s\ de\ un\ descuento\ extra\ del\ 10%\ si\ el\ cliente\ es\ premium.\r\n\ @param\ precioLogistica\ Precio\ de\ la\ log\u00EDstica.\r\n\ @param\ porcentaje\ Porcentaje\ de\ descuento.\r\n\ @param\ c\ Cliente\ al\ que\ se\ le\ aplica\ el\ descuento.\r\n\ @return\ Precio\ de\ la\ log\u00EDstica\ con\ el\ descuento\ aplicado.\r\n
+comment2.text=\n\ Aplica\ un\ descuento\ al\ precio\ de\ la\ log\u00EDstica,\ adem\u00E1s\ de\ un\ descuento\ extra\ del\ 10%\ si\ el\ cliente\ es\ premium.\n\ @param\ precioLogistica\ Precio\ de\ la\ log\u00EDstica.\n\ @param\ porcentaje\ Porcentaje\ de\ descuento.\n\ @param\ c\ Cliente\ al\ que\ se\ le\ aplica\ el\ descuento.\n\ @return\ Precio\ de\ la\ log\u00EDstica\ con\ el\ descuento\ aplicado.\n
 comment3.params=
 comment3.target=java.lang.String\ toString()
-comment3.text=\r\n\ ToString\ de\ la\ clase\ EnvioPremium.\r\n
+comment3.text=\n\ ToString\ de\ la\ clase\ EnvioPremium.\n
 numComments=4
